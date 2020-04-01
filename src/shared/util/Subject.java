@@ -1,5 +1,8 @@
 package shared.util;
+import java.beans.PropertyChangeListener;
 
-public class Subject
+public interface Subject
 {
+  void addListener(String eventName, PropertyChangeListener listener);
+  void removeListener(String eventName, PropertyChangeListener listener);
 }

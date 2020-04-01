@@ -1,4 +1,4 @@
-package server.networking;
+package server;
 
 public class RunServer
 {
