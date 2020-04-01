@@ -51,7 +51,7 @@ public class Quiz implements Serializable
 
   @Override public String toString()
   {
-    String a = "";
+    String a = "Quiz: " + title;
     for (int i = 0; i < questions.size(); i++)
     {
       a += "\n" + "Question " + (i + 1) + "\n" + questions.get(i);

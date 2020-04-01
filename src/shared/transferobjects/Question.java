@@ -66,6 +66,6 @@ public class Question implements Serializable
     {
       a += answers.get(i) + " ";
     }
-    return " > " + question + "\n" + a;
+    return " > " + question + "(" + time + "s)" + "\n" + a;
   }
 }
