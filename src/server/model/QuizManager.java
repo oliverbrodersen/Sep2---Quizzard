@@ -1,5 +1,7 @@
 package server.model;
 
-public interface QuizManager
+import shared.util.Subject;
+
+public interface QuizManager extends Subject
 {
 }
