@@ -1,5 +1,8 @@
 package client.networking;
 
-public class Client
+import shared.util.Subject;
+
+public interface Client extends Subject
 {
+
 }
