@@ -1,5 +1,5 @@
 package shared.util;
 
-public class Subject
+public interface Subject
 {
 }
