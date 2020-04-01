@@ -34,7 +34,10 @@ public class Answer {
     this.correct = correct;
   }
 
-
-
-
+  public String toString(){
+    if (correct)
+      return "\u001B[32m" + "[" + answer + "]" + "\u001B[0m";
+    else
+      return "[" + answer + "]";
+  }
 }

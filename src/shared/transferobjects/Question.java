@@ -19,7 +19,6 @@ public class Question {
     this.pointValue = pointValue;
   }
 
-
   // Getters
   public String getQuestion() {
     return question;
@@ -58,6 +57,13 @@ public class Question {
     this.pointValue = pointValue;
   }
 
-
-
+  @Override public String toString()
+  {
+    String a = "";
+    for (int i = 0; i < answers.size(); i++)
+    {
+      a += answers.get(i) + " ";
+    }
+    return " > " + question + "\n" + a;
+  }
 }
