@@ -48,6 +48,13 @@ public class Quiz
     questions.set(i, question);
   }
 
-
-
+  @Override public String toString()
+  {
+    String a = "";
+    for (int i = 0; i < questions.size(); i++)
+    {
+      a += "Question " + i + 1 + "\n" + questions.get(i);
+    }
+    return a;
+  }
 }
