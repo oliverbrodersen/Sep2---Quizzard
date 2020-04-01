@@ -11,8 +11,9 @@ public class Question {
   private int time, pointValue;
 
 
-  public Question(String question, ArrayList<Answer> answersList, int time, int pointValue) {
+  public Question(String question, List<Answer> answersList, int time, int pointValue) {
     this.question = question;
+    answers = new ArrayList<>();
     answers = answersList;
     this.time = time;
     this.pointValue = pointValue;

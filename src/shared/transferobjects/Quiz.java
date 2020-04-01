@@ -9,9 +9,10 @@ public class Quiz
   private String title, subject;
   private List<Question> questions;
 
-  public Quiz(String title, String subject, ArrayList<Question> questionsList) {
+  public Quiz(String title, String subject, List<Question> questionsList) {
     this.title = title;
     this.subject = subject;
+    questions = new ArrayList<>();
     questions = questionsList;
   }
 
