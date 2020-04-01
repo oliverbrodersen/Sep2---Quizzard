@@ -69,6 +69,11 @@ public class Lobby {
     this.title = title;
   }
 
+  public void addParticipant(Participant participant)
+  {
+    this.participants.add(participant);
+  }
+
 
   // Logic
   public void removeParticipant(Participant participant) {

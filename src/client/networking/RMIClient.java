@@ -2,10 +2,7 @@ package client.networking;
 
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
-import shared.transferobjects.Lobby;
-import shared.transferobjects.Quiz;
-import shared.transferobjects.Question;
-import shared.transferobjects.Answer;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -14,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class RMIClient implements Client, ClientCallback
 {
@@ -87,5 +85,10 @@ public class RMIClient implements Client, ClientCallback
   public void connected()
   {
     System.out.println("New connection.");
+  }
+
+  @Override public ArrayList<Participant> getParticipants()
+  {
+    return server.getParticipants();
   }
 }

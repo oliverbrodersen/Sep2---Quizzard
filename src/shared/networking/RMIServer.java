@@ -1,11 +1,13 @@
 package shared.networking;
 
+import shared.transferobjects.Participant;
 import shared.transferobjects.Quiz;
 import shared.transferobjects.Question;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public interface RMIServer extends Remote
 {
@@ -16,4 +18,5 @@ public interface RMIServer extends Remote
   void removeClient(ClientCallback client) throws RemoteException;
 
   void startServer() throws RemoteException, AlreadyBoundException;
+  ArrayList<Participant> getParticipants();
 }

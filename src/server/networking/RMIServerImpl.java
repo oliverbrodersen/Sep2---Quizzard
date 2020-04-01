@@ -4,6 +4,7 @@ import server.model.QuizManager;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 import shared.transferobjects.Lobby;
+import shared.transferobjects.Participant;
 import shared.transferobjects.Question;
 import shared.transferobjects.Quiz;
 
@@ -13,14 +14,18 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RMIServerImpl implements RMIServer
 {
   public QuizManager quizManager;
+  public List<Participant> participantList;
 
   public RMIServerImpl(QuizManager quizManager)
   {
     this.quizManager = quizManager;
+    participantList = new ArrayList<>();
   }
 
   public void startServer() throws RemoteException, AlreadyBoundException
@@ -30,6 +35,12 @@ public class RMIServerImpl implements RMIServer
     registry.bind("QuizServer", this);
     System.out.println("Server started.");
   }
+
+  @Override public ArrayList<Participant> getParticipants()
+  {
+    return (ArrayList<Participant>)participantList;
+  }
+
 
   @Override public Quiz getQuiz()
   {
@@ -55,6 +66,7 @@ public class RMIServerImpl implements RMIServer
       }
     };
     quizManager.addListener("Lobby", listener);
+
     System.out.println("Client successfully connected.");
     try
     {
