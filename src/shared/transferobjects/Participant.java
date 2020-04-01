@@ -6,10 +6,10 @@ public class Participant {
   private String name;
   private int score, userID;
 
-  public Participant(String name, int score, int userID) {
+  public Participant(String name) {
     this.name = name;
-    this.score = score;
-    this.userID = userID;
+    this.score = 0;
+    this.userID = (int)Math.floor(Math.random()*9999);
   }
 
 
