@@ -1,6 +1,5 @@
 package shared.transferobjects;
 
-import javafx.scene.Parent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +47,11 @@ public class Lobby {
   }
 
 
+  public Question getNextQuestion(int i) {
+    return quiz.getQuestion(i);
+  }
+
+
   // Setters
   public void setId(int id) {
     this.id = id;
@@ -65,14 +69,10 @@ public class Lobby {
     this.title = title;
   }
 
-  public void setParticipant(Participant participant, int i) {
-    participants.set(i, participant);
-  }
-
 
   // Logic
-  public void removeParticipant(int i) {
-    participants.remove(i);
+  public void removeParticipant(Participant participant) {
+    participants.remove(participant);
   }
 
 
