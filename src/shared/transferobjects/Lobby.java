@@ -1,19 +1,18 @@
 package shared.transferobjects;
 
-import javafx.scene.Parent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Lobby {
 
-  private String id;
+  private int id;
   private Quiz quiz;
   private Host host;
   private String title;
   private List<Participant> participants;
 
-  public Lobby(String id, Quiz quiz, Host host, ArrayList<Participant> participantsList) {
+  public Lobby(int id, Quiz quiz, Host host, ArrayList<Participant> participantsList) {
     this.id = id;
     this.quiz = quiz;
     this.host = host;
@@ -23,7 +22,7 @@ public class Lobby {
 
 
   // getters
-  public String getId() {
+  public int getId() {
     return id;
   }
 
@@ -48,8 +47,13 @@ public class Lobby {
   }
 
 
+  public Question getNextQuestion(int i) {
+    return quiz.getQuestion(i);
+  }
+
+
   // Setters
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 
@@ -65,14 +69,10 @@ public class Lobby {
     this.title = title;
   }
 
-  public void setParticipant(Participant participant, int i) {
-    participants.set(i, participant);
-  }
-
 
   // Logic
-  public void removeParticipant(int i) {
-    participants.remove(i);
+  public void removeParticipant(Participant participant) {
+    participants.remove(participant);
   }
 
 
