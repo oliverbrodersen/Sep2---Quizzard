@@ -3,10 +3,11 @@ package shared.transferobjects;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Host {
+public class Host implements UserClass {
 
   private String email, username, password;
   private List<Quiz> quizzes;
+  private UserID userID;
 
 
   public Host(String email, String username, String password, ArrayList<Quiz> quizzesList) {
@@ -14,19 +15,24 @@ public class Host {
     this.username = username;
     this.password = password;
     quizzes = quizzesList;
+    userID = UserID.HOST;
   }
 
   // getters
-  public String getEmail() {
+  @Override public String getEmail() {
     return email;
   }
 
-  public String getUsername() {
+  @Override public String getUsername() {
     return username;
   }
 
-  public String getPassword() {
+  @Override public String getPassword() {
     return password;
+  }
+
+  @Override public UserID getUserID() {
+    return userID;
   }
 
   public List<Quiz> getQuizzes() {
@@ -37,17 +43,16 @@ public class Host {
     return quizzes.get(i);
   }
 
-
   // Setters
-  public void setEmail(String email) {
+  @Override public void setEmail(String email) {
     this.email = email;
   }
 
-  public void setUsername(String username) {
+  @Override public void setUsername(String username) {
     this.username = username;
   }
 
-  public void setPassword(String password) {
+  @Override public void setPassword(String password) {
     this.password = password;
   }
 
