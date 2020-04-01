@@ -8,4 +8,5 @@ import java.rmi.RemoteException;
 public interface ClientCallback extends Remote
 {
   void update(Lobby lobby) throws RemoteException;
+  void connected() throws RemoteException;
 }

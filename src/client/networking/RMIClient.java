@@ -31,6 +31,7 @@ public class RMIClient implements Client, ClientCallback
       Registry registry = LocateRegistry.getRegistry("localhost", 1099);
       server = (RMIServer) registry.lookup("QuizServer");
       server.registerClient(this);
+      System.out.println("Client registered.");
     } catch (RemoteException | NotBoundException e) {
       e.printStackTrace();
     }
@@ -81,5 +82,10 @@ public class RMIClient implements Client, ClientCallback
   @Override public void update(Lobby lobby)
   {
 
+  }
+
+  public void connected()
+  {
+    System.out.println("New connection.");
   }
 }

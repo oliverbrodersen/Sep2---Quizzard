@@ -12,6 +12,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
 public class RMIServerImpl implements RMIServer
 {
@@ -24,8 +25,10 @@ public class RMIServerImpl implements RMIServer
 
   public void startServer() throws RemoteException, AlreadyBoundException
   {
+    UnicastRemoteObject.exportObject(this, 0);
     Registry registry = LocateRegistry.createRegistry(1099);
     registry.bind("QuizServer", this);
+    System.out.println("Server started.");
   }
 
   @Override public Quiz getQuiz()
@@ -52,6 +55,15 @@ public class RMIServerImpl implements RMIServer
       }
     };
     quizManager.addListener("Lobby", listener);
+    System.out.println("Client successfully connected.");
+    try
+    {
+      client.connected();
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
   }
 
   @Override public void removeClient(ClientCallback client)
