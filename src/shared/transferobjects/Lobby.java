@@ -7,13 +7,13 @@ import java.util.List;
 
 public class Lobby {
 
-  private String id;
+  private int id;
   private Quiz quiz;
   private Host host;
   private String title;
   private List<Participant> participants;
 
-  public Lobby(String id, Quiz quiz, Host host, ArrayList<Participant> participantsList) {
+  public Lobby(int id, Quiz quiz, Host host, ArrayList<Participant> participantsList) {
     this.id = id;
     this.quiz = quiz;
     this.host = host;
@@ -23,7 +23,7 @@ public class Lobby {
 
 
   // getters
-  public String getId() {
+  public int getId() {
     return id;
   }
 
@@ -49,7 +49,7 @@ public class Lobby {
 
 
   // Setters
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 
