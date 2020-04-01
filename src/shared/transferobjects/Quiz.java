@@ -54,7 +54,7 @@ public class Quiz implements Serializable
     String a = "";
     for (int i = 0; i < questions.size(); i++)
     {
-      a += "Question " + i + 1 + "\n" + questions.get(i);
+      a += "\n" + "Question " + (i + 1) + "\n" + questions.get(i);
     }
     return a;
   }
