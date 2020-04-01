@@ -3,6 +3,7 @@ package server.networking;
 import server.model.QuizManager;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
+import shared.transferobjects.Lobby;
 import shared.transferobjects.Question;
 import shared.transferobjects.Quiz;
 
