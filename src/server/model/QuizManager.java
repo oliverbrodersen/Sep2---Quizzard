@@ -6,5 +6,5 @@ import java.beans.PropertyChangeListener;
 
 public interface QuizManager extends Subject
 {
-  
+
 }
