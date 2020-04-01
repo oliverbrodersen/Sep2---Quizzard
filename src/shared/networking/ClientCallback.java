@@ -1,5 +1,7 @@
 package shared.networking;
 
+import shared.transferobjects.Lobby;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

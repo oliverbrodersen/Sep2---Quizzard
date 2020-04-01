@@ -2,6 +2,7 @@ package client.networking;
 
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
+import shared.transferobjects.Lobby;
 import shared.transferobjects.Quiz;
 import shared.transferobjects.Question;
 import shared.transferobjects.Answer;
