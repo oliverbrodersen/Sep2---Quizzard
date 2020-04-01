@@ -91,4 +91,9 @@ public class RMIClient implements Client, ClientCallback
   {
     return server.getParticipants();
   }
+
+  @Override public void newParticipant(Participant participant)
+  {
+    server.newParticipant(participant);
+  }
 }

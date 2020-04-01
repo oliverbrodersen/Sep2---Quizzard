@@ -19,4 +19,5 @@ public interface RMIServer extends Remote
 
   void startServer() throws RemoteException, AlreadyBoundException;
   ArrayList<Participant> getParticipants();
+  void newParticipant(Participant participant);
 }
