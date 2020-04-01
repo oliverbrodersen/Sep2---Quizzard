@@ -27,6 +27,11 @@ public class QuizApp extends Application
     Answer answer4 = new Answer("Orange", false);
 
     List<Answer> answers = new ArrayList<>();
+    answers.add(answer1);
+    answers.add(answer2);
+    answers.add(answer3);
+    answers.add(answer4);
+
     Question question = new Question("What is the colour of the sky?", answers, 20, 100);
 
     Answer answer5 = new Answer("Blue", true);
@@ -35,9 +40,16 @@ public class QuizApp extends Application
     Answer answer8 = new Answer("Orange", false);
 
     List<Answer> answers2 = new ArrayList<>();
+    answers2.add(answer5);
+    answers2.add(answer6);
+    answers2.add(answer7);
+    answers2.add(answer8);
+
     Question question2 = new Question("What is boy colours?", answers2, 20, 150);
 
     List<Question> questions = new ArrayList<>();
+    questions.add(question);
+    questions.add(question2);
 
     Quiz quiz = new Quiz("Awesome Quiz!", "CoolBeans", questions);
     //
@@ -61,16 +73,21 @@ public class QuizApp extends Application
         quizzes.add(quiz);
         Host host = new Host("fakemail@mail.com",name,"Strongpassword",quizzes);
         lobby = new Lobby(1,quiz,host,client.getParticipants());
+        client.setLobby(lobby);
       }
     }
 
     else if (userclass.equalsIgnoreCase("P"))
     {
-      lobby = null;
+      lobby = client.getLobby();
       System.out.println("You're now a player");
-      Participant participant = new Participant(name)
+      Participant participant = new Participant(name);
       client.newParticipant(participant);
       lobby.addParticipant(participant);
+      for (int i = 0; i < client.getParticipants().size(); i++)
+      {
+        System.out.println(client.getParticipants().get(i).getName());
+      }
     }
 
 

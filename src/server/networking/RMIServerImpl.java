@@ -21,11 +21,13 @@ public class RMIServerImpl implements RMIServer
 {
   public QuizManager quizManager;
   public List<Participant> participantList;
+  public Lobby lobby;
 
   public RMIServerImpl(QuizManager quizManager)
   {
     this.quizManager = quizManager;
     participantList = new ArrayList<>();
+    lobby = null;
   }
 
   public void startServer() throws RemoteException, AlreadyBoundException
@@ -41,6 +43,20 @@ public class RMIServerImpl implements RMIServer
     return (ArrayList<Participant>)participantList;
   }
 
+  @Override public void newParticipant(Participant participant)
+  {
+    participantList.add(participant);
+  }
+
+  @Override public void setLobby(Lobby lobby) throws RemoteException
+  {
+   this.lobby = lobby;
+  }
+
+  @Override public Lobby getLobby() throws RemoteException
+  {
+    return this.lobby;
+  }
 
   @Override public Quiz getQuiz()
   {

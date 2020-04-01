@@ -1,10 +1,12 @@
 package shared.transferobjects;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Question {
+public class Question implements Serializable
+{
 
   private String question;
   private List<Answer> answers;

@@ -1,6 +1,9 @@
 package shared.transferobjects;
 
-public interface UserClass {
+import java.io.Serializable;
+
+public interface UserClass extends Serializable
+{
 
   String getUsername();
 

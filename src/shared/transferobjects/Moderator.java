@@ -1,6 +1,9 @@
 package shared.transferobjects;
 
-public class Moderator implements UserClass {
+import java.io.Serializable;
+
+public class Moderator implements UserClass
+{
 
   private String name, password, email;
   private UserID userID;

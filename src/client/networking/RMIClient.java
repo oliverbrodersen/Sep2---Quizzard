@@ -89,11 +89,51 @@ public class RMIClient implements Client, ClientCallback
 
   @Override public ArrayList<Participant> getParticipants()
   {
-    return server.getParticipants();
+    try
+    {
+      return server.getParticipants();
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   @Override public void newParticipant(Participant participant)
   {
-    server.newParticipant(participant);
+    try
+    {
+      server.newParticipant(participant);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public void setLobby(Lobby lobby)
+  {
+    try
+    {
+      server.setLobby(lobby);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public Lobby getLobby()
+  {
+    try
+    {
+      return server.getLobby();
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
   }
 }

@@ -1,9 +1,10 @@
 package shared.transferobjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Quiz
+public class Quiz implements Serializable
 {
 
   private String title, subject;

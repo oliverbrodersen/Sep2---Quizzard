@@ -1,9 +1,11 @@
 package shared.transferobjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Host implements UserClass {
+public class Host implements UserClass
+{
 
   private String email, username, password;
   private List<Quiz> quizzes;

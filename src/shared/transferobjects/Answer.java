@@ -1,10 +1,12 @@
 package shared.transferobjects;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Answer {
+public class Answer implements Serializable
+{
 
   private String answer;
   private Boolean correct;

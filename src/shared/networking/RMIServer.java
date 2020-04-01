@@ -1,5 +1,6 @@
 package shared.networking;
 
+import shared.transferobjects.Lobby;
 import shared.transferobjects.Participant;
 import shared.transferobjects.Quiz;
 import shared.transferobjects.Question;
@@ -18,6 +19,8 @@ public interface RMIServer extends Remote
   void removeClient(ClientCallback client) throws RemoteException;
 
   void startServer() throws RemoteException, AlreadyBoundException;
-  ArrayList<Participant> getParticipants();
-  void newParticipant(Participant participant);
+  ArrayList<Participant> getParticipants()throws RemoteException;
+  void newParticipant(Participant participant)throws RemoteException;
+  void setLobby(Lobby lobby) throws RemoteException;
+  Lobby getLobby() throws RemoteException;
 }

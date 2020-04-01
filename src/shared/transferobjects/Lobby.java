@@ -1,10 +1,13 @@
 package shared.transferobjects;
 
 
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lobby {
+public class Lobby implements Serializable
+{
 
   private int id;
   private Quiz quiz;

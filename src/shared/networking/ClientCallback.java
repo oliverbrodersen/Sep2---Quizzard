@@ -11,6 +11,8 @@ public interface ClientCallback extends Remote
 {
   void update(Lobby lobby) throws RemoteException;
   void connected() throws RemoteException;
-  ArrayList<Participant> getParticipants();
-  void newParticipant(Participant participant);
+  ArrayList<Participant> getParticipants()throws RemoteException;
+  void newParticipant(Participant participant)throws RemoteException;
+  void setLobby(Lobby lobby)throws RemoteException;
+  Lobby getLobby()throws RemoteException;
 }

@@ -1,6 +1,9 @@
 package shared.transferobjects;
 
-public class Participant {
+import java.io.Serializable;
+
+public class Participant implements Serializable
+{
 
 
   private String name;
