@@ -78,7 +78,7 @@ public class RMIClient implements Client, ClientCallback
     support.removePropertyChangeListener(eventName, listener);
   }
 
-  @Override public void update(Lobby lobby) throws RemoteException
+  @Override public void update(Lobby lobby)
   {
 
   }
