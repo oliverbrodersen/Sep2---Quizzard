@@ -12,14 +12,12 @@ public class QuizManagerImpl implements QuizManager
     support = new PropertyChangeSupport(this);
   }
 
-  @Override public void addListener(String eventName,
-      PropertyChangeListener listener)
+  @Override public void addListener(String eventName, PropertyChangeListener listener)
   {
     support.addPropertyChangeListener(eventName, listener);
   }
 
-  @Override public void removeListener(String eventName,
-      PropertyChangeListener listener)
+  @Override public void removeListener(String eventName, PropertyChangeListener listener)
   {
     support.removePropertyChangeListener(eventName, listener);
   }
