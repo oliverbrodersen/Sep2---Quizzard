@@ -59,6 +59,10 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
+  @Override public UserID getUserID() {
+    return null;
+  }
+
   @Override public void sendAnswer(Answer answer)
   {
 

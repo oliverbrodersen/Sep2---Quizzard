@@ -17,7 +17,7 @@ public class Host implements UserClass
     this.username = username;
     this.password = password;
     quizzes = quizzesList;
-    userID = UserID.HOST;
+    userID = UserID.HOST; //Gives the user class for login validation
   }
 
   // getters

@@ -1,9 +1,6 @@
 package shared.networking;
 
-import shared.transferobjects.Lobby;
-import shared.transferobjects.Participant;
-import shared.transferobjects.Quiz;
-import shared.transferobjects.Question;
+import shared.transferobjects.*;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
@@ -14,6 +11,7 @@ public interface RMIServer extends Remote
 {
   Quiz getQuiz() throws RemoteException;
   Question getNextQuestion() throws RemoteException;
+  UserID getUserID();
 
   void registerClient(ClientCallback client) throws RemoteException;
   void removeClient(ClientCallback client) throws RemoteException;

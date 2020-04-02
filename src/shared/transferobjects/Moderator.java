@@ -12,7 +12,7 @@ public class Moderator implements UserClass
     this.name = name;
     this.password = password;
     this.email = email;
-    userID = UserID.MODERATOR;
+    userID = UserID.MODERATOR; //Gives the user class for login validation
   }
 
 

@@ -8,11 +8,13 @@ public class Participant implements Serializable
 
   private String name;
   private int score, userID;
+  private UserID userClass;
 
   public Participant(String name) {
     this.name = name;
     this.score = 0;
     this.userID = (int)Math.floor(Math.random()*9999);
+    userClass = UserID.PARTICIPANT;
   }
 
 
@@ -27,6 +29,10 @@ public class Participant implements Serializable
 
   public int getUserID() {
     return userID;
+  }
+
+  public UserID getUserClass() {
+    return userClass;
   }
 
   // Setters
