@@ -4,6 +4,7 @@ import client.networking.Client;
 import shared.transferobjects.Lobby;
 import shared.transferobjects.Participant;
 import shared.transferobjects.Question;
+import shared.transferobjects.UserID;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

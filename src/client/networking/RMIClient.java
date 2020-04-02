@@ -59,7 +59,15 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public UserID getUserID() {
+  @Override public UserID getUserClass() {
+    return null;
+  }
+
+  @Override public int getUserID() {
+    return 0;
+  }
+
+  @Override public String getPassword() {
     return null;
   }
 
@@ -101,6 +109,10 @@ public class RMIClient implements Client, ClientCallback
     {
       e.printStackTrace();
     }
+    return null;
+  }
+
+  @Override public String getUsername() {
     return null;
   }
 

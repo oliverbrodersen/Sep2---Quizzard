@@ -3,10 +3,7 @@ package server.networking;
 import server.model.QuizManager;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
-import shared.transferobjects.Lobby;
-import shared.transferobjects.Participant;
-import shared.transferobjects.Question;
-import shared.transferobjects.Quiz;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.AlreadyBoundException;
@@ -65,6 +62,10 @@ public class RMIServerImpl implements RMIServer
 
   @Override public Question getNextQuestion()
   {
+    return null;
+  }
+
+  @Override public UserID getUserID() {
     return null;
   }
 
