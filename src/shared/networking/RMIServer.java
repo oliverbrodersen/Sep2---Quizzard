@@ -11,7 +11,7 @@ public interface RMIServer extends Remote
 {
   Quiz getQuiz() throws RemoteException;
   Question getNextQuestion() throws RemoteException;
-  UserID getUserID();
+  UserID getUserID() throws RemoteException;
 
   void registerClient(ClientCallback client) throws RemoteException;
   void removeClient(ClientCallback client) throws RemoteException;
