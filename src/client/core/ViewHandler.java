@@ -24,7 +24,7 @@ public class ViewHandler {
     this.vmf = vmf;
   }
 
-  public void start(Stage primaryStage) {
+  public void start() {
     this.primaryStage = primaryStage;
     this.currentScene = new Scene(new Region());
     openView("login");
