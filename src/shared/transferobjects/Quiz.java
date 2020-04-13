@@ -8,6 +8,7 @@ public class Quiz implements Serializable
 {
 
   private String title, subject;
+  private int questionNumber;
   private List<Question> questions;
 
   public Quiz(String title, String subject, List<Question> questionsList) {
@@ -15,6 +16,7 @@ public class Quiz implements Serializable
     this.subject = subject;
     questions = new ArrayList<>();
     questions = questionsList;
+    questionNumber = -1;
   }
 
 
@@ -35,6 +37,10 @@ public class Quiz implements Serializable
     return questions.get(i);
   }
 
+  public int nextQuestion(){
+    questionNumber++;
+    return questionNumber;
+  }
 
   // Setters
   public void setTitle(String title) {

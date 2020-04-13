@@ -3,6 +3,7 @@ package client.model;
 import shared.transferobjects.Lobby;
 import shared.transferobjects.Participant;
 import shared.transferobjects.Question;
+import shared.transferobjects.Quiz;
 import shared.util.Subject;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface QuizConverter extends Subject
   void setPassword(String password);
 
   void addNewParticipant(Participant participant);
-
+  Quiz setQuiz();
   void sendAnswer();
   void exit();
 

@@ -1,10 +1,7 @@
 package client.model;
 
 import client.networking.Client;
-import shared.transferobjects.Lobby;
-import shared.transferobjects.Participant;
-import shared.transferobjects.Question;
-import shared.transferobjects.UserID;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -66,6 +63,11 @@ public class QuizConverterManager implements QuizConverter
 
   @Override public void addNewParticipant(Participant participant) {
 
+  }
+
+  @Override public Quiz setQuiz()
+  {
+    return client.getQuiz();
   }
 
   @Override public void sendAnswer() {

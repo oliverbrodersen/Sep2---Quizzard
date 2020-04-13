@@ -17,6 +17,7 @@ public class RMIClient implements Client, ClientCallback
 {
   private RMIServer server;
   private PropertyChangeSupport support;
+  private Quiz quiz;
 
   public RMIClient() {
     support = new PropertyChangeSupport(this);
@@ -47,7 +48,7 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public Question getNextQuestion()
+  @Override public int getNextQuestion()
   {
     try
     {
@@ -76,6 +77,17 @@ public class RMIClient implements Client, ClientCallback
 
   }
 
+  @Override public void startQuiz()
+  {
+    try
+    {
+      server.startQuiz();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not start quiz");
+    }
+  }
 
   @Override public void addListener(String eventName,
       PropertyChangeListener listener)
@@ -150,6 +162,14 @@ public class RMIClient implements Client, ClientCallback
     {
       e.printStackTrace();
     }
+    return null;
+  }
+
+  @Override public Quiz getQuiz(Quiz quiz) throws RemoteException
+  {
+    //System.out.println(quiz);
+    this.quiz = quiz;
+    System.out.println("Quiz recieved");
     return null;
   }
 }

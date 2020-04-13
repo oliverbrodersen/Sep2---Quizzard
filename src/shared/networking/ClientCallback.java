@@ -2,6 +2,8 @@ package shared.networking;
 
 import shared.transferobjects.Lobby;
 import shared.transferobjects.Participant;
+import shared.transferobjects.Question;
+import shared.transferobjects.Quiz;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -15,4 +17,6 @@ public interface ClientCallback extends Remote
   void newParticipant(Participant participant)throws RemoteException;
   void setLobby(Lobby lobby)throws RemoteException;
   Lobby getLobby()throws RemoteException;
+  Quiz getQuiz(Quiz quiz) throws RemoteException;
+  int getNextQuestion();
 }

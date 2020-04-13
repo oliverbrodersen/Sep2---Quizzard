@@ -8,7 +8,6 @@ import java.util.List;
 public interface Client extends Subject
 {
   Quiz getQuiz();
-  Question getNextQuestion();
   UserID getUserClass();
 
   Lobby getLobby();
@@ -18,7 +17,7 @@ public interface Client extends Subject
   String getPassword();
 
   void sendAnswer(Answer answer);
-
+  void startQuiz();
   void startClient();
 
 
