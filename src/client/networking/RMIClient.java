@@ -48,16 +48,24 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public int getNextQuestion()
+  @Override public void getNextQuestion()
   {
     try
     {
-      return server.getNextQuestion();
+      server.getNextQuestion();
     }
     catch (RemoteException e)
     {
       throw new RuntimeException("Could not get question");
     }
+  }
+
+  @Override public void returnNextQuestion(int num)
+  {
+    if (num != -1)
+      System.out.println(quiz.getQuestion(num));
+    else
+      System.out.println("End of quiz, you lost");
   }
 
   @Override public UserID getUserClass() {

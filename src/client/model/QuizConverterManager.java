@@ -34,11 +34,11 @@ public class QuizConverterManager implements QuizConverter
 
 
   @Override public List<Participant> getParticipants() {
-    return client.getParticipants();
+    return null;
   }
 
   @Override public Question getNextQuestion() {
-    return client.getNextQuestion();
+    return null;
   }
 
   @Override public String getUsername() {

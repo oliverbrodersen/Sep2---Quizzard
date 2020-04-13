@@ -38,7 +38,10 @@ public class Quiz implements Serializable
   }
 
   public int nextQuestion(){
-    questionNumber++;
+    if (questionNumber < questions.size() - 1)
+      questionNumber++;
+    else
+      questionNumber = -1;
     return questionNumber;
   }
 

@@ -55,6 +55,14 @@ public class QuizApp extends Application
         hostInput = input.nextLine();
         if (hostInput.equalsIgnoreCase("y")){
           client.startQuiz();
+
+          while(true){
+            System.out.println("Type 'Y' for next question");
+            hostInput = input.nextLine();
+            if (hostInput.equalsIgnoreCase("y")){
+              client.getNextQuestion();
+            }
+          }
         }
       }
     }

@@ -19,6 +19,7 @@ public class RMIServerImpl implements RMIServer
   public QuizManager quizManager;
   public List<Participant> participantList;
   public List<ClientCallback> clientList;
+  public Quiz quiz;
   public Lobby lobby;
 
   public RMIServerImpl(QuizManager quizManager)
@@ -27,6 +28,7 @@ public class RMIServerImpl implements RMIServer
     participantList = new ArrayList<>();
     clientList = new ArrayList<>();
     lobby = null;
+    quiz = getQuiz();
   }
 
   public void startServer() throws RemoteException, AlreadyBoundException
@@ -59,39 +61,43 @@ public class RMIServerImpl implements RMIServer
 
   @Override public Quiz getQuiz()
   {
-    // QUIZ
-    Answer answer1 = new Answer("Blue", true);
-    Answer answer2 = new Answer("Red", false);
-    Answer answer3 = new Answer("Green", false);
-    Answer answer4 = new Answer("Orange", false);
+    if (quiz == null){
+      // QUIZ
+      Answer answer1 = new Answer("Blue", true);
+      Answer answer2 = new Answer("Red", false);
+      Answer answer3 = new Answer("Green", false);
+      Answer answer4 = new Answer("Orange", false);
 
-    List<Answer> answers = new ArrayList<>();
-    answers.add(answer1);
-    answers.add(answer2);
-    answers.add(answer3);
-    answers.add(answer4);
+      List<Answer> answers = new ArrayList<>();
+      answers.add(answer1);
+      answers.add(answer2);
+      answers.add(answer3);
+      answers.add(answer4);
 
-    Question question = new Question("What is the colour of the sky?", answers, 20, 100);
+      Question question = new Question("1) What is the colour of the sky?", answers, 20, 100);
 
-    Answer answer5 = new Answer("Blue", true);
-    Answer answer6 = new Answer("Purple", false);
-    Answer answer7 = new Answer("Magenta", false);
-    Answer answer8 = new Answer("Orange", false);
+      Answer answer5 = new Answer("Blue", true);
+      Answer answer6 = new Answer("Purple", false);
+      Answer answer7 = new Answer("Magenta", false);
+      Answer answer8 = new Answer("Orange", false);
 
-    List<Answer> answers2 = new ArrayList<>();
-    answers2.add(answer5);
-    answers2.add(answer6);
-    answers2.add(answer7);
-    answers2.add(answer8);
+      List<Answer> answers2 = new ArrayList<>();
+      answers2.add(answer5);
+      answers2.add(answer6);
+      answers2.add(answer7);
+      answers2.add(answer8);
 
-    Question question2 = new Question("What is boy colours?", answers2, 20, 150);
+      Question question2 = new Question("2) What is boy colours?", answers2, 20, 150);
 
-    List<Question> questions = new ArrayList<>();
-    questions.add(question);
-    questions.add(question2);
+      List<Question> questions = new ArrayList<>();
+      questions.add(question);
+      questions.add(question2);
 
-    Quiz quiz = new Quiz("Awesome Quiz!", "CoolBeans", questions);
-    return quiz;
+      Quiz quizz = new Quiz("Awesome Quiz!", "CoolBeans", questions);
+      return quizz;
+    }
+    else
+      return quiz;
   }
 
   @Override public void startQuiz() throws RemoteException
@@ -103,9 +109,14 @@ public class RMIServerImpl implements RMIServer
     }
   }
 
-  @Override public int getNextQuestion()
+  @Override public void getNextQuestion() throws RemoteException
   {
-    return -1;
+    int num = getQuiz().nextQuestion();
+    System.out.println("Question number:" + num);
+    for (int i = 0; i < clientList.size(); i++)
+    {
+      clientList.get(i).returnNextQuestion(num);
+    }
   }
 
   @Override public UserID getUserID() {
