@@ -44,6 +44,8 @@ public class MainViewModel {
   }
 
   public String getQuizID() {
+    String quizString = quizID.toString();
+    int quizIDint = Integer.parseInt(quizString);
     return quizID.get();
   }
 
