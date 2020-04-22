@@ -1,5 +1,6 @@
 package server;
 
+import server.DAO.DatabaseConnection;
 import server.model.QuizManagerImpl;
 import server.networking.RMIServerImpl;
 

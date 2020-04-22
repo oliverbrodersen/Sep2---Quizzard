@@ -1,5 +1,8 @@
 package server.networking;
 
+import server.DAO.DatabaseConnection;
+import server.DAO.QuizData;
+import server.DAO.QuizHandler;
 import server.model.QuizManager;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
@@ -11,16 +14,19 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RMIServerImpl implements RMIServer
 {
-  public QuizManager quizManager;
-  public List<Participant> participantList;
-  public List<ClientCallback> clientList;
-  public Quiz quiz;
-  public Lobby lobby;
+  private QuizManager quizManager;
+  private List<Participant> participantList;
+  private List<ClientCallback> clientList;
+  private QuizData quizData;
+  private Lobby lobby;
+  private DatabaseConnection DBConn;
 
   public RMIServerImpl(QuizManager quizManager)
   {
@@ -28,7 +34,7 @@ public class RMIServerImpl implements RMIServer
     participantList = new ArrayList<>();
     clientList = new ArrayList<>();
     lobby = null;
-    quiz = getQuiz();
+    DBConn = new DatabaseConnection();
   }
 
   public void startServer() throws RemoteException, AlreadyBoundException
@@ -36,6 +42,7 @@ public class RMIServerImpl implements RMIServer
     UnicastRemoteObject.exportObject(this, 0);
     Registry registry = LocateRegistry.createRegistry(1099);
     registry.bind("QuizServer", this);
+    DBConn.startDB();
     System.out.println("Server started.");
   }
 
@@ -61,43 +68,17 @@ public class RMIServerImpl implements RMIServer
 
   @Override public Quiz getQuiz()
   {
-    if (quiz == null){
-      // QUIZ
-      Answer answer1 = new Answer("Blue", true);
-      Answer answer2 = new Answer("Red", false);
-      Answer answer3 = new Answer("Green", false);
-      Answer answer4 = new Answer("Orange", false);
-
-      List<Answer> answers = new ArrayList<>();
-      answers.add(answer1);
-      answers.add(answer2);
-      answers.add(answer3);
-      answers.add(answer4);
-
-      Question question = new Question("1) What is the colour of the sky?", answers, 20, 100);
-
-      Answer answer5 = new Answer("Blue", true);
-      Answer answer6 = new Answer("Purple", false);
-      Answer answer7 = new Answer("Magenta", false);
-      Answer answer8 = new Answer("Orange", false);
-
-      List<Answer> answers2 = new ArrayList<>();
-      answers2.add(answer5);
-      answers2.add(answer6);
-      answers2.add(answer7);
-      answers2.add(answer8);
-
-      Question question2 = new Question("2) What is boy colours?", answers2, 20, 150);
-
-      List<Question> questions = new ArrayList<>();
-      questions.add(question);
-      questions.add(question2);
-
-      Quiz quizz = new Quiz("Awesome Quiz!", "CoolBeans", questions);
-      return quizz;
+    Quiz quiz = null;
+    if (quizData == null)
+    {
+      quizData = new QuizHandler(DBConn);
     }
-    else
-      return quiz;
+    try {
+      quiz = quizData.readQuiz(1234);
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
+    return quiz;
   }
 
   @Override public void startQuiz() throws RemoteException

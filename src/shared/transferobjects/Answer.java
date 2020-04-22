@@ -10,10 +10,12 @@ public class Answer implements Serializable
 
   private String answer;
   private Boolean correct;
+  private String answerID;
 
-  public Answer(String answer, Boolean correct) {
+  public Answer(String answer, Boolean correct, String answerID) {
     this.answer = answer;
     this.correct = correct;
+    this.answerID = answerID;
   }
 
 
@@ -25,6 +27,10 @@ public class Answer implements Serializable
 
   public Boolean getCorrect() {
     return correct;
+  }
+
+  public String getAnswerID() {
+    return answerID;
   }
 
   // Setters
