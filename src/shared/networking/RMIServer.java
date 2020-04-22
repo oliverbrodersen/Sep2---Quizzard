@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public interface RMIServer extends Remote
 {
-  Quiz getQuiz() throws RemoteException;
-  void startQuiz() throws RemoteException;
-  void getNextQuestion() throws RemoteException;
+  Quiz getQuiz(int quizID, String email) throws RemoteException;
+  void startQuiz(int quizID, String email) throws RemoteException;
+  void getNextQuestion(int quizID, String email) throws RemoteException;
   UserID getUserID() throws RemoteException;
 
   void registerClient(ClientCallback client) throws RemoteException;

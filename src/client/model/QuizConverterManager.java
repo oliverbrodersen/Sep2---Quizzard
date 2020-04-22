@@ -65,9 +65,9 @@ public class QuizConverterManager implements QuizConverter
 
   }
 
-  @Override public Quiz setQuiz()
+  @Override public Quiz setQuiz(int quizID, String email)
   {
-    return client.getQuiz();
+    return client.getQuiz(quizID, email);
   }
 
   @Override public void sendAnswer() {

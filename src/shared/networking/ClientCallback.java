@@ -18,6 +18,6 @@ public interface ClientCallback extends Remote
   void setLobby(Lobby lobby)throws RemoteException;
   Lobby getLobby()throws RemoteException;
   Quiz getQuiz(Quiz quiz) throws RemoteException;
-  void getNextQuestion() throws RemoteException;
+  void getNextQuestion(int quizID, String email) throws RemoteException;
   void returnNextQuestion(int num) throws RemoteException;
 }

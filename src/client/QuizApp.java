@@ -43,24 +43,37 @@ public class QuizApp extends Application
     {
       String hostInput;
       System.out.println("You're now the host");
+      String email = null;
+      Quiz quiz = null;
+      int quizIDint = -1;
+      while (quiz == null) {
+        System.out.println("Please enter email:");
+        email = input.nextLine();
+        System.out.println("Please enter quizID:");
+        quizIDint = input.nextInt();
+        input.nextLine();
+
+        quiz = client.getQuiz(quizIDint, email);
+
+      }
       System.out.println("Are you ready to create the lobby(Y|N)?:");
       hostInput = input.nextLine();
       if (hostInput.equalsIgnoreCase("Y"))
       {
-        Host host = new Host("fakemail@mail.com",name,"Strongpassword",null);
-        lobby = new Lobby(1, client.getQuiz() ,host,client.getParticipants());
+        Host host = new Host(email,name,"Strongpassword",null);
+        lobby = new Lobby(1, quiz ,host,client.getParticipants());
         client.setLobby(lobby);
 
         System.out.println("Type Y when you want to start the quiz");
         hostInput = input.nextLine();
         if (hostInput.equalsIgnoreCase("y")){
-          client.startQuiz();
+          client.startQuiz(quizIDint, email);
 
           while(true){
             System.out.println("Type 'Y' for next question");
             hostInput = input.nextLine();
             if (hostInput.equalsIgnoreCase("y")){
-              client.getNextQuestion();
+              client.getNextQuestion(quizIDint, email);
             }
           }
         }

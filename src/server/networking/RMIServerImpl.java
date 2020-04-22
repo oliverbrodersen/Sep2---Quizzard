@@ -66,7 +66,7 @@ public class RMIServerImpl implements RMIServer
     return this.lobby;
   }
 
-  @Override public Quiz getQuiz()
+  @Override public Quiz getQuiz(int quizID, String email)
   {
     Quiz quiz = null;
     if (quizData == null)
@@ -74,25 +74,25 @@ public class RMIServerImpl implements RMIServer
       quizData = new QuizHandler(DBConn);
     }
     try {
-      quiz = quizData.readQuiz(1234);
+      quiz = quizData.readQuiz(quizID, email);
     } catch (SQLException throwables) {
       throwables.printStackTrace();
     }
     return quiz;
   }
 
-  @Override public void startQuiz() throws RemoteException
+  @Override public void startQuiz(int quizID, String email) throws RemoteException
   {
     System.out.println("Connected clients: " + clientList.size());
     for (int i = 0; i < clientList.size(); i++)
     {
-      clientList.get(i).getQuiz(getQuiz());
+      clientList.get(i).getQuiz(getQuiz(quizID, email));
     }
   }
 
-  @Override public void getNextQuestion() throws RemoteException
+  @Override public void getNextQuestion(int quizID, String email) throws RemoteException
   {
-    int num = getQuiz().nextQuestion();
+    int num = getQuiz(quizID, email).nextQuestion();
     System.out.println("Question number:" + num);
     for (int i = 0; i < clientList.size(); i++)
     {

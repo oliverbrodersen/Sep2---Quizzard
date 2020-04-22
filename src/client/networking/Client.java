@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface Client extends Subject
 {
-  Quiz getQuiz();
+  Quiz getQuiz(int quizID, String email);
   UserID getUserClass();
 
   Lobby getLobby();
@@ -17,7 +17,7 @@ public interface Client extends Subject
   String getPassword();
 
   void sendAnswer(Answer answer);
-  void startQuiz();
+  void startQuiz(int quizID, String email);
   void startClient();
 
 

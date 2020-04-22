@@ -36,11 +36,11 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public Quiz getQuiz()
+  @Override public Quiz getQuiz(int quizID, String email)
   {
     try
     {
-      return server.getQuiz();
+      return server.getQuiz(quizID, email);
     }
     catch (RemoteException e)
     {
@@ -48,11 +48,11 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public void getNextQuestion()
+  @Override public void getNextQuestion(int quizID, String email)
   {
     try
     {
-      server.getNextQuestion();
+      server.getNextQuestion(quizID, email);
     }
     catch (RemoteException e)
     {
@@ -85,11 +85,11 @@ public class RMIClient implements Client, ClientCallback
 
   }
 
-  @Override public void startQuiz()
+  @Override public void startQuiz(int quizID, String email)
   {
     try
     {
-      server.startQuiz();
+      server.startQuiz(quizID, email);
     }
     catch (RemoteException e)
     {

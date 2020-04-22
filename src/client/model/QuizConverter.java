@@ -24,7 +24,7 @@ public interface QuizConverter extends Subject
   void setPassword(String password);
 
   void addNewParticipant(Participant participant);
-  Quiz setQuiz();
+  Quiz setQuiz(int quizID, String email);
   void sendAnswer();
   void exit();
 

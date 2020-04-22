@@ -41,7 +41,13 @@ public class DatabaseConnection {
 
     public void addData(String sql)
     {
-
+        try {
+            stmt = c.createStatement();
+            stmt.executeQuery(sql);
+            closeStatement();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public ResultSet retrieveData(String sql)
