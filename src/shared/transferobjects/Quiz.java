@@ -36,6 +36,11 @@ public class Quiz implements Serializable
     return questions.get(i);
   }
 
+  public int getQuestionNumber()
+  {
+    return questionNumber;
+  }
+
   public int nextQuestion(){
     if (questionNumber < questions.size() - 1)
       questionNumber++;

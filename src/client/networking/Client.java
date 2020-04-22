@@ -16,9 +16,9 @@ public interface Client extends Subject
   int getUserID();
   String getPassword();
 
-  void sendAnswer(Answer answer);
+  void sendAnswer(int answer);
   void startQuiz(int quizID, String email);
-  void startClient();
+  void startClient(UserID userID);
 
 
 }

@@ -24,10 +24,12 @@ public class RMIServerImpl implements RMIServer
   private QuizManager quizManager;
   private List<Participant> participantList;
   private List<ClientCallback> clientList;
+  private ClientCallback host;
   private QuizData quizData;
   private Lobby lobby;
   private DatabaseConnection DBConn;
   private Quiz quiz;
+  private ArrayList<ArrayList<Integer>> answers;
 
   public RMIServerImpl(QuizManager quizManager)
   {
@@ -67,6 +69,14 @@ public class RMIServerImpl implements RMIServer
     return this.lobby;
   }
 
+  @Override
+  public void submitAnswer(int answer) throws RemoteException {
+    int number = answers.get(quiz.getQuestionNumber()).get(answer);
+    number++;
+    answers.get(quiz.getQuestionNumber()).set(answer, number);
+    System.out.println(answers.get(quiz.getQuestionNumber()));
+  }
+
   @Override public Quiz getQuiz(int quizID, String email)
   {
     if (quiz == null) {
@@ -77,6 +87,14 @@ public class RMIServerImpl implements RMIServer
         quiz = quizData.readQuiz(quizID, email);
       } catch (SQLException throwables) {
         throwables.printStackTrace();
+      }
+      answers = new ArrayList<ArrayList<Integer>>();
+      for (int i = 0; i < quiz.getQuestions().size(); i++) {
+        ArrayList<Integer> answersInner = new ArrayList<>();
+        for (int j = 0; j < quiz.getQuestion(i).getAnswers().size(); j++) {
+          answersInner.add(0);
+        }
+        answers.add(answersInner);
       }
     }
     return quiz;
@@ -105,7 +123,7 @@ public class RMIServerImpl implements RMIServer
     return null;
   }
 
-  @Override public void registerClient(ClientCallback client)
+  @Override public void registerClient(ClientCallback client, UserID userID)
   {
     PropertyChangeListener listener = null;
     PropertyChangeListener finalListener = listener;
@@ -119,7 +137,10 @@ public class RMIServerImpl implements RMIServer
       }
     };
     quizManager.addListener("Lobby", listener);
-    clientList.add(client);
+    if (userID == UserID.PARTICIPANT)
+      clientList.add(client);
+    else if (userID == UserID.HOST)
+      host = client;
     System.out.println("Client successfully connected.");
     try
     {
@@ -135,4 +156,5 @@ public class RMIServerImpl implements RMIServer
   {
 
   }
+
 }

@@ -12,6 +12,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class RMIClient implements Client, ClientCallback
 {
@@ -23,13 +24,13 @@ public class RMIClient implements Client, ClientCallback
     support = new PropertyChangeSupport(this);
   }
 
-  @Override public void startClient()
+  @Override public void startClient(UserID userID)
   {
     try {
       UnicastRemoteObject.exportObject(this, 0);
       Registry registry = LocateRegistry.getRegistry("localhost", 1099);
       server = (RMIServer) registry.lookup("QuizServer");
-      server.registerClient(this);
+      server.registerClient(this, userID);
       System.out.println("Client registered.");
     } catch (RemoteException | NotBoundException e) {
       e.printStackTrace();
@@ -62,8 +63,15 @@ public class RMIClient implements Client, ClientCallback
 
   @Override public void returnNextQuestion(int num)
   {
-    if (num != -1)
+    if (num != -1) {
       System.out.println(quiz.getQuestion(num));
+
+      System.out.println("Please enter answer: ");
+      Scanner scanner = new Scanner(System.in);
+      int answer = scanner.nextInt();
+      scanner.nextLine();
+      sendAnswer(answer);
+    }
     else
       System.out.println("End of quiz, you lost");
   }
@@ -80,9 +88,13 @@ public class RMIClient implements Client, ClientCallback
     return null;
   }
 
-  @Override public void sendAnswer(Answer answer)
+  @Override public void sendAnswer(int answer)
   {
-
+    try {
+      server.submitAnswer(answer);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override public void startQuiz(int quizID, String email)

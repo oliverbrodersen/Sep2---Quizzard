@@ -14,7 +14,7 @@ public interface RMIServer extends Remote
   void getNextQuestion() throws RemoteException;
   UserID getUserID() throws RemoteException;
 
-  void registerClient(ClientCallback client) throws RemoteException;
+  void registerClient(ClientCallback client, UserID userID) throws RemoteException;
   void removeClient(ClientCallback client) throws RemoteException;
 
   void startServer() throws RemoteException, AlreadyBoundException;
@@ -22,4 +22,6 @@ public interface RMIServer extends Remote
   void newParticipant(Participant participant)throws RemoteException;
   void setLobby(Lobby lobby) throws RemoteException;
   Lobby getLobby() throws RemoteException;
+
+  void submitAnswer(int answer) throws RemoteException;
 }

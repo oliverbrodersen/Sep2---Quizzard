@@ -17,8 +17,8 @@ public class QuizConverterManager implements QuizConverter
   public QuizConverterManager(Client client) {
     this.client = client;
     support = new PropertyChangeSupport(this);
-    client.startClient();
-    client.addListener("OnJoin", this::onJoin);
+    // client.startClient();
+     client.addListener("OnJoin", this::onJoin);
   }
 
 

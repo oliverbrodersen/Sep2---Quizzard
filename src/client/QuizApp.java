@@ -31,13 +31,16 @@ public class QuizApp extends Application
     String name = input.nextLine();
 
     RMIClient client = new RMIClient();
-    client.startClient();
 
     String userclass;
     System.out.println("Are you host(H) or player(P):");
     userclass = input.nextLine();
     System.out.println("\n");
     Lobby lobby;
+    if (userclass.equalsIgnoreCase("h"))
+      client.startClient(UserID.HOST);
+    else if (userclass.equalsIgnoreCase("p"))
+      client.startClient(UserID.PARTICIPANT);
 
     if (userclass.equalsIgnoreCase("H"))
     {
@@ -91,6 +94,8 @@ public class QuizApp extends Application
       {
         System.out.println(client.getParticipants().get(i).getName());
       }
+
+
     }
 
   }
