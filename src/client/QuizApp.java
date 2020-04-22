@@ -73,7 +73,7 @@ public class QuizApp extends Application
             System.out.println("Type 'Y' for next question");
             hostInput = input.nextLine();
             if (hostInput.equalsIgnoreCase("y")){
-              client.getNextQuestion(quizIDint, email);
+              client.getNextQuestion();
             }
           }
         }

@@ -48,11 +48,11 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public void getNextQuestion(int quizID, String email)
+  @Override public void getNextQuestion()
   {
     try
     {
-      server.getNextQuestion(quizID, email);
+      server.getNextQuestion();
     }
     catch (RemoteException e)
     {
