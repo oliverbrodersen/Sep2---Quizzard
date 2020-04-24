@@ -210,7 +210,12 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public Lobby getLobby() throws RemoteException
+  @Override public Lobby getLobby()
+  {
+    return null;
+  }
+
+  @Override public List<Participant> getParticipants()
   {
     return null;
   }

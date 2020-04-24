@@ -14,7 +14,7 @@ public interface Client extends Subject
   Lobby getLobby(int pin);
   List<Participant> getParticipants(int pin);
   List<Quiz> getQuizzes();
-  Lobby getLobby();
+  Lobby getLobby() ;
   List<Participant> getParticipants();
   String getUsername();
   int getUserID();

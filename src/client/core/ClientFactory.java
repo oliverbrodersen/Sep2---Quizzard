@@ -2,6 +2,7 @@ package client.core;
 
 import client.networking.Client;
 import client.networking.RMIClient;
+import shared.transferobjects.UserID;
 
 public class ClientFactory {
 
@@ -10,11 +11,8 @@ public class ClientFactory {
   public Client getClient() {
     if(client == null) {
       client = new RMIClient();
-      client.startClient();
+      client.startClient(-1, UserID.HOST);
     }
     return client;
   }
-
-
-
 }
