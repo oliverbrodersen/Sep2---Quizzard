@@ -2,10 +2,10 @@ package client.views.scoreboardview;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.views.ViewController;
 import client.views.hostmain.HostMainVM;
 
-public class ScoreboardVC
-{
+public class ScoreboardVC implements ViewController {
   private ScoreboardVM vm;
   private ViewHandler vh;
 

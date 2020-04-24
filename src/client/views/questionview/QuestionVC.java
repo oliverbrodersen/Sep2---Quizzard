@@ -2,9 +2,10 @@ package client.views.questionview;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.views.ViewController;
 import client.views.hostmain.HostMainVM;
 
-public class QuestionVC {
+public class QuestionVC implements ViewController {
   private QuestionVM vm;
   private ViewHandler vh;
 
