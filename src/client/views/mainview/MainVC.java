@@ -47,8 +47,10 @@ public class MainVC implements ViewController {
 
   @FXML public void onLoginPressed() {
     boolean loginCheck = vm.CheckLogin();
-    if (loginCheck)
+    if (loginCheck){
+      vm.setUser();
       vh.openView("hostmain");
+    }
   }
 
   @FXML public void onCreatePressed() {

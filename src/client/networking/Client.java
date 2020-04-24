@@ -3,6 +3,7 @@ package client.networking;
 import shared.transferobjects.*;
 import shared.util.Subject;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 public interface Client extends Subject
@@ -13,12 +14,14 @@ public interface Client extends Subject
 
   Lobby getLobby(int pin);
   List<Participant> getParticipants(int pin);
-  List<Quiz> getQuizzes();
+  List<Quiz> getQuizzes(String email);
+  UserClass getUser(String email);
   Lobby getLobby() ;
   List<Participant> getParticipants();
   String getUsername();
   int getUserID();
   String getPassword();
+  int getPin();
 
   void sendAnswer(int pin, int answer);
   void startQuiz(int pin, int quizID, String email);

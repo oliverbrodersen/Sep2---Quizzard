@@ -1,5 +1,8 @@
 package shared.transferobjects;
 
+import client.networking.Client;
+import shared.networking.ClientCallback;
+
 import java.io.Serializable;
 
 public class Moderator implements UserClass
@@ -7,6 +10,7 @@ public class Moderator implements UserClass
 
   private String name, password, email;
   private UserID userID;
+  private ClientCallback client;
 
   public Moderator(String name, String password, String email) {
     this.name = name;
@@ -33,6 +37,10 @@ public class Moderator implements UserClass
     return userID;
   }
 
+  @Override public ClientCallback getClient()
+  {
+    return client;
+  }
 
   // Setters
   @Override public void setUsername(String name) {
@@ -47,5 +55,9 @@ public class Moderator implements UserClass
     this.email = email;
   }
 
+  @Override public void setClient(Client client)
+  {
+    this.client = (ClientCallback)client;
+  }
 
 }

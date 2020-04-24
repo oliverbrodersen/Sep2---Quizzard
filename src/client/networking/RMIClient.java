@@ -98,7 +98,7 @@ public class RMIClient implements Client, ClientCallback
     pinFromServer = pin;
   }
 
-  @Override public int getPin() throws RemoteException
+  @Override public int getPin()
   {
     return pinFromServer;
   }
@@ -108,13 +108,23 @@ public class RMIClient implements Client, ClientCallback
   }
 
   @Override
-  public List<Quiz> getQuizzes() {
+  public List<Quiz> getQuizzes(String email) {
     try {
-      return server.getQuizzes();
+      return server.getQuizzes(email);
     } catch (RemoteException e) {
       e.printStackTrace();
     }
     return quizzes;
+  }
+
+  @Override
+  public UserClass getUser(String email) {
+    try {
+      return server.getUser(email);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   @Override public int getUserID() {

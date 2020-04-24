@@ -8,6 +8,8 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 import shared.transferobjects.Participant;
+import shared.transferobjects.UserClass;
+import shared.transferobjects.UserID;
 
 import java.beans.PropertyChangeEvent;
 
@@ -83,6 +85,9 @@ public class MainVM {
     quizConverter.exit();
   }
 
+  public void setUser(){
+    quizConverter.setUser(username.get());
+  }
 
   public boolean CheckLogin() {
     boolean loginSuccessful = quizConverter.verifyLogin(username.get());

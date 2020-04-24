@@ -19,9 +19,9 @@ public class Lobby implements Serializable
   private List<ClientCallback> clientList;
   private ClientCallback hostCallBack;
 
-  public Lobby(Quiz quiz, Host host) {
+  public Lobby(Quiz quiz, UserClass host) {
     this.quiz = quiz;
-    this.hostData = host;
+    this.hostData = (Host) host;
     title = quiz.getTitle();
     participants = new ArrayList<>();
     clientList = new ArrayList<>();

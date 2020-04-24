@@ -3,8 +3,12 @@ package client.views.hostmain;
 import client.model.QuizConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import shared.networking.ClientCallback;
+import shared.transferobjects.Lobby;
 import shared.transferobjects.Quiz;
+import shared.transferobjects.UserClass;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 public class HostMainVM {
@@ -27,6 +31,15 @@ public class HostMainVM {
 
     public ObservableList<Quiz> getQuizzes() {
         return quizzes;
+    }
+
+    public void host(Quiz quiz) throws RemoteException
+    {
+        UserClass user = quizConverter.getUser();
+        Lobby lobby = new Lobby(quiz , user);
+        ClientCallback client = (ClientCallback) user.getClient();
+        lobby.setHostCallBack(client);
+        client.addLobby(lobby,client);
     }
 }
 

@@ -1,5 +1,8 @@
 package shared.transferobjects;
 
+import client.networking.Client;
+import shared.networking.ClientCallback;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +13,7 @@ public class Host implements UserClass
   private String email, username, password;
   private List<Quiz> quizzes;
   private UserID userID;
+  private ClientCallback client;
 
 
   public Host(String email, String username, String password, ArrayList<Quiz> quizzesList) {
@@ -37,6 +41,11 @@ public class Host implements UserClass
     return userID;
   }
 
+  @Override public ClientCallback getClient()
+  {
+    return client;
+  }
+
   public List<Quiz> getQuizzes() {
     return quizzes;
   }
@@ -48,6 +57,11 @@ public class Host implements UserClass
   // Setters
   @Override public void setEmail(String email) {
     this.email = email;
+  }
+
+  @Override public void setClient(Client client)
+  {
+    this.client = (ClientCallback) client;
   }
 
   @Override public void setUsername(String username) {

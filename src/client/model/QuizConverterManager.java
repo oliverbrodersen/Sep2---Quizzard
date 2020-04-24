@@ -13,6 +13,7 @@ public class QuizConverterManager implements QuizConverter
 
   private PropertyChangeSupport support;
   private Client client;
+  private UserClass user;
 
   public QuizConverterManager(Client client) {
     this.client = client;
@@ -34,7 +35,7 @@ public class QuizConverterManager implements QuizConverter
 
   @Override
   public List<Quiz> getQuizzes() {
-    return client.getQuizzes();
+    return client.getQuizzes(user.getEmail());
   }
 
 
@@ -58,12 +59,29 @@ public class QuizConverterManager implements QuizConverter
     return client.getPassword();
   }
 
+  @Override public UserClass getUser()
+  {
+    return user;
+  }
+
+  @Override public int getPin()
+  {
+    return client.getPin();
+  }
+
   @Override public void setUsername(String username) {
 
   }
 
   @Override public void setPassword(String password) {
 
+  }
+
+  @Override public void setUser(String email)
+  {
+    this.user = client.getUser(email);
+    System.out.println(user.getEmail());
+    user.setClient(client);
   }
 
   @Override public void addNewParticipant(Participant participant) {

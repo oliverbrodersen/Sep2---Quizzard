@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.transferobjects.Quiz;
 
+import java.rmi.RemoteException;
 
 public class HostMainVC implements ViewController {
 
@@ -49,7 +50,10 @@ public class HostMainVC implements ViewController {
     public void onDeletePressed(ActionEvent actionEvent) {
     }
 
-    public void onHostPressed(ActionEvent actionEvent) {
+    public void onHostPressed(ActionEvent actionEvent) throws RemoteException
+    {
+        vm.host(hostQuizTable.getSelectionModel().getSelectedItem());
+        vh.openView("lobbyview");
     }
 
     public void onExitPressed(ActionEvent actionEvent) {

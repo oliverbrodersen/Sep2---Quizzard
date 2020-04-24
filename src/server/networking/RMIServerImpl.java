@@ -140,18 +140,32 @@ public class RMIServerImpl implements RMIServer
     return quiz;
   }
 
-  @Override public List<Quiz> getQuizzes() {
+  @Override public List<Quiz> getQuizzes(String email) {
     quizzes = new ArrayList<>();
     if (quizData == null)
     {
       quizData = new QuizHandler(DBConn);
     }
     try {
-      quizzes = quizData.readQuizzes("Host@Host.com");
+      quizzes = quizData.readQuizzes(email);
     } catch (SQLException throwables) {
       throwables.printStackTrace();
     }
     return quizzes;
+  }
+
+  @Override public UserClass getUser(String email) throws RemoteException
+  {
+    if (userData == null)
+    {
+      userData = new UserHandler(DBConn);
+    }
+    try {
+      return userData.retrieveUser(email);
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
+    return null;
   }
 
   @Override public void startQuiz(int pin, int quizID, String email) throws RemoteException

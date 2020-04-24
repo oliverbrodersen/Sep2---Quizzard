@@ -1,9 +1,6 @@
 package client.model;
 
-import shared.transferobjects.Lobby;
-import shared.transferobjects.Participant;
-import shared.transferobjects.Question;
-import shared.transferobjects.Quiz;
+import shared.transferobjects.*;
 import shared.util.Subject;
 
 import java.util.List;
@@ -20,9 +17,12 @@ public interface QuizConverter extends Subject
   String getUsername();
   int getUserID();
   String getPassword();
+  UserClass getUser();
+  int getPin();
 
   void setUsername(String username);
   void setPassword(String password);
+  void setUser(String email);
 
   void addNewParticipant(Participant participant);
   Quiz setQuiz(int quizID, String email);
