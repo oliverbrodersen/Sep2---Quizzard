@@ -13,6 +13,9 @@ public interface Client extends Subject
 
   Lobby getLobby(int pin);
   List<Participant> getParticipants(int pin);
+  List<Quiz> getQuizzes();
+  Lobby getLobby();
+  List<Participant> getParticipants();
   String getUsername();
   int getUserID();
   String getPassword();
@@ -21,4 +24,5 @@ public interface Client extends Subject
   void startQuiz(int pin, int quizID, String email);
 
 
+    boolean verifyLogin(String username);
 }

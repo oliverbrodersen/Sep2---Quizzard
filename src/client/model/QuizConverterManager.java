@@ -18,7 +18,7 @@ public class QuizConverterManager implements QuizConverter
     this.client = client;
     support = new PropertyChangeSupport(this);
     // client.startClient();
-     client.addListener("OnJoin", this::onJoin);
+    // client.addListener("OnJoin", this::onJoin);
   }
 
 
@@ -30,6 +30,11 @@ public class QuizConverterManager implements QuizConverter
 
   @Override public Lobby getLobby(int pin) {
     return client.getLobby(pin);
+  }
+
+  @Override
+  public List<Quiz> getQuizzes() {
+    return client.getQuizzes();
   }
 
 
@@ -76,6 +81,11 @@ public class QuizConverterManager implements QuizConverter
 
   @Override public void exit() {
 
+  }
+
+  @Override
+  public boolean verifyLogin(String username) {
+    return client.verifyLogin(username);
   }
 
   @Override public void addListener(String eventName,

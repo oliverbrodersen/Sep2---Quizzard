@@ -6,11 +6,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TextField;
 import shared.transferobjects.Participant;
 
 import java.beans.PropertyChangeEvent;
 
-public class MainViewModel {
+public class MainVM {
 
   private ObservableList<Participant> participants;
   private QuizConverter quizConverter;
@@ -18,7 +19,7 @@ public class MainViewModel {
   //quizID returns as string, may cause problems since lobby needs int
 
 
-  public MainViewModel(QuizConverter quizConverter) {
+  public MainVM(QuizConverter quizConverter) {
     this.quizConverter = quizConverter;
 
     username = new SimpleStringProperty();
@@ -83,4 +84,8 @@ public class MainViewModel {
   }
 
 
+  public boolean CheckLogin() {
+    boolean loginSuccessful = quizConverter.verifyLogin(username.get());
+    return loginSuccessful;
+  }
 }

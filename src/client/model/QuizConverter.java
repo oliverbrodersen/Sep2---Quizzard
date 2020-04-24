@@ -13,6 +13,7 @@ public interface QuizConverter extends Subject
 
   Lobby getLobby(int pin);
 
+  List<Quiz> getQuizzes();
   List<Participant> getParticipants();
   Question getNextQuestion();
 
@@ -29,4 +30,5 @@ public interface QuizConverter extends Subject
   void exit();
 
 
+    boolean verifyLogin(String username);
 }

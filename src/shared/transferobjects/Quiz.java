@@ -10,6 +10,7 @@ public class Quiz implements Serializable
   private String title, subject;
   private int questionNumber;
   private List<Question> questions;
+  private int length;
 
   public Quiz(String title, String subject, List<Question> questionsList) {
     this.title = title;
@@ -29,6 +30,10 @@ public class Quiz implements Serializable
 
   public List<Question> getQuestions() {
     return questions;
+  }
+
+  public int getLength() {
+    return questions.size();
   }
 
   public Question getQuestion (int i) {

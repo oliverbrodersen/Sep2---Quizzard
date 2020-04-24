@@ -1,8 +1,6 @@
 package server.networking;
 
-import server.DAO.DatabaseConnection;
-import server.DAO.QuizData;
-import server.DAO.QuizHandler;
+import server.DAO.*;
 import server.model.QuizManager;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
@@ -24,7 +22,10 @@ public class RMIServerImpl implements RMIServer
   private QuizManager quizManager;
   private List<Lobby> lobbyList;
   private QuizData quizData;
+  private UserData userData;
+  private Lobby lobby;
   private DatabaseConnection DBConn;
+  private List<Quiz> quizzes;
 
   public RMIServerImpl(QuizManager quizManager)
   {
@@ -109,6 +110,22 @@ public class RMIServerImpl implements RMIServer
     System.out.println(answers);
   }
 
+  @Override
+  public boolean verifyLogin(String username){
+    if (userData == null)
+    {
+      userData = new UserHandler(DBConn);
+    }
+    try {
+      UserClass user = userData.retrieveUser(username);
+      if (user.equals(null))
+        return false;
+    } catch (SQLException | NullPointerException throwables) {
+      return false;
+    }
+    return true;
+  }
+
   @Override public Quiz getQuiz(int quizID, String email)
   {
     Quiz quiz = null;
@@ -121,6 +138,20 @@ public class RMIServerImpl implements RMIServer
       throwables.printStackTrace();
     }
     return quiz;
+  }
+
+  @Override public List<Quiz> getQuizzes() {
+    quizzes = new ArrayList<>();
+    if (quizData == null)
+    {
+      quizData = new QuizHandler(DBConn);
+    }
+    try {
+      quizzes = quizData.readQuizzes("Host@Host.com");
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
+    return quizzes;
   }
 
   @Override public void startQuiz(int pin, int quizID, String email) throws RemoteException
