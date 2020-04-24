@@ -1,22 +1,31 @@
 package client.core;
 
-import client.views.mainview.MainViewModel;
+import client.views.hostmain.HostMainVM;
+import client.views.mainview.MainVM;
 
 public class ViewModelFactory {
 
   private final ModelFactory mf;
 
-  private MainViewModel mainViewModel;
+  private MainVM mainVM;
+  private HostMainVM hostMainVM;
 
   public ViewModelFactory(ModelFactory mf) {
     this.mf = mf;
   }
 
-  public MainViewModel getMainViewModel() {
-    if(mainViewModel == null) {
-      mainViewModel = new MainViewModel(mf.getQuizConverter());
+  public MainVM getMainVM() {
+    if(mainVM == null) {
+      mainVM = new MainVM(mf.getQuizConverter());
     }
-    return mainViewModel;
+    return mainVM;
+  }
+
+  public HostMainVM getHostMainVM() {
+    if (hostMainVM == null) {
+      hostMainVM = new HostMainVM(mf.getQuizConverter());
+    }
+    return hostMainVM;
   }
 
 

@@ -2,7 +2,7 @@ package client.core;
 
 import client.model.QuizConverter;
 import client.views.ViewController;
-import client.views.mainview.MainViewController;
+import client.views.mainview.MainVC;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,19 +13,19 @@ import java.io.IOException;
 
 public class ViewHandler {
 
+  private Stage stage;
   private Scene currentScene;
-  private Stage primaryStage;
 
   private ViewModelFactory vmf;
   private QuizConverter quizConverter;
-  private MainViewController mainViewController;
+  private MainVC mainVC;
 
   public ViewHandler(ViewModelFactory vmf) {
     this.vmf = vmf;
   }
 
   public void start() {
-    this.primaryStage = primaryStage;
+    this.stage = new Stage();
     this.currentScene = new Scene(new Region());
     openView("login");
   }
@@ -33,11 +33,13 @@ public class ViewHandler {
 
   public void openView(String id) {
 
-    Region root = null;
+    Parent root = null;
     switch (id) {
       case "login":
-        root = loadView("../views/mainview/mainview.fxml", mainViewController);
+        root = loadFXML("../views/mainview/mainview.fxml");
         break;
+      case "hostMain":
+        root = loadFXML("../views/hostmain/hostmain.fxml");
     }
     currentScene.setRoot(root);
 
@@ -47,31 +49,24 @@ public class ViewHandler {
       title += root.getUserData();
     }
 
-    primaryStage.setTitle(title);
-    primaryStage.setScene(currentScene);
-    primaryStage.show();
+    stage.setTitle(title);
+    stage.setScene(currentScene);
+    stage.show();
   }
 
-
-  private Region loadView(String fxmlFile, ViewController controller) {
-
-    if (controller == null) {
-      try {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(fxmlFile));
-        Region root = loader.load();
-        controller = loader.getController();
-        controller.init(this, vmf, root);
-      }
-      catch (IOException e) {
-        e.printStackTrace();
-      }
+  private Parent loadFXML(String path)
+  {
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource(path));
+    Parent root = null;
+    try {
+      root = loader.load();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-    else {
-      controller.reset();
-    }
-    return controller.getRoot();
+
+    ViewController ctrl = loader.getController();
+    ctrl.init(this, vmf);
+    return root;
   }
-
-
 }

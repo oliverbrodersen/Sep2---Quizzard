@@ -10,7 +10,7 @@ import shared.transferobjects.Participant;
 
 import java.beans.PropertyChangeEvent;
 
-public class MainViewModel {
+public class MainVM {
 
   private ObservableList<Participant> participants;
   private QuizConverter quizConverter;
@@ -18,7 +18,7 @@ public class MainViewModel {
   //quizID returns as string, may cause problems since lobby needs int
 
 
-  public MainViewModel(QuizConverter quizConverter) {
+  public MainVM(QuizConverter quizConverter) {
     this.quizConverter = quizConverter;
 
     username = new SimpleStringProperty();
