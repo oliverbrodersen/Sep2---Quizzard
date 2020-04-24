@@ -82,7 +82,6 @@ public class ViewHandler {
     }
 
     ViewController ctrl = loader.getController();
-    System.out.println(ctrl);
     ctrl.init(this, vmf);
     return root;
   }

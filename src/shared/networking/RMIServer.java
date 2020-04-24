@@ -6,6 +6,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface RMIServer extends Remote
 {
@@ -16,6 +17,8 @@ public interface RMIServer extends Remote
 
   void registerClient(ClientCallback client, UserID userID) throws RemoteException;
   void removeClient(ClientCallback client) throws RemoteException;
+
+  List<Quiz> getQuizzes()  throws RemoteException;
 
   void startServer() throws RemoteException, AlreadyBoundException;
   ArrayList<Participant> getParticipants()throws RemoteException;

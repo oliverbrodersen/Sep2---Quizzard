@@ -13,6 +13,7 @@ public interface QuizConverter extends Subject
 
   Lobby getLobby();
 
+  List<Quiz> getQuizzes();
   List<Participant> getParticipants();
   Question getNextQuestion();
 

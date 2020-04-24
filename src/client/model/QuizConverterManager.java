@@ -32,6 +32,11 @@ public class QuizConverterManager implements QuizConverter
     return client.getLobby();
   }
 
+  @Override
+  public List<Quiz> getQuizzes() {
+    return client.getQuizzes();
+  }
+
 
   @Override public List<Participant> getParticipants() {
     return null;

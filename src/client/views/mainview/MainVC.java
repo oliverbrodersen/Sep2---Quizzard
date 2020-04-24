@@ -46,7 +46,6 @@ public class MainVC implements ViewController {
   }
 
   @FXML public void onLoginPressed() {
-    System.out.println("pressed openhost");
     vh.openView("hostmain");
   }
 

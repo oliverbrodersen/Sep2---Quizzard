@@ -10,6 +10,7 @@ public interface Client extends Subject
   Quiz getQuiz(int quizID, String email);
   UserID getUserClass();
 
+  List<Quiz> getQuizzes();
   Lobby getLobby();
   List<Participant> getParticipants();
   String getUsername();
@@ -18,7 +19,7 @@ public interface Client extends Subject
 
   void sendAnswer(int answer);
   void startQuiz(int quizID, String email);
-  void startClient(UserID userID);
+  void startClient();
 
 
 }

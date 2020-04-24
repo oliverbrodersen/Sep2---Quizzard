@@ -12,6 +12,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class RMIClient implements Client, ClientCallback
@@ -19,14 +20,16 @@ public class RMIClient implements Client, ClientCallback
   private RMIServer server;
   private PropertyChangeSupport support;
   private Quiz quiz;
+  private List<Quiz> quizzes = new ArrayList<>();
 
   public RMIClient() {
     support = new PropertyChangeSupport(this);
   }
 
-  @Override public void startClient(UserID userID)
+  @Override public void startClient()
   {
     try {
+      UserID userID = UserID.HOST;
       UnicastRemoteObject.exportObject(this, 0);
       Registry registry = LocateRegistry.getRegistry("localhost", 1099);
       server = (RMIServer) registry.lookup("QuizServer");
@@ -36,6 +39,8 @@ public class RMIClient implements Client, ClientCallback
       e.printStackTrace();
     }
   }
+
+
 
   @Override public Quiz getQuiz(int quizID, String email)
   {
@@ -78,6 +83,16 @@ public class RMIClient implements Client, ClientCallback
 
   @Override public UserID getUserClass() {
     return null;
+  }
+
+  @Override
+  public List<Quiz> getQuizzes() {
+    try {
+      return server.getQuizzes();
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return quizzes;
   }
 
   @Override public int getUserID() {
