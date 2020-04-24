@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.hostmain.HostMainVC">
    <children>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="446.0">
          <children>
@@ -30,11 +30,11 @@
             </VBox>
             <VBox alignment="TOP_RIGHT" prefHeight="371.0" prefWidth="51.0">
                <children>
-                  <Button mnemonicParsing="false" text="Create" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="Edit" />
-                  <Button mnemonicParsing="false" text="Delete" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="Host" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Exit" />
+                  <Button mnemonicParsing="false" onAction="#onCreatePressed" text="Create" />
+                  <Button mnemonicParsing="false" onAction="#onEditPressed" prefHeight="25.0" prefWidth="51.0" text="Edit" />
+                  <Button mnemonicParsing="false" onAction="#onDeletePressed" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#onHostPressed" prefHeight="25.0" prefWidth="51.0" text="Host" />
+                  <Button mnemonicParsing="false" onAction="#onExitPressed" prefHeight="25.0" prefWidth="52.0" text="Exit" />
                </children>
             </VBox>
          </children>

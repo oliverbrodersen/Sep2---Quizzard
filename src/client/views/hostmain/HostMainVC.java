@@ -3,6 +3,7 @@ package client.views.hostmain;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
+import javafx.event.ActionEvent;
 
 
 public class HostMainVC implements ViewController {
@@ -19,5 +20,20 @@ public class HostMainVC implements ViewController {
     @Override
     public void reset() {
 
+    }
+
+    public void onCreatePressed(ActionEvent actionEvent) {
+    }
+
+    public void onEditPressed(ActionEvent actionEvent) {
+    }
+
+    public void onDeletePressed(ActionEvent actionEvent) {
+    }
+
+    public void onHostPressed(ActionEvent actionEvent) {
+    }
+
+    public void onExitPressed(ActionEvent actionEvent) {
     }
 }

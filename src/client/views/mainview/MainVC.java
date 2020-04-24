@@ -26,13 +26,13 @@ public class MainVC implements ViewController {
   @Override public void init(ViewHandler vh, ViewModelFactory vmf) {
     this.vh = vh;
     this.vm = vmf.getMainVM();
-
-    usernameField.textProperty().bindBidirectional(vm.usernameProperty());
-    passwordField.textProperty().bindBidirectional(vm.passwordProperty());
-    quizIDField.textProperty().bindBidirectional(vm.quizIDProperty());
-
-    errorJoinLabel.textProperty().bindBidirectional(vm.joinErrorProperty());
-    errorLoginLabel.textProperty().bindBidirectional(vm.loginErrorProperty());
+//
+//    usernameField.textProperty().bindBidirectional(vm.usernameProperty());
+//    passwordField.textProperty().bindBidirectional(vm.passwordProperty());
+//    quizIDField.textProperty().bindBidirectional(vm.quizIDProperty());
+//
+//    errorJoinLabel.textProperty().bindBidirectional(vm.joinErrorProperty());
+//    errorLoginLabel.textProperty().bindBidirectional(vm.loginErrorProperty());
 
   }
 
@@ -46,7 +46,8 @@ public class MainVC implements ViewController {
   }
 
   @FXML public void onLoginPressed() {
-    vh.openView("hostMain");
+    System.out.println("pressed openhost");
+    vh.openView("hostmain");
   }
 
   @FXML public void onCreatePressed() {

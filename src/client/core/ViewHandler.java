@@ -2,6 +2,7 @@ package client.core;
 
 import client.model.QuizConverter;
 import client.views.ViewController;
+import client.views.hostmain.HostMainVC;
 import client.views.mainview.MainVC;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +18,7 @@ public class ViewHandler {
   private Scene currentScene;
 
   private ViewModelFactory vmf;
-  private QuizConverter quizConverter;
-  private MainVC mainVC;
+
 
   public ViewHandler(ViewModelFactory vmf) {
     this.vmf = vmf;
@@ -26,10 +26,8 @@ public class ViewHandler {
 
   public void start() {
     this.stage = new Stage();
-    this.currentScene = new Scene(new Region());
     openView("login");
   }
-
 
   public void openView(String id) {
 
@@ -38,14 +36,32 @@ public class ViewHandler {
       case "login":
         root = loadFXML("../views/mainview/mainview.fxml");
         break;
-      case "hostMain":
+      case "hostmain":
         root = loadFXML("../views/hostmain/hostmain.fxml");
+        break;
+      case "createaccount":
+        root = loadFXML("../views/createaccount/createaccount.fxml");
+        break;
+      case "finalscreen":
+        root = loadFXML("../views/finalscreen/finalscreen.fxml");
+        break;
+      case "createquiz":
+        root = loadFXML("../views/hostmain/createquiz/createquiz.fxml");
+        break;
+      case "lobbyview":
+        root = loadFXML("../views/lobbyview/lobbyview.fxml");
+        break;
+      case "questionview":
+        root = loadFXML("../views/questionview/questionview.fxml");
+        break;
+      case "scoreboardview":
+        root = loadFXML("../views/scoreboardview/scoreboardview.fxml");
+        break;
     }
-    currentScene.setRoot(root);
+    currentScene = new Scene(root);
 
     String title = "";
     if(root.getUserData() != null) {
-
       title += root.getUserData();
     }
 
@@ -66,7 +82,9 @@ public class ViewHandler {
     }
 
     ViewController ctrl = loader.getController();
+    System.out.println(ctrl);
     ctrl.init(this, vmf);
     return root;
   }
+
 }
