@@ -83,6 +83,11 @@ public class QuizConverterManager implements QuizConverter
 
   }
 
+  @Override
+  public boolean verifyLogin(String username) {
+    return client.verifyLogin(username);
+  }
+
   @Override public void addListener(String eventName,
       PropertyChangeListener listener) {
 

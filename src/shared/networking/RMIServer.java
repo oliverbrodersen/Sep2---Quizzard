@@ -27,4 +27,6 @@ public interface RMIServer extends Remote
   Lobby getLobby() throws RemoteException;
 
   void submitAnswer(int answer) throws RemoteException;
+
+  boolean verifyLogin(String username) throws RemoteException;
 }

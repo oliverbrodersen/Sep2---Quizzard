@@ -30,4 +30,5 @@ public interface QuizConverter extends Subject
   void exit();
 
 
+    boolean verifyLogin(String username);
 }

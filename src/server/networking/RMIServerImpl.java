@@ -1,8 +1,6 @@
 package server.networking;
 
-import server.DAO.DatabaseConnection;
-import server.DAO.QuizData;
-import server.DAO.QuizHandler;
+import server.DAO.*;
 import server.model.QuizManager;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
@@ -26,6 +24,7 @@ public class RMIServerImpl implements RMIServer
   private List<ClientCallback> clientList;
   private ClientCallback host;
   private QuizData quizData;
+  private UserData userData;
   private Lobby lobby;
   private DatabaseConnection DBConn;
   private Quiz quiz;
@@ -60,22 +59,38 @@ public class RMIServerImpl implements RMIServer
     participantList.add(participant);
   }
 
-  @Override public void setLobby(Lobby lobby) throws RemoteException
+  @Override public void setLobby(Lobby lobby)
   {
    this.lobby = lobby;
   }
 
-  @Override public Lobby getLobby() throws RemoteException
+  @Override public Lobby getLobby()
   {
     return this.lobby;
   }
 
   @Override
-  public void submitAnswer(int answer) throws RemoteException {
+  public void submitAnswer(int answer) {
     int number = answers.get(quiz.getQuestionNumber()).get(answer);
     number++;
     answers.get(quiz.getQuestionNumber()).set(answer, number);
     System.out.println(answers.get(quiz.getQuestionNumber()));
+  }
+
+  @Override
+  public boolean verifyLogin(String username){
+    if (userData == null)
+    {
+      userData = new UserHandler(DBConn);
+    }
+    try {
+      UserClass user = userData.retrieveUser(username);
+      if (user.equals(null))
+        return false;
+    } catch (SQLException | NullPointerException throwables) {
+      return false;
+    }
+    return true;
   }
 
   @Override public Quiz getQuiz(int quizID, String email)
@@ -116,22 +131,30 @@ public class RMIServerImpl implements RMIServer
     return quizzes;
   }
 
-  @Override public void startQuiz(int quizID, String email) throws RemoteException
+  @Override public void startQuiz(int quizID, String email)
   {
     System.out.println("Connected clients: " + clientList.size());
     for (int i = 0; i < clientList.size(); i++)
     {
-      clientList.get(i).getQuiz(getQuiz(quizID, email));
+      try {
+        clientList.get(i).getQuiz(getQuiz(quizID, email));
+      } catch (RemoteException e) {
+        e.printStackTrace();
+      }
     }
   }
 
-  @Override public void getNextQuestion() throws RemoteException
+  @Override public void getNextQuestion()
   {
     int num = quiz.nextQuestion();
     System.out.println("Question number:" + num);
     for (int i = 0; i < clientList.size(); i++)
     {
-      clientList.get(i).returnNextQuestion(num);
+      try {
+        clientList.get(i).returnNextQuestion(num);
+      } catch (RemoteException e) {
+        e.printStackTrace();
+      }
     }
   }
 

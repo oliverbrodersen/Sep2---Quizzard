@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TextField;
 import shared.transferobjects.Participant;
 
 import java.beans.PropertyChangeEvent;
@@ -83,4 +84,8 @@ public class MainVM {
   }
 
 
+  public boolean CheckLogin() {
+    boolean loginSuccessful = quizConverter.verifyLogin(username.get());
+    return loginSuccessful;
+  }
 }

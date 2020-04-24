@@ -26,8 +26,8 @@ public class MainVC implements ViewController {
   @Override public void init(ViewHandler vh, ViewModelFactory vmf) {
     this.vh = vh;
     this.vm = vmf.getMainVM();
-//
-//    usernameField.textProperty().bindBidirectional(vm.usernameProperty());
+
+    usernameField.textProperty().bindBidirectional(vm.usernameProperty());
 //    passwordField.textProperty().bindBidirectional(vm.passwordProperty());
 //    quizIDField.textProperty().bindBidirectional(vm.quizIDProperty());
 //
@@ -46,7 +46,9 @@ public class MainVC implements ViewController {
   }
 
   @FXML public void onLoginPressed() {
-    vh.openView("hostmain");
+    boolean loginCheck = vm.CheckLogin();
+    if (loginCheck)
+      vh.openView("hostmain");
   }
 
   @FXML public void onCreatePressed() {

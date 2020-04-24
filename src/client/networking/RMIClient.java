@@ -40,6 +40,15 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
+  @Override
+  public boolean verifyLogin(String username) {
+    try {
+      return server.verifyLogin(username);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
 
 
   @Override public Quiz getQuiz(int quizID, String email)

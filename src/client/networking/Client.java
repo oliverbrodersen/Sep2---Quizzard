@@ -22,4 +22,5 @@ public interface Client extends Subject
   void startClient();
 
 
+    boolean verifyLogin(String username);
 }
