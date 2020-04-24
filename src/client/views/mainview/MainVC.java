@@ -29,7 +29,7 @@ public class MainVC implements ViewController {
 
     usernameField.textProperty().bindBidirectional(vm.usernameProperty());
 //    passwordField.textProperty().bindBidirectional(vm.passwordProperty());
-//    quizIDField.textProperty().bindBidirectional(vm.quizIDProperty());
+    quizIDField.textProperty().bindBidirectional(vm.quizIDProperty());
 //
 //    errorJoinLabel.textProperty().bindBidirectional(vm.joinErrorProperty());
 //    errorLoginLabel.textProperty().bindBidirectional(vm.loginErrorProperty());
@@ -43,11 +43,13 @@ public class MainVC implements ViewController {
   @FXML public void onJoinPressed() {
     //vh.openView("participantLobby");
     System.out.println("join pressed");
+    if (vm.checkPin())
+      vm.addParticipant();
+      vh.openView("lobbyview");
   }
 
   @FXML public void onLoginPressed() {
-    boolean loginCheck = vm.CheckLogin();
-    if (loginCheck){
+    if (vm.CheckLogin()){
       vm.setUser();
       vh.openView("hostmain");
     }

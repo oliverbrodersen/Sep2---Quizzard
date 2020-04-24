@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface Client extends Subject
 {
-  void startClient(int pin, UserID userID);
+  void startClient();
   Quiz getQuiz(int quizID, String email);
   UserID getUserClass();
 
@@ -19,13 +19,15 @@ public interface Client extends Subject
   Lobby getLobby() ;
   List<Participant> getParticipants();
   String getUsername();
+  void setPin(int pin);
   int getUserID();
   String getPassword();
   int getPin();
-
+  void registerParticipant(int pin);
   void sendAnswer(int pin, int answer);
   void startQuiz(int pin, int quizID, String email);
 
 
     boolean verifyLogin(String username);
+  boolean verifyPin(String pin);
 }

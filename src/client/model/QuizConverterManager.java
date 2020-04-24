@@ -80,8 +80,12 @@ public class QuizConverterManager implements QuizConverter
   @Override public void setUser(String email)
   {
     this.user = client.getUser(email);
-    System.out.println(user.getEmail());
     user.setClient(client);
+  }
+
+  @Override public void setPin(int pin)
+  {
+    client.setPin(pin);
   }
 
   @Override public void addNewParticipant(Participant participant) {
@@ -104,6 +108,16 @@ public class QuizConverterManager implements QuizConverter
   @Override
   public boolean verifyLogin(String username) {
     return client.verifyLogin(username);
+  }
+
+  @Override public boolean verifyPin(String pin)
+  {
+    return client.verifyPin(pin);
+  }
+
+  @Override public void addParticipant(String pin)
+  {
+    client.registerParticipant(Integer.parseInt(pin));
   }
 
   @Override public void addListener(String eventName,

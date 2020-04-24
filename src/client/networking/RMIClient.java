@@ -20,24 +20,20 @@ public class RMIClient implements Client, ClientCallback
   private RMIServer server;
   private PropertyChangeSupport support;
   private Quiz quiz;
-  private int pinFromServer;
+  private int pinFromServer = -1;
   private List<Quiz> quizzes = new ArrayList<>();
 
   public RMIClient() {
     support = new PropertyChangeSupport(this);
   }
 
-  @Override public void startClient(int pin, UserID userID)
+  @Override public void startClient()
   {
     try {
       //UserID userIDUI = UserID.HOST;
       UnicastRemoteObject.exportObject(this, 0);
       Registry registry = LocateRegistry.getRegistry("localhost", 1099);
       server = (RMIServer) registry.lookup("QuizServer");
-      if (userID == UserID.PARTICIPANT){
-        server.registerClient(pin, this, userID);
-        System.out.println("Client registered.");
-      }
     } catch (RemoteException | NotBoundException e) {
       e.printStackTrace();
     }
@@ -53,6 +49,15 @@ public class RMIClient implements Client, ClientCallback
     return false;
   }
 
+  @Override public boolean verifyPin(String pin)
+  {
+    try {
+      return server.verifyPin(pin);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
 
   @Override public Quiz getQuiz(int quizID, String email)
   {
@@ -93,7 +98,7 @@ public class RMIClient implements Client, ClientCallback
       System.out.println("End of quiz, you lost");
   }
 
-  @Override public void updatePin(int pin) throws RemoteException
+  @Override public void updatePin(int pin)
   {
     pinFromServer = pin;
   }
@@ -101,6 +106,18 @@ public class RMIClient implements Client, ClientCallback
   @Override public int getPin()
   {
     return pinFromServer;
+  }
+
+  @Override public void registerParticipant(int pin)
+  {
+    try
+    {
+      server.registerClient(pin, this, UserID.PARTICIPANT);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
   }
 
   @Override public UserID getUserClass() {
@@ -194,6 +211,11 @@ public class RMIClient implements Client, ClientCallback
 
   @Override public String getUsername() {
     return null;
+  }
+
+  @Override public void setPin(int pin)
+  {
+    pinFromServer = pin;
   }
 
   @Override public void newParticipant(int pin, Participant participant)

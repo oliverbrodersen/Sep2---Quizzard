@@ -16,7 +16,7 @@
             <VBox prefHeight="291.0" prefWidth="193.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Join Quiz" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quiz ID" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pin" />
                   <TextField fx:id="quizIDField" />
                   <Button mnemonicParsing="false" onAction="#onJoinPressed" text="Join" />
                   <Label fx:id="errorJoinLabel" text="ERROR" />

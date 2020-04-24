@@ -50,9 +50,6 @@ public class RMIServerImpl implements RMIServer
     }
     return null;
   }
-  public boolean isPinActive(int pin){
-    return !(getLobbyByPin(pin) == null);
-  }
   @Override public ArrayList<Participant> getParticipants(int pin)
   {
     return (ArrayList<Participant>)getLobbyByPin(pin).getParticipants();
@@ -124,6 +121,11 @@ public class RMIServerImpl implements RMIServer
       return false;
     }
     return true;
+  }
+
+  @Override public boolean verifyPin(String pin) throws RemoteException
+  {
+    return !(getLobbyByPin(Integer.parseInt(pin)) == null);
   }
 
   @Override public Quiz getQuiz(int quizID, String email)
@@ -224,7 +226,6 @@ public class RMIServerImpl implements RMIServer
 
   @Override public void removeClient(ClientCallback client)
   {
-
   }
 
 }

@@ -16,7 +16,6 @@ public class LobbyVC implements ViewController {
     public void init(ViewHandler vh, ViewModelFactory vmf) {
         this.vh = vh;
         this.vm = vmf.getLobbyVM();
-        //System.out.println(vm.getPin());
         pinLabel.setText("Pin: " + vm.getPin());
     }
 

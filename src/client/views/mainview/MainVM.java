@@ -90,7 +90,17 @@ public class MainVM {
   }
 
   public boolean CheckLogin() {
-    boolean loginSuccessful = quizConverter.verifyLogin(username.get());
-    return loginSuccessful;
+    return quizConverter.verifyLogin(username.get());
+  }
+
+  public boolean checkPin()
+  {
+    return quizConverter.verifyPin(quizID.get());
+  }
+
+  public void addParticipant()
+  {
+    quizConverter.setPin(Integer.parseInt(quizID.get()));
+    quizConverter.addParticipant(quizID.get());
   }
 }
