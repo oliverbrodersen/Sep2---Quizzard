@@ -10,18 +10,19 @@ import java.util.ArrayList;
 public interface RMIServer extends Remote
 {
   Quiz getQuiz(int quizID, String email) throws RemoteException;
-  void startQuiz(int quizID, String email) throws RemoteException;
-  void getNextQuestion() throws RemoteException;
+  void startQuiz(int pin, int quizID, String email) throws RemoteException;
+  void getNextQuestion(int pin) throws RemoteException;
   UserID getUserID() throws RemoteException;
 
-  void registerClient(ClientCallback client, UserID userID) throws RemoteException;
+  void registerClient(int pin, ClientCallback client, UserID userID) throws RemoteException;
   void removeClient(ClientCallback client) throws RemoteException;
 
   void startServer() throws RemoteException, AlreadyBoundException;
-  ArrayList<Participant> getParticipants()throws RemoteException;
-  void newParticipant(Participant participant)throws RemoteException;
-  void setLobby(Lobby lobby) throws RemoteException;
-  Lobby getLobby() throws RemoteException;
+  ArrayList<Participant> getParticipants(int pin)throws RemoteException;
+  void newParticipant(int pin, Participant participant)throws RemoteException;
+  void newClientCallBack(int pin, ClientCallback clientCallback)throws RemoteException;
+  void addLobby(Lobby lobby, ClientCallback client) throws RemoteException;
+  Lobby getLobby(int pin) throws RemoteException;
 
-  void submitAnswer(int answer) throws RemoteException;
+  void submitAnswer(int pin, int answer) throws RemoteException;
 }

@@ -13,11 +13,13 @@ public interface ClientCallback extends Remote
 {
   void update(Lobby lobby) throws RemoteException;
   void connected() throws RemoteException;
-  ArrayList<Participant> getParticipants()throws RemoteException;
-  void newParticipant(Participant participant)throws RemoteException;
-  void setLobby(Lobby lobby)throws RemoteException;
+  ArrayList<Participant> getParticipants(int pin) throws RemoteException;
+  void newParticipant(int pin, Participant participant)throws RemoteException;
+  void addLobby(Lobby lobby, ClientCallback client)throws RemoteException;
   Lobby getLobby()throws RemoteException;
   Quiz getQuiz(Quiz quiz) throws RemoteException;
-  void getNextQuestion() throws RemoteException;
-  void returnNextQuestion(int num) throws RemoteException;
+  void getNextQuestion(int pin) throws RemoteException;
+  void returnNextQuestion(int pin, int num) throws RemoteException;
+  void updatePin(int pin) throws RemoteException;
+  int getPin() throws  RemoteException;
 }

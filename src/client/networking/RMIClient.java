@@ -19,19 +19,22 @@ public class RMIClient implements Client, ClientCallback
   private RMIServer server;
   private PropertyChangeSupport support;
   private Quiz quiz;
+  private int pinFromServer;
 
   public RMIClient() {
     support = new PropertyChangeSupport(this);
   }
 
-  @Override public void startClient(UserID userID)
+  @Override public void startClient(int pin, UserID userID)
   {
     try {
       UnicastRemoteObject.exportObject(this, 0);
       Registry registry = LocateRegistry.getRegistry("localhost", 1099);
       server = (RMIServer) registry.lookup("QuizServer");
-      server.registerClient(this, userID);
-      System.out.println("Client registered.");
+      if (userID == UserID.PARTICIPANT){
+        server.registerClient(pin, this, userID);
+        System.out.println("Client registered.");
+      }
     } catch (RemoteException | NotBoundException e) {
       e.printStackTrace();
     }
@@ -49,11 +52,11 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public void getNextQuestion()
+  @Override public void getNextQuestion(int pin)
   {
     try
     {
-      server.getNextQuestion();
+      server.getNextQuestion(pin);
     }
     catch (RemoteException e)
     {
@@ -61,7 +64,7 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public void returnNextQuestion(int num)
+  @Override public void returnNextQuestion(int pin, int num)
   {
     if (num != -1) {
       System.out.println(quiz.getQuestion(num));
@@ -70,10 +73,20 @@ public class RMIClient implements Client, ClientCallback
       Scanner scanner = new Scanner(System.in);
       int answer = scanner.nextInt();
       scanner.nextLine();
-      sendAnswer(answer);
+      sendAnswer(pin, answer);
     }
     else
       System.out.println("End of quiz, you lost");
+  }
+
+  @Override public void updatePin(int pin) throws RemoteException
+  {
+    pinFromServer = pin;
+  }
+
+  @Override public int getPin() throws RemoteException
+  {
+    return pinFromServer;
   }
 
   @Override public UserID getUserClass() {
@@ -88,20 +101,20 @@ public class RMIClient implements Client, ClientCallback
     return null;
   }
 
-  @Override public void sendAnswer(int answer)
+  @Override public void sendAnswer(int pin, int answer)
   {
     try {
-      server.submitAnswer(answer);
+      server.submitAnswer(pin, answer);
     } catch (RemoteException e) {
       e.printStackTrace();
     }
   }
 
-  @Override public void startQuiz(int quizID, String email)
+  @Override public void startQuiz(int pin, int quizID, String email)
   {
     try
     {
-      server.startQuiz(quizID, email);
+      server.startQuiz(pin, quizID, email);
     }
     catch (RemoteException e)
     {
@@ -131,11 +144,12 @@ public class RMIClient implements Client, ClientCallback
     System.out.println("New connection.");
   }
 
-  @Override public ArrayList<Participant> getParticipants()
+
+  @Override public ArrayList<Participant> getParticipants(int pin)
   {
     try
     {
-      return server.getParticipants();
+      return server.getParticipants(pin);
     }
     catch (RemoteException e)
     {
@@ -148,11 +162,11 @@ public class RMIClient implements Client, ClientCallback
     return null;
   }
 
-  @Override public void newParticipant(Participant participant)
+  @Override public void newParticipant(int pin, Participant participant)
   {
     try
     {
-      server.newParticipant(participant);
+      server.newParticipant(pin, participant);
     }
     catch (RemoteException e)
     {
@@ -160,11 +174,11 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public void setLobby(Lobby lobby)
+  @Override public void addLobby(Lobby lobby, ClientCallback client)
   {
     try
     {
-      server.setLobby(lobby);
+      server.addLobby(lobby, client);
     }
     catch (RemoteException e)
     {
@@ -172,11 +186,16 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public Lobby getLobby()
+  @Override public Lobby getLobby() throws RemoteException
+  {
+    return null;
+  }
+
+  @Override public Lobby getLobby(int pin)
   {
     try
     {
-      return server.getLobby();
+      return server.getLobby(pin);
     }
     catch (RemoteException e)
     {
@@ -189,6 +208,7 @@ public class RMIClient implements Client, ClientCallback
   {
     //System.out.println(quiz);
     this.quiz = quiz;
+
     System.out.println("Quiz recieved");
     return null;
   }

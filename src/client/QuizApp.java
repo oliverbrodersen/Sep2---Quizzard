@@ -1,16 +1,11 @@
 package client;
 
-import client.core.ClientFactory;
-import client.core.ModelFactory;
-import client.core.ViewHandler;
-import client.core.ViewModelFactory;
 import client.networking.RMIClient;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import server.networking.RMIServerImpl;
 import shared.transferobjects.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class QuizApp extends Application
@@ -25,7 +20,6 @@ public class QuizApp extends Application
   //  vh.start();
 
 
-    
     Scanner input = new Scanner(System.in);
     System.out.println("Enter name: ");
     String name = input.nextLine();
@@ -37,13 +31,11 @@ public class QuizApp extends Application
     userclass = input.nextLine();
     System.out.println("\n");
     Lobby lobby;
-    if (userclass.equalsIgnoreCase("h"))
-      client.startClient(UserID.HOST);
-    else if (userclass.equalsIgnoreCase("p"))
-      client.startClient(UserID.PARTICIPANT);
 
     if (userclass.equalsIgnoreCase("H"))
     {
+      //Pin til host er ligemeget
+      client.startClient(-1, UserID.HOST);
       String hostInput;
       System.out.println("You're now the host");
       String email = null;
@@ -55,28 +47,30 @@ public class QuizApp extends Application
         System.out.println("Please enter quizID:");
         quizIDint = input.nextInt();
         input.nextLine();
-
         quiz = client.getQuiz(quizIDint, email);
-
       }
       System.out.println("Are you ready to create the lobby(Y|N)?:");
       hostInput = input.nextLine();
       if (hostInput.equalsIgnoreCase("Y"))
       {
         Host host = new Host(email,name,"Strongpassword",null);
-        lobby = new Lobby(1, quiz ,host,client.getParticipants());
-        client.setLobby(lobby);
+        lobby = new Lobby(quiz ,host);
+        lobby.setHostCallBack(client);
+        client.addLobby(lobby, client);
 
         System.out.println("Type Y when you want to start the quiz");
         hostInput = input.nextLine();
         if (hostInput.equalsIgnoreCase("y")){
-          client.startQuiz(quizIDint, email);
+          //Det er ikke sikkert at metoden under kan få fat i pin koden, da den først
+          //bliver oprettet når lobbyen bliver uploaded til serveren
+          System.out.println(client.getPin());
+          client.startQuiz(client.getPin(), quizIDint, email);
 
           while(true){
             System.out.println("Type 'Y' for next question");
             hostInput = input.nextLine();
             if (hostInput.equalsIgnoreCase("y")){
-              client.getNextQuestion();
+              client.getNextQuestion(client.getPin());
             }
           }
         }
@@ -85,14 +79,19 @@ public class QuizApp extends Application
 
     else if (userclass.equalsIgnoreCase("P"))
     {
-      lobby = client.getLobby();
       System.out.println("You're now a player");
+      System.out.println("Enter pin:");
+      String pinFromUser = input.nextLine();
+      int pin = Integer.parseInt(pinFromUser);
+
+      client.startClient(pin, UserID.PARTICIPANT);
+      lobby = client.getLobby(pin);
       Participant participant = new Participant(name);
-      client.newParticipant(participant);
+      client.newParticipant(pin, participant);
       lobby.addParticipant(participant);
-      for (int i = 0; i < client.getParticipants().size(); i++)
+      for (int i = 0; i < client.getParticipants(pin).size(); i++)
       {
-        System.out.println(client.getParticipants().get(i).getName());
+        System.out.println(client.getParticipants(pin).get(i).getName());
       }
 
 

@@ -18,7 +18,6 @@ public class Quiz implements Serializable
     questionNumber = -1;
   }
 
-
   // Getters
   public String getTitle() {
     return title;

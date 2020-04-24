@@ -11,7 +11,7 @@ import java.util.List;
 public interface QuizConverter extends Subject
 {
 
-  Lobby getLobby();
+  Lobby getLobby(int pin);
 
   List<Participant> getParticipants();
   Question getNextQuestion();

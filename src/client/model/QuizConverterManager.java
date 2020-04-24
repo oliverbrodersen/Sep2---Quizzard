@@ -28,8 +28,8 @@ public class QuizConverterManager implements QuizConverter
 
 
 
-  @Override public Lobby getLobby() {
-    return client.getLobby();
+  @Override public Lobby getLobby(int pin) {
+    return client.getLobby(pin);
   }
 
 
