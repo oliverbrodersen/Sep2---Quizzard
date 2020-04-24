@@ -1,17 +1,18 @@
-package client.views.questionview;
+package client.views.scoreboardview;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.hostmain.HostMainVM;
 
-public class QuestionVC {
-  private QuestionVM vm;
+public class ScoreboardVC
+{
+  private ScoreboardVM vm;
   private ViewHandler vh;
 
   @Override
   public void init(ViewHandler vh, ViewModelFactory vmf) {
     this.vh = vh;
-    this.vm = vmf.getQuestionVM();
+    this.vm = vmf.getScoreboardVM();
   }
 
   @Override
@@ -19,4 +20,3 @@ public class QuestionVC {
 
   }
 }
-
