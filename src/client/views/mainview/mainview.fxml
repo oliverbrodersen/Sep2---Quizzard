@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.mainview.MainVC">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.mainview.MainVC">
    <children>
       <ImageView fitHeight="117.0" fitWidth="236.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,6 +25,8 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Join Quiz" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter pin" />
+            <TextField fx:id="nickField" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter nickname" />
             <HBox prefHeight="43.0" prefWidth="245.0">
                <children>
                   <TextField fx:id="quizIDField" prefHeight="25.0" prefWidth="184.0" />

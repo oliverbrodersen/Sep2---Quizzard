@@ -115,9 +115,9 @@ public class QuizConverterManager implements QuizConverter
     return client.verifyPin(pin);
   }
 
-  @Override public void addParticipant(String pin)
+  @Override public void addParticipant(String pin, Participant participant)
   {
-    client.registerParticipant(Integer.parseInt(pin));
+    client.newParticipant(Integer.parseInt(pin), participant);
   }
 
   @Override public void addListener(String eventName,

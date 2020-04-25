@@ -1,10 +1,7 @@
 package client.views.mainview;
 
 import client.model.QuizConverter;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 import shared.transferobjects.Participant;
@@ -16,7 +13,7 @@ import java.beans.PropertyChangeEvent;
 public class MainVM {
   private ObservableList<Participant> participants;
   private QuizConverter quizConverter;
-  private StringProperty username, password, quizID, loginError, joinError;
+  private StringProperty username, password, quizID, loginError, joinError, nick;
   //quizID returns as string, may cause problems since lobby needs int
 
 
@@ -26,6 +23,7 @@ public class MainVM {
     username = new SimpleStringProperty();
     password = new SimpleStringProperty();
     quizID = new SimpleStringProperty();
+    nick = new SimpleStringProperty();
     loginError = new SimpleStringProperty();
     joinError = new SimpleStringProperty();
     quizConverter.addListener("OnJoin", this::onJoin);
@@ -40,7 +38,9 @@ public class MainVM {
   public String getUsername() {
     return username.get();
   }
-
+  public String getNick() {
+    return nick.get();
+  }
   public String getPassword() {
     return password.get();
   }
@@ -80,9 +80,7 @@ public class MainVM {
     return joinError;
   }
 
-  public void exit() {
-    quizConverter.exit();
-  }
+  StringProperty nickProperty() { return nick; }
 
   public void setUser(){
     quizConverter.setUser(username.get());
@@ -94,12 +92,13 @@ public class MainVM {
 
   public boolean checkPin()
   {
-    return quizConverter.verifyPin(quizID.get());
+      return quizConverter.verifyPin(quizID.get());
   }
 
   public void addParticipant()
   {
     quizConverter.setPin(Integer.parseInt(quizID.get()));
-    quizConverter.addParticipant(quizID.get());
+    Participant participant = new Participant(nick.get());
+    quizConverter.addParticipant(quizID.get(), participant);
   }
 }

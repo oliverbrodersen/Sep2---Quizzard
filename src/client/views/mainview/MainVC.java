@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 public class MainVC implements ViewController
 {
 
-  @FXML private TextField quizIDField, usernameField;
+  @FXML private TextField quizIDField, usernameField, nickField;
   @FXML private PasswordField passwordField;
   @FXML private Label errorJoinLabel, errorLoginLabel;
 
@@ -31,6 +31,7 @@ public class MainVC implements ViewController
     usernameField.textProperty().bindBidirectional(vm.usernameProperty());
     passwordField.textProperty().bindBidirectional(vm.passwordProperty());
     quizIDField.textProperty().bindBidirectional(vm.quizIDProperty());
+    nickField.textProperty().bindBidirectional(vm.nickProperty());
 
     errorJoinLabel.textProperty().bindBidirectional(vm.joinErrorProperty());
     errorLoginLabel.textProperty().bindBidirectional(vm.loginErrorProperty());
@@ -44,7 +45,11 @@ public class MainVC implements ViewController
   @FXML public void onJoinPressed()
   {
     //vh.openView("participantLobby");
-    if (vm.checkPin())
+    if (quizIDField.getText() == null || quizIDField.getText().equals("") || quizIDField.getText().equals(" "))
+      errorJoinLabel.setText("Please enter pin");
+    else if (nickField.getText() == null || nickField.getText().equals("") || nickField.getText().equals(" "))
+      errorJoinLabel.setText("Please nickname");
+    else if (vm.checkPin())
     {
       vm.addParticipant();
       vh.openView("lobbyview");

@@ -111,4 +111,9 @@ public class Lobby implements Serializable
   {
     participants.remove(participant);
   }
+
+  public void submitAnswer(int answer){
+    int currentQ = quiz.getQuestionNumber();
+    answers.get(currentQ).set(answer, answers.get(currentQ).get(answer) + 1);
+  }
 }
