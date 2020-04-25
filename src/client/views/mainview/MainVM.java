@@ -14,7 +14,6 @@ import shared.transferobjects.UserID;
 import java.beans.PropertyChangeEvent;
 
 public class MainVM {
-
   private ObservableList<Participant> participants;
   private QuizConverter quizConverter;
   private StringProperty username, password, quizID, loginError, joinError;

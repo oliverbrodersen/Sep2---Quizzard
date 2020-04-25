@@ -9,7 +9,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 
-public class MainVC implements ViewController {
+public class MainVC implements ViewController
+{
 
   @FXML private TextField quizIDField, usernameField;
   @FXML private PasswordField passwordField;
@@ -18,61 +19,55 @@ public class MainVC implements ViewController {
   private MainVM vm;
   private ViewHandler vh;
 
+  public MainVC()
+  {
+  }
 
-  public MainVC() { }
-
-
-
-  @Override public void init(ViewHandler vh, ViewModelFactory vmf) {
+  @Override public void init(ViewHandler vh, ViewModelFactory vmf)
+  {
     this.vh = vh;
     this.vm = vmf.getMainVM();
 
     usernameField.textProperty().bindBidirectional(vm.usernameProperty());
-//    passwordField.textProperty().bindBidirectional(vm.passwordProperty());
+    passwordField.textProperty().bindBidirectional(vm.passwordProperty());
     quizIDField.textProperty().bindBidirectional(vm.quizIDProperty());
-//
-//    errorJoinLabel.textProperty().bindBidirectional(vm.joinErrorProperty());
-//    errorLoginLabel.textProperty().bindBidirectional(vm.loginErrorProperty());
+
+    errorJoinLabel.textProperty().bindBidirectional(vm.joinErrorProperty());
+    errorLoginLabel.textProperty().bindBidirectional(vm.loginErrorProperty());
 
   }
 
+  @Override public void reset()
+  {
+  }
 
-  @Override public void reset() { }
-
-
-  @FXML public void onJoinPressed() {
+  @FXML public void onJoinPressed()
+  {
     //vh.openView("participantLobby");
-    System.out.println("join pressed");
     if (vm.checkPin())
+    {
       vm.addParticipant();
       vh.openView("lobbyview");
+    }
+    else
+      errorJoinLabel.setText("Could not connect to pin");
   }
 
-  @FXML public void onLoginPressed() {
-    if (vm.CheckLogin()){
+  @FXML public void onLoginPressed()
+  {
+    if (vm.CheckLogin())
+    {
       vm.setUser();
       vh.openView("hostmain");
     }
+    else
+      errorLoginLabel.setText("Not a valid user");
   }
 
-  @FXML public void onCreatePressed() {
+  @FXML public void onCreatePressed()
+  {
     //vh.openView("create");
     System.out.println("CreatePressed");
   }
-
-  @FXML public void onExitPressed() {
-    vm.exit();
-    Platform.exit();
-  }
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -5,44 +5,70 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.mainview.MainVC">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.mainview.MainVC">
    <children>
-      <HBox alignment="CENTER" prefHeight="130.0" prefWidth="353.0">
+      <ImageView fitHeight="117.0" fitWidth="236.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Logo.png" />
+         </image>
+         <VBox.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </VBox.margin>
+      </ImageView>
+      <VBox prefHeight="212.0" prefWidth="245.0">
          <children>
-            <VBox prefHeight="291.0" prefWidth="193.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Join Quiz" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter pin" />
+            <HBox prefHeight="43.0" prefWidth="245.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Join Quiz" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pin" />
-                  <TextField fx:id="quizIDField" />
-                  <Button mnemonicParsing="false" onAction="#onJoinPressed" text="Join" />
-                  <Label fx:id="errorJoinLabel" text="ERROR" />
+                  <TextField fx:id="quizIDField" prefHeight="25.0" prefWidth="184.0" />
+                  <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onJoinPressed" prefHeight="25.0" prefWidth="46.0" text="Join">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </VBox>
-            <VBox prefHeight="191.0" prefWidth="177.0">
+            </HBox>
+            <Label fx:id="errorJoinLabel" prefHeight="17.0" prefWidth="240.0" textAlignment="CENTER" textFill="#ff3d3d" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </VBox>
+      <VBox prefHeight="426.0" prefWidth="241.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+            <TextField fx:id="usernameField" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+            <PasswordField fx:id="passwordField" />
+            <HBox prefHeight="41.0" prefWidth="247.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
-                  <TextField fx:id="usernameField" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-                  <PasswordField fx:id="passwordField" />
                   <Button mnemonicParsing="false" onAction="#onLoginPressed" prefHeight="25.0" prefWidth="52.0" text="Login" />
-                  <Button mnemonicParsing="false" onAction="#onCreatePressed" text="Create user" />
-                  <Label fx:id="errorLoginLabel" text="ERROR" />
+                  <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onCreatePressed" text="Create user">
+                     <HBox.margin>
+                        <Insets left="120.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
-            </VBox>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </HBox>
+            <Label fx:id="errorLoginLabel" prefHeight="17.0" prefWidth="247.0" textAlignment="CENTER" textFill="#fe4646" />
          </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#onExitPressed" text="Exit" />
-         </children>
-      </HBox>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </VBox>
    </children>
 </VBox>

@@ -42,7 +42,9 @@ public class RMIServerImpl implements RMIServer
     DBConn.startDB();
     System.out.println("Server started.");
   }
-  private Lobby getLobbyByPin(int pin){
+
+  private Lobby getLobbyByPin(int pin)
+  {
     for (int i = 0; i < lobbyList.size(); i++)
     {
       if (lobbyList.get(i).getPin() == pin)
@@ -50,9 +52,10 @@ public class RMIServerImpl implements RMIServer
     }
     return null;
   }
+
   @Override public ArrayList<Participant> getParticipants(int pin)
   {
-    return (ArrayList<Participant>)getLobbyByPin(pin).getParticipants();
+    return (ArrayList<Participant>) getLobbyByPin(pin).getParticipants();
   }
 
   @Override public void newParticipant(int pin, Participant participant)
@@ -60,18 +63,23 @@ public class RMIServerImpl implements RMIServer
     getLobbyByPin(pin).addParticipant(participant);
   }
 
-  public void newClientCallBack(int pin, ClientCallback clientCallback)throws RemoteException{
+  public void newClientCallBack(int pin, ClientCallback clientCallback)
+      throws RemoteException
+  {
     getLobbyByPin(pin).addClientCallback(clientCallback);
   }
 
-  @Override public void addLobby(Lobby lobby, ClientCallback client) throws RemoteException
+  @Override public void addLobby(Lobby lobby, ClientCallback client)
+      throws RemoteException
   {
     boolean check = false;
     int pin = -1;
-    while (!check){
+    while (!check)
+    {
       check = true;
-      pin = (int)Math.floor(Math.random()*899999)+100000;
-      if (lobbyList.size() > 0){
+      pin = (int) Math.floor(Math.random() * 899999) + 100000;
+      if (lobbyList.size() > 0)
+      {
         for (Lobby value : lobbyList)
         {
           if (value.getPin() == pin)
@@ -93,10 +101,11 @@ public class RMIServerImpl implements RMIServer
     return getLobbyByPin(pin);
   }
 
-  @Override
-  public void submitAnswer(int pin, int answer) throws RemoteException {
+  @Override public void submitAnswer(int pin, int answer) throws RemoteException
+  {
     int questionNumber = getLobbyByPin(pin).getQuiz().getQuestionNumber();
-    ArrayList<Integer> answers = (ArrayList<Integer>)getLobbyByPin(pin).getAnswersForQuestion(questionNumber);
+    ArrayList<Integer> answers = (ArrayList<Integer>) getLobbyByPin(pin)
+        .getAnswersForQuestion(questionNumber);
 
     int number = answers.get(answer);
     number++;
@@ -107,17 +116,20 @@ public class RMIServerImpl implements RMIServer
     System.out.println(answers);
   }
 
-  @Override
-  public boolean verifyLogin(String username){
+  @Override public boolean verifyLogin(String username)
+  {
     if (userData == null)
     {
       userData = new UserHandler(DBConn);
     }
-    try {
+    try
+    {
       UserClass user = userData.retrieveUser(username);
       if (user.equals(null))
         return false;
-    } catch (SQLException | NullPointerException throwables) {
+    }
+    catch (SQLException | NullPointerException throwables)
+    {
       return false;
     }
     return true;
@@ -131,26 +143,34 @@ public class RMIServerImpl implements RMIServer
   @Override public Quiz getQuiz(int quizID, String email)
   {
     Quiz quiz = null;
-    if (quizData == null) {
+    if (quizData == null)
+    {
       quizData = new QuizHandler(DBConn);
     }
-    try {
+    try
+    {
       quiz = quizData.readQuiz(quizID, email);
-    } catch (SQLException throwables) {
+    }
+    catch (SQLException throwables)
+    {
       throwables.printStackTrace();
     }
     return quiz;
   }
 
-  @Override public List<Quiz> getQuizzes(String email) {
+  @Override public List<Quiz> getQuizzes(String email)
+  {
     quizzes = new ArrayList<>();
     if (quizData == null)
     {
       quizData = new QuizHandler(DBConn);
     }
-    try {
+    try
+    {
       quizzes = quizData.readQuizzes(email);
-    } catch (SQLException throwables) {
+    }
+    catch (SQLException throwables)
+    {
       throwables.printStackTrace();
     }
     return quizzes;
@@ -162,17 +182,22 @@ public class RMIServerImpl implements RMIServer
     {
       userData = new UserHandler(DBConn);
     }
-    try {
+    try
+    {
       return userData.retrieveUser(email);
-    } catch (SQLException throwables) {
+    }
+    catch (SQLException throwables)
+    {
       throwables.printStackTrace();
     }
     return null;
   }
 
-  @Override public void startQuiz(int pin, int quizID, String email) throws RemoteException
+  @Override public void startQuiz(int pin, int quizID, String email)
+      throws RemoteException
   {
-    ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>)getLobbyByPin(pin).getClientList();
+    ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(
+        pin).getClientList();
     System.out.println("Connected clients: " + clientList.size());
     for (int i = 0; i < clientList.size(); i++)
     {
@@ -182,7 +207,8 @@ public class RMIServerImpl implements RMIServer
 
   @Override public void getNextQuestion(int pin) throws RemoteException
   {
-    ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>)getLobbyByPin(pin).getClientList();
+    ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(
+        pin).getClientList();
     int num = getLobbyByPin(pin).getQuiz().nextQuestion();
     System.out.println("Question number:" + num);
     for (int i = 0; i < clientList.size(); i++)
@@ -191,19 +217,24 @@ public class RMIServerImpl implements RMIServer
     }
   }
 
-  @Override public UserID getUserID() {
+  @Override public UserID getUserID()
+  {
     return null;
   }
 
-  @Override public void registerClient(int pin, ClientCallback client, UserID userID)
+  @Override public void registerClient(int pin, ClientCallback client,
+      UserID userID)
   {
     PropertyChangeListener listener = null;
     PropertyChangeListener finalListener = listener;
 
     listener = evt -> {
-      try {
+      try
+      {
         client.update((Lobby) evt.getNewValue());
-      } catch (RemoteException e) {
+      }
+      catch (RemoteException e)
+      {
         e.printStackTrace();
         quizManager.removeListener("Lobby", finalListener);
       }
