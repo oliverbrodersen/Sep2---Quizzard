@@ -48,6 +48,9 @@ public class Participant implements Serializable
     this.userID = userID;
   }
 
-
-
+  @Override public String toString()
+  {
+    return "Participant{" + "name='" + name + '\'' + ", score=" + score
+        + ", userID=" + userID + ", userClass=" + userClass + '}';
+  }
 }

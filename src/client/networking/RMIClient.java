@@ -6,6 +6,7 @@ import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -30,11 +31,11 @@ public class RMIClient implements Client, ClientCallback
   @Override public void startClient()
   {
     try {
-      //UserID userIDUI = UserID.HOST;
       UnicastRemoteObject.exportObject(this, 0);
       Registry registry = LocateRegistry.getRegistry("localhost", 1099);
       server = (RMIServer) registry.lookup("QuizServer");
     } catch (RemoteException | NotBoundException e) {
+      System.out.println("Could not connect to server");
       e.printStackTrace();
     }
   }
@@ -108,17 +109,6 @@ public class RMIClient implements Client, ClientCallback
     return pinFromServer;
   }
 
-  @Override public void registerParticipant(int pin)
-  {
-    try
-    {
-      server.registerClient(pin, this, UserID.PARTICIPANT);
-    }
-    catch (RemoteException e)
-    {
-      e.printStackTrace();
-    }
-  }
 
   @Override public UserID getUserClass() {
     return null;
@@ -223,6 +213,7 @@ public class RMIClient implements Client, ClientCallback
     try
     {
       server.newParticipant(pin, participant);
+      server.registerClient(pin, this, UserID.PARTICIPANT);
     }
     catch (RemoteException e)
     {
@@ -267,10 +258,10 @@ public class RMIClient implements Client, ClientCallback
 
   @Override public Quiz getQuiz(Quiz quiz) throws RemoteException
   {
-    //System.out.println(quiz);
+    System.out.println(quiz);
     this.quiz = quiz;
 
     System.out.println("Quiz recieved");
-    return null;
+    return quiz;
   }
 }

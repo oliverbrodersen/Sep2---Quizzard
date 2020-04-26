@@ -23,7 +23,6 @@ public interface Client extends Subject
   int getUserID();
   String getPassword();
   int getPin();
-  void registerParticipant(int pin);
   void newParticipant(int pin, Participant participant);
   void sendAnswer(int pin, int answer);
   void startQuiz(int pin, int quizID, String email);

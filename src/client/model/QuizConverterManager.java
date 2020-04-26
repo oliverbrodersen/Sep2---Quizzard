@@ -88,10 +88,6 @@ public class QuizConverterManager implements QuizConverter
     client.setPin(pin);
   }
 
-  @Override public void addNewParticipant(Participant participant) {
-
-  }
-
   @Override public Quiz setQuiz(int quizID, String email)
   {
     return client.getQuiz(quizID, email);
@@ -118,6 +114,11 @@ public class QuizConverterManager implements QuizConverter
   @Override public void addParticipant(String pin, Participant participant)
   {
     client.newParticipant(Integer.parseInt(pin), participant);
+  }
+
+  @Override public void startQuiz()
+  {
+    client.startQuiz(client.getPin(), client.getPin(), user.getEmail());
   }
 
   @Override public void addListener(String eventName,

@@ -240,8 +240,9 @@ public class RMIServerImpl implements RMIServer
       }
     };
     quizManager.addListener("Lobby", listener);
-    if (userID == UserID.PARTICIPANT)
+    if (userID == UserID.PARTICIPANT){
       getLobbyByPin(pin).addClientCallback(client);
+    }
     else if (userID == UserID.HOST)
       getLobbyByPin(pin).setHostCallBack(client);
     System.out.println("Client successfully connected.");

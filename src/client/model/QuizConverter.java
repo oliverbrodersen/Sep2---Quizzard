@@ -25,7 +25,6 @@ public interface QuizConverter extends Subject
   void setUser(String email);
   void setPin(int pin);
 
-  void addNewParticipant(Participant participant);
   Quiz setQuiz(int quizID, String email);
   void sendAnswer();
   void exit();
@@ -34,4 +33,5 @@ public interface QuizConverter extends Subject
     boolean verifyLogin(String username);
   boolean verifyPin(String pin);
   void addParticipant(String pin, Participant participant);
+  void startQuiz();
 }

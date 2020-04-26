@@ -9,6 +9,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
 public class MainVC implements ViewController
 {
 
@@ -27,6 +30,11 @@ public class MainVC implements ViewController
   {
     this.vh = vh;
     this.vm = vmf.getMainVM();
+    //try{
+    //  this.vm = vmf.getMainVM();
+    //} catch (RemoteException | NotBoundException e) {
+    //  System.out.println("Caught from view");
+    //}
 
     usernameField.textProperty().bindBidirectional(vm.usernameProperty());
     passwordField.textProperty().bindBidirectional(vm.passwordProperty());
