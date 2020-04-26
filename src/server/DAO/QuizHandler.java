@@ -31,7 +31,7 @@ public class QuizHandler implements QuizData{
         while ( rs.next() ) {
             String quizName = rs.getString("QuizName");
             String quizSubject = rs.getString("Subject");
-            quiz = new Quiz(quizName, quizSubject, questionData.retrieveQuestion(quizID));
+            quiz = new Quiz(quizName, quizSubject, questionData.retrieveQuestion(quizID), quizID);
         }
         DBConn.closeStatement();
         rs.close();
@@ -49,7 +49,7 @@ public class QuizHandler implements QuizData{
             String quizName = rs.getString("QuizName");
             String quizSubject = rs.getString("Subject");
             int quizID = Integer.parseInt(rs.getString("QuizID"));
-            quiz = new Quiz(quizName, quizSubject, questionData.retrieveQuestion(quizID));
+            quiz = new Quiz(quizName, quizSubject, questionData.retrieveQuestion(quizID), quizID);
             quizzes.add(quiz);
         }
         return quizzes;

@@ -10,18 +10,24 @@ public class Quiz implements Serializable
   private String title, subject;
   private int questionNumber;
   private List<Question> questions;
-  private int length;
+  private int length, quizId;
 
-  public Quiz(String title, String subject, List<Question> questionsList) {
+  public Quiz(String title, String subject, List<Question> questionsList, int quizId) {
     this.title = title;
     this.subject = subject;
     questions = questionsList;
     questionNumber = -1;
+    this.quizId = quizId;
   }
 
   // Getters
   public String getTitle() {
     return title;
+  }
+
+  public int getQuizId()
+  {
+    return quizId;
   }
 
   public String getSubject() {

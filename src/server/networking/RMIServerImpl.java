@@ -199,9 +199,10 @@ public class RMIServerImpl implements RMIServer
     ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(
         pin).getClientList();
     System.out.println("Connected clients: " + clientList.size());
+    Quiz quiz = getQuiz(quizID, email);
     for (int i = 0; i < clientList.size(); i++)
     {
-      clientList.get(i).getQuiz(getQuiz(quizID, email));
+      clientList.get(i).getQuiz(quiz);
     }
   }
 

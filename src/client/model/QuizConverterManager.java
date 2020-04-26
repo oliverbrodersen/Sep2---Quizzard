@@ -118,7 +118,7 @@ public class QuizConverterManager implements QuizConverter
 
   @Override public void startQuiz()
   {
-    client.startQuiz(client.getPin(), client.getPin(), user.getEmail());
+    client.startQuiz(client.getPin(), client.getLobby(client.getPin()).getQuiz().getQuizId(), user.getEmail());
   }
 
   @Override public void addListener(String eventName,

@@ -50,7 +50,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
-            <TextField fx:id="usernameField" />
+            <TextField fx:id="usernameField" text="Host@Host.com" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
             <PasswordField fx:id="passwordField" />
             <HBox prefHeight="41.0" prefWidth="247.0">
