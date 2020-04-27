@@ -21,8 +21,13 @@ public class LobbyVC implements ViewController {
         this.vh = vh;
         this.vm = vmf.getLobbyVM();
         userTypeLabel.textProperty().bindBidirectional(vm.userTypeLabelProperty());
-        pinLabel.textProperty().bindBidirectional(vm.pinLabelProperty());
-        vm.setup(startButton);
+        String pin = vm.getPin();
+        String pinDisplay = pin.charAt(0) + pin.charAt(1) + " " + pin.charAt(2) + pin.charAt(3) + " " +pin.charAt(4) + pin.charAt(5);
+        pinLabel.setText("Pin: " + pin);
+        if (vm.getUserClass() == null)
+            startButton.setVisible(false);
+        vm.setUserClass(vm.getUserClass());
+
     }
 
     @Override

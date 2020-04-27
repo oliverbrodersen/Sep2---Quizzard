@@ -4,17 +4,15 @@ import client.model.QuizConverter;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.control.Button;
 import shared.transferobjects.UserID;
 
 public class LobbyVM {
     private QuizConverter quizConverter;
-    private StringProperty userTypeLabel, pinLabel;
+    private StringProperty userTypeLabel;
 
     public LobbyVM(QuizConverter quizConverter) {
         this.quizConverter = quizConverter;
         userTypeLabel = new SimpleStringProperty();
-        pinLabel = new SimpleStringProperty();
     }
 
     public String getPin()
@@ -48,20 +46,5 @@ public class LobbyVM {
     public StringProperty userTypeLabelProperty()
     {
         return userTypeLabel;
-    }
-    public StringProperty pinLabelProperty()
-    {
-        return pinLabel;
-    }
-
-    public void setup(Button startButton)
-    {
-        String pin = getPin();
-        String[] pinArray = pin.split("");
-        String pinDisplay = pinArray[0] + pinArray[1] + " " + pinArray[2] + pinArray[3] + " " + pinArray[4] + pinArray[5];
-        pinLabel.set("Pin: " + pinDisplay);
-        if (getUserClass() == null)
-            startButton.setVisible(false);
-        setUserClass(getUserClass());
     }
 }
