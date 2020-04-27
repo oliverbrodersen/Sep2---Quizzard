@@ -92,15 +92,6 @@ public class MainVM {
 
   public boolean checkPin()
   {
-    //Input lock
-      if (quizID.get() == null || quizID.get().equals("") || quizID.get().equals(" ")){
-        joinError.set("Please enter pin");
-        return false;
-      }
-      else if (nick.get() == null ||nick.get().equals("") || nick.get().equals(" ")){
-        joinError.set("Please nickname");
-        return false;
-      }
       return quizConverter.verifyPin(quizID.get());
   }
 
