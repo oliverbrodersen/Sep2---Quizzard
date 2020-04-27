@@ -180,17 +180,14 @@ public class RMIClient implements Client, ClientCallback
 
   }
 
-  public void connected()
-  {
-    System.out.println("New connection.");
-  }
-
 
   @Override public ArrayList<Participant> getParticipants(int pin)
   {
     try
     {
-      return server.getParticipants(pin);
+      ArrayList<Participant> players = server.getParticipants(pin);
+      support.firePropertyChange("onNewConnected", null, players);
+      return players;
     }
     catch (RemoteException e)
     {
@@ -240,7 +237,7 @@ public class RMIClient implements Client, ClientCallback
 
   @Override public List<Participant> getParticipants()
   {
-    return null;
+    return getParticipants(pinFromServer);
   }
 
   @Override public Lobby getLobby(int pin)

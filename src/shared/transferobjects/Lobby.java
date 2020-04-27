@@ -75,6 +75,10 @@ public class Lobby implements Serializable
     return clientList;
   }
 
+  public ClientCallback getHostCallBack()
+  {
+    return hostCallBack;
+  }
 
   // Setters
   public void setPin(int pin) {

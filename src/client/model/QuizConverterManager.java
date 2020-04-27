@@ -40,7 +40,7 @@ public class QuizConverterManager implements QuizConverter
 
 
   @Override public List<Participant> getParticipants() {
-    return null;
+    return client.getParticipants();
   }
 
   @Override public Question getNextQuestion() {
@@ -121,9 +121,8 @@ public class QuizConverterManager implements QuizConverter
     client.startQuiz(client.getPin(), client.getLobby(client.getPin()).getQuiz().getQuizId(), user.getEmail());
   }
 
-  @Override public void addListener(String eventName,
-      PropertyChangeListener listener) {
-
+  @Override public void addListener(String eventName, PropertyChangeListener listener) {
+      client.addListener(eventName,listener);
   }
 
   @Override public void removeListener(String eventName,

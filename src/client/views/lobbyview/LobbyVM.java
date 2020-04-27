@@ -4,10 +4,18 @@ import client.model.QuizConverter;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import shared.transferobjects.Participant;
+import shared.transferobjects.Quiz;
 import shared.transferobjects.UserID;
 
+import java.beans.PropertyChangeListener;
+import java.util.List;
+
 public class LobbyVM {
+    private ObservableList<Participant> participants;
     private QuizConverter quizConverter;
     private StringProperty userTypeLabel, pinLabel;
 
@@ -63,5 +71,21 @@ public class LobbyVM {
         if (getUserClass() == null)
             startButton.setVisible(false);
         setUserClass(getUserClass());
+    }
+
+    public ObservableList<Participant> getParticipants()
+    {
+        List<Participant> participantsList = quizConverter.getParticipants();
+        participants = FXCollections.observableArrayList(participantsList);
+        return participants;
+    }
+    public ObservableList<Participant> setParticipants(List<Participant> participantsList){
+        participants = FXCollections.observableArrayList(participantsList);
+        return participants;
+    }
+
+    public void addListener(String propertyChange, PropertyChangeListener propertyChange1)
+    {
+        quizConverter.addListener(propertyChange, propertyChange1);
     }
 }

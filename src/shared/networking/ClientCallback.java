@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public interface ClientCallback extends Remote
 {
   void update(Lobby lobby) throws RemoteException;
-  void connected() throws RemoteException;
   ArrayList<Participant> getParticipants(int pin) throws RemoteException;
   void newParticipant(int pin, Participant participant)throws RemoteException;
   void addLobby(Lobby lobby, ClientCallback client)throws RemoteException;
