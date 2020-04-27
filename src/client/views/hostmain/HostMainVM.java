@@ -37,9 +37,8 @@ public class HostMainVM {
     {
         UserClass user = quizConverter.getUser();
         Lobby lobby = new Lobby(quiz , user);
-        ClientCallback client = user.getClient();
+        ClientCallback client = (ClientCallback) user.getClient();
         lobby.setHostCallBack(client);
-        //Adds lobby to server
         client.addLobby(lobby,client);
     }
 }

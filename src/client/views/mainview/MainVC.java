@@ -29,9 +29,12 @@ public class MainVC implements ViewController
   @Override public void init(ViewHandler vh, ViewModelFactory vmf)
   {
     this.vh = vh;
-    //Program will crash here if server is not started
-    //Idk how to prevent this
     this.vm = vmf.getMainVM();
+    //try{
+    //  this.vm = vmf.getMainVM();
+    //} catch (RemoteException | NotBoundException e) {
+    //  System.out.println("Caught from view");
+    //}
 
     usernameField.textProperty().bindBidirectional(vm.usernameProperty());
     passwordField.textProperty().bindBidirectional(vm.passwordProperty());
@@ -49,7 +52,12 @@ public class MainVC implements ViewController
 
   @FXML public void onJoinPressed()
   {
-    if (vm.checkPin())
+    //vh.openView("participantLobby");
+    if (quizIDField.getText() == null || quizIDField.getText().equals("") || quizIDField.getText().equals(" "))
+      errorJoinLabel.setText("Please enter pin");
+    else if (nickField.getText() == null || nickField.getText().equals("") || nickField.getText().equals(" "))
+      errorJoinLabel.setText("Please nickname");
+    else if (vm.checkPin())
     {
       vm.addParticipant();
       vh.openView("lobbyview");
