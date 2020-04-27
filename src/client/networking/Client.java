@@ -10,18 +10,13 @@ public interface Client extends Subject
 {
   void startClient();
   Quiz getQuiz(int quizID, String email);
-  UserID getUserClass();
 
   Lobby getLobby(int pin);
   List<Participant> getParticipants(int pin);
   List<Quiz> getQuizzes(String email);
   UserClass getUser(String email);
-  Lobby getLobby() ;
   List<Participant> getParticipants();
-  String getUsername();
   void setPin(int pin);
-  int getUserID();
-  String getPassword();
   int getPin();
   void newParticipant(int pin, Participant participant);
   void sendAnswer(int pin, int answer);

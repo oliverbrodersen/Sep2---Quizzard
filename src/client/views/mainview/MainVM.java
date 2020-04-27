@@ -47,7 +47,6 @@ public class MainVM {
 
   public String getQuizID() {
     String quizString = quizID.toString();
-    int quizIDint = Integer.parseInt(quizString);
     return quizID.get();
   }
 
@@ -93,15 +92,17 @@ public class MainVM {
   public boolean checkPin()
   {
     //Input lock
-      if (quizID.get() == null || quizID.get().equals("") || quizID.get().equals(" ")){
+    String quizIdTrim = quizID.get().trim();
+    String nickTrim = nick.get().trim();
+      if (quizIdTrim == null || quizIdTrim.equals("")){
         joinError.set("Please enter pin");
         return false;
       }
-      else if (nick.get() == null ||nick.get().equals("") || nick.get().equals(" ")){
+      else if (nickTrim == null ||nickTrim.equals("")){
         joinError.set("Please nickname");
         return false;
       }
-      return quizConverter.verifyPin(quizID.get());
+      return quizConverter.verifyPin(quizIdTrim);
   }
 
   public void addParticipant()
