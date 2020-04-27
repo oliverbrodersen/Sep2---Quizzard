@@ -109,6 +109,11 @@ public class RMIClient implements Client, ClientCallback
     return pinFromServer;
   }
 
+
+  @Override public UserID getUserClass() {
+    return null;
+  }
+
   @Override
   public List<Quiz> getQuizzes(String email) {
     try {
@@ -126,6 +131,14 @@ public class RMIClient implements Client, ClientCallback
     } catch (RemoteException e) {
       e.printStackTrace();
     }
+    return null;
+  }
+
+  @Override public int getUserID() {
+    return 0;
+  }
+
+  @Override public String getPassword() {
     return null;
   }
 
@@ -186,6 +199,9 @@ public class RMIClient implements Client, ClientCallback
     return null;
   }
 
+  @Override public String getUsername() {
+    return null;
+  }
 
   @Override public void setPin(int pin)
   {
@@ -217,6 +233,11 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
+  @Override public Lobby getLobby()
+  {
+    return null;
+  }
+
   @Override public List<Participant> getParticipants()
   {
     return null;
@@ -239,6 +260,8 @@ public class RMIClient implements Client, ClientCallback
   {
     System.out.println(quiz);
     this.quiz = quiz;
+
+    System.out.println("Quiz recieved");
     return quiz;
   }
 }

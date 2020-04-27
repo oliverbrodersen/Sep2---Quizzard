@@ -16,6 +16,7 @@ public interface ClientCallback extends Remote
   ArrayList<Participant> getParticipants(int pin) throws RemoteException;
   void newParticipant(int pin, Participant participant)throws RemoteException;
   void addLobby(Lobby lobby, ClientCallback client)throws RemoteException;
+  Lobby getLobby()throws RemoteException;
   Quiz getQuiz(Quiz quiz) throws RemoteException;
   void getNextQuestion(int pin) throws RemoteException;
   void returnNextQuestion(int pin, int num) throws RemoteException;
