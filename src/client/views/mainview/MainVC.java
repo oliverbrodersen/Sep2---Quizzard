@@ -53,11 +53,7 @@ public class MainVC implements ViewController
   @FXML public void onJoinPressed()
   {
     //vh.openView("participantLobby");
-    if (quizIDField.getText() == null || quizIDField.getText().equals("") || quizIDField.getText().equals(" "))
-      errorJoinLabel.setText("Please enter pin");
-    else if (nickField.getText() == null || nickField.getText().equals("") || nickField.getText().equals(" "))
-      errorJoinLabel.setText("Please nickname");
-    else if (vm.checkPin())
+    if (vm.checkPin())
     {
       vm.addParticipant();
       vh.openView("lobbyview");

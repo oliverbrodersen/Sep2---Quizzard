@@ -92,7 +92,18 @@ public class MainVM {
 
   public boolean checkPin()
   {
-      return quizConverter.verifyPin(quizID.get());
+
+    String quizIdTrim = quizID.get().trim();
+    String nickTrim = nick.get().trim();
+    if (quizIdTrim == null || quizIdTrim.equals("") ||quizIdTrim.equals(" ")){
+      joinError.set("Please enter pin");
+      return false;
+    }
+    else if (nickTrim == null || nickTrim.equals("")){
+      joinError.set("Please nickname");
+      return false;
+    }
+    return quizConverter.verifyPin(quizID.get());
   }
 
   public void addParticipant()
