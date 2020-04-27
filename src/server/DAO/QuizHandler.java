@@ -26,7 +26,7 @@ public class QuizHandler implements QuizData{
     public Quiz readQuiz(int quizID, String email) throws SQLException {
         Quiz quiz = null;
         ResultSet rs = DBConn.retrieveData("SELECT * FROM \"Quizzard_Database\".Quiz WHERE QuizID = "
-                + quizID + " AND Email = '" + email + "';");
+                + quizID + " AND LOWER(Email) = LOWER('" + email + "');");
 
         while ( rs.next() ) {
             String quizName = rs.getString("QuizName");
@@ -43,7 +43,7 @@ public class QuizHandler implements QuizData{
         List<Quiz> quizzes = new ArrayList<>();
         List<Question> questions = new ArrayList<>();
         Quiz quiz = null;
-        ResultSet rs = DBConn.retrieveData("SELECT * FROM \"Quizzard_Database\".Quiz WHERE Email = '" + email + "';");
+        ResultSet rs = DBConn.retrieveData("SELECT * FROM \"Quizzard_Database\".Quiz WHERE LOWER(Email) = LOWER('" + email + "');");
 
         while ( rs.next() ) {
             String quizName = rs.getString("QuizName");
