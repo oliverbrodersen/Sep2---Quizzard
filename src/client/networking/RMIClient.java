@@ -1,5 +1,6 @@
 package client.networking;
 
+import javafx.application.Platform;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 import shared.transferobjects.*;
@@ -253,11 +254,10 @@ public class RMIClient implements Client, ClientCallback
     return null;
   }
 
-  @Override public Quiz getQuiz(Quiz quiz) throws RemoteException
+  @Override public Quiz getQuiz(Quiz quiz)
   {
-    System.out.println(quiz);
     this.quiz = quiz;
-
+    support.firePropertyChange("onQuizStarted", null, quiz);
     System.out.println("Quiz recieved");
     return quiz;
   }

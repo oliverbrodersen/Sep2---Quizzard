@@ -10,23 +10,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.lobbyview.LobbyVC">
+<AnchorPane prefHeight="400.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.lobbyview.LobbyVC">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0">
+      <VBox prefHeight="400.0" prefWidth="370.0">
          <children>
             <Label fx:id="userTypeLabel" text="User type: ">
                <VBox.margin>
                   <Insets left="30.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="pinLabel" text="Pin:">
+            <Label fx:id="pinLabel" text="Pin: 00 00 00">
                <font>
                   <Font size="54.0" />
                </font>
                <VBox.margin>
                   <Insets left="30.0" />
                </VBox.margin></Label>
-            <HBox prefHeight="289.0" prefWidth="600.0">
+            <HBox prefHeight="289.0" prefWidth="548.0">
                <children>
                   <TableView fx:id="participantsTableView" prefHeight="132.0" prefWidth="200.0">
                     <columns>
@@ -36,11 +36,20 @@
                         <Insets bottom="30.0" left="30.0" />
                      </HBox.margin>
                   </TableView>
-                  <Button fx:id="startButton" mnemonicParsing="false" onAction="#StartQuizButton" prefHeight="25.0" prefWidth="72.0" text="Start quiz">
-                     <HBox.margin>
-                        <Insets left="30.0" />
-                     </HBox.margin>
-                  </Button>
+                  <VBox prefHeight="289.0" prefWidth="139.0">
+                     <children>
+                        <Button fx:id="startButton" mnemonicParsing="false" onAction="#StartQuizButton" prefHeight="25.0" prefWidth="72.0" text="Start quiz">
+                           <VBox.margin>
+                              <Insets left="30.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="kickButton" mnemonicParsing="false" onAction="#onKickButtonPressed" text="Kick player">
+                           <VBox.margin>
+                              <Insets left="30.0" top="30.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
          </children>

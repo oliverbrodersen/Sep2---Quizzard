@@ -62,14 +62,17 @@ public class LobbyVM {
         return pinLabel;
     }
 
-    public void setup(Button startButton)
+    public void setup(Button startButton, Button kickButton)
     {
         String pin = getPin();
         String[] pinArray = pin.split("");
         String pinDisplay = pinArray[0] + pinArray[1] + " " + pinArray[2] + pinArray[3] + " " + pinArray[4] + pinArray[5];
         pinLabel.set("Pin: " + pinDisplay);
         if (getUserClass() == null)
+        {
             startButton.setVisible(false);
+            kickButton.setVisible(false);
+        }
         setUserClass(getUserClass());
     }
 

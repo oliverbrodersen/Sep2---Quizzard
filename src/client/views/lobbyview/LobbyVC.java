@@ -23,7 +23,7 @@ public class LobbyVC implements ViewController {
     private LobbyVM vm;
     private ViewHandler vh;
     @FXML private Label pinLabel, userTypeLabel;
-    @FXML private Button startButton;
+    @FXML private Button startButton, kickButton;
 
     @FXML private TableView<Participant> participantsTableView;
     @FXML private TableColumn<String, Quiz> participantsColumn;
@@ -33,11 +33,22 @@ public class LobbyVC implements ViewController {
         this.vh = vh;
         this.vm = vmf.getLobbyVM();
         vm.addListener("onNewConnected", this::updateParticipantList);
+        vm.addListener("onQuizStarted", this::startQuizListener);
         userTypeLabel.textProperty().bindBidirectional(vm.userTypeLabelProperty());
         pinLabel.textProperty().bindBidirectional(vm.pinLabelProperty());
         participantsTableView.setItems(vm.getParticipants());
         participantsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        vm.setup(startButton);
+        vm.setup(startButton, kickButton);
+    }
+
+    private void startQuizListener(PropertyChangeEvent evt)
+    {
+        Platform.runLater(new Runnable(){
+            @Override public void run()
+            {
+                vh.openView("questionview");
+            }
+        });
     }
 
     @Override
@@ -49,7 +60,12 @@ public class LobbyVC implements ViewController {
     {
         participantsTableView.setItems(vm.setParticipants((List<Participant>)evt.getNewValue()));
     }
+
     public void StartQuizButton(ActionEvent actionEvent){
         vm.startQuiz();
+    }
+
+    public void onKickButtonPressed(ActionEvent actionEvent){
+        System.out.println("Kick player: " + participantsTableView.getSelectionModel().getSelectedItem().getName());
     }
 }
