@@ -253,7 +253,9 @@ public class RMIClient implements Client, ClientCallback
     }
     return null;
   }
-
+  @Override public Quiz getQuiz(){
+    return quiz;
+  }
   @Override public Quiz getQuiz(Quiz quiz)
   {
     this.quiz = quiz;

@@ -19,6 +19,7 @@ public interface QuizConverter extends Subject
   String getPassword();
   UserClass getUser();
   int getPin();
+  Quiz getQuiz();
 
   void setUsername(String username);
   void setPassword(String password);

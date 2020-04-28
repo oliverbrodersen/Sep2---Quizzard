@@ -69,6 +69,11 @@ public class QuizConverterManager implements QuizConverter
     return client.getPin();
   }
 
+  @Override public Quiz getQuiz()
+  {
+    return client.getQuiz();
+  }
+
   @Override public void setUsername(String username) {
 
   }
