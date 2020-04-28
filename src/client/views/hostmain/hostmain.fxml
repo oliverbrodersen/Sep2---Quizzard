@@ -1,40 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.hostmain.HostMainVC">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.hostmain.HostMainVC">
    <children>
-      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="446.0">
+      <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Host" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="371.0" prefWidth="455.0">
-         <children>
-            <VBox prefHeight="371.0" prefWidth="399.0">
+            <Text fx:id="userTypeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Host">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="30.0" top="15.0" />
+               </HBox.margin>
+            </Text>
+            <VBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="413.0">
                <children>
-                  <TableView fx:id="hostQuizTable" prefHeight="382.0" prefWidth="223.0">
-                    <columns>
-                      <TableColumn fx:id="quizTitleColumn" prefWidth="190.0" text="Title" />
-                        <TableColumn fx:id="quizSubjectColumn" prefWidth="162.0" text="Subject" />
-                        <TableColumn fx:id="quizLengthColumn" prefWidth="46.0" text="Length" />
-                    </columns>
-                  </TableView>
+                  <Text fx:id="emailText" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail" />
+                  <Text fx:id="nameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
                </children>
             </VBox>
-            <VBox alignment="TOP_RIGHT" prefHeight="371.0" prefWidth="51.0">
+         </children>
+      </HBox>
+      <HBox prefHeight="378.0" prefWidth="474.0">
+         <children>
+            <TableView fx:id="hostQuizTable" prefHeight="378.0" prefWidth="375.0">
+              <columns>
+                <TableColumn fx:id="quizTitleColumn" prefWidth="209.9998722076416" text="Title" />
+                  <TableColumn fx:id="quizSubjectColumn" prefWidth="94.66664123535156" text="Subject" />
+                  <TableColumn fx:id="quizLengthColumn" prefWidth="68.0" text="Length" />
+              </columns>
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" />
+               </HBox.margin>
+            </TableView>
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onCreatePressed" text="Create" />
-                  <Button mnemonicParsing="false" onAction="#onEditPressed" prefHeight="25.0" prefWidth="51.0" text="Edit" />
-                  <Button mnemonicParsing="false" onAction="#onDeletePressed" text="Delete" />
-                  <Button mnemonicParsing="false" onAction="#onHostPressed" prefHeight="25.0" prefWidth="51.0" text="Host" />
-                  <Button mnemonicParsing="false" onAction="#onExitPressed" prefHeight="25.0" prefWidth="52.0" text="Exit" />
+                  <Button mnemonicParsing="false" onAction="#onCreatePressed" text="Create">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onEditPressed" prefHeight="25.0" prefWidth="51.0" text="Edit">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onDeletePressed" text="Delete">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onHostPressed" prefHeight="25.0" prefWidth="51.0" text="Host">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onExitPressed" prefHeight="25.0" prefWidth="52.0" text="Exit">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>

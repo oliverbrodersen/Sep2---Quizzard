@@ -22,7 +22,7 @@ import java.util.List;
 public class LobbyVC implements ViewController {
     private LobbyVM vm;
     private ViewHandler vh;
-    @FXML private Label pinLabel, userTypeLabel;
+    @FXML private Label pinLabel, userTypeLabel, playersCountLabel;
     @FXML private Button startButton, kickButton;
 
     @FXML private TableView<Participant> participantsTableView;
@@ -36,6 +36,7 @@ public class LobbyVC implements ViewController {
         vm.addListener("onQuizStarted", this::startQuizListener);
         userTypeLabel.textProperty().bindBidirectional(vm.userTypeLabelProperty());
         pinLabel.textProperty().bindBidirectional(vm.pinLabelProperty());
+        playersCountLabel.textProperty().bindBidirectional(vm.playersCountLabelProperty());
         participantsTableView.setItems(vm.getParticipants());
         participantsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         vm.setup(startButton, kickButton);

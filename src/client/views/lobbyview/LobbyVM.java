@@ -1,6 +1,7 @@
 package client.views.lobbyview;
 
 import client.model.QuizConverter;
+import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -17,12 +18,13 @@ import java.util.List;
 public class LobbyVM {
     private ObservableList<Participant> participants;
     private QuizConverter quizConverter;
-    private StringProperty userTypeLabel, pinLabel;
+    private StringProperty userTypeLabel, pinLabel, playersCountLabel;
 
     public LobbyVM(QuizConverter quizConverter) {
         this.quizConverter = quizConverter;
         userTypeLabel = new SimpleStringProperty();
         pinLabel = new SimpleStringProperty();
+        playersCountLabel= new SimpleStringProperty();
     }
 
     public String getPin()
@@ -80,15 +82,29 @@ public class LobbyVM {
     {
         List<Participant> participantsList = quizConverter.getParticipants();
         participants = FXCollections.observableArrayList(participantsList);
+        playersCountLabel.set("Players: " + participantsList.size());
         return participants;
     }
     public ObservableList<Participant> setParticipants(List<Participant> participantsList){
         participants = FXCollections.observableArrayList(participantsList);
+
+        Platform.runLater(new Runnable(){
+            @Override public void run()
+            {
+                playersCountLabel.set("Players: " + participants.size());
+            }
+        });
+
         return participants;
     }
 
     public void addListener(String propertyChange, PropertyChangeListener propertyChange1)
     {
         quizConverter.addListener(propertyChange, propertyChange1);
+    }
+
+    public StringProperty playersCountLabelProperty()
+    {
+        return playersCountLabel;
     }
 }
