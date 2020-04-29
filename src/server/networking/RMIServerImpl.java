@@ -23,8 +23,10 @@ public class RMIServerImpl implements RMIServer
   private List<Lobby> lobbyList;
   private QuizData quizData;
   private UserData userData;
+  private QuestionData questionData;
   private DatabaseConnection DBConn;
   private List<Quiz> quizzes;
+//  private List<Question> questionsCreated = new ArrayList<>();
 
   public RMIServerImpl(QuizManager quizManager)
   {
@@ -138,6 +140,27 @@ public class RMIServerImpl implements RMIServer
   {
     return !(getLobbyByPin(Integer.parseInt(pin)) == null);
   }
+
+  @Override
+  public int getNextQuestionID() {
+    int questionID = -1;
+    if (questionData == null)
+    {
+      questionData = new QuestionHandler(DBConn);
+    }
+    try {
+      questionID = questionData.getNextQuestionID();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
+    return questionID;
+  }
+
+//  @Override
+//  public void questionCreated(Question question) {
+//    questionsCreated.add(question);
+//
+//  }
 
   @Override public Quiz getQuiz(int quizID, String email)
   {

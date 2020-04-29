@@ -61,6 +61,22 @@ public class RMIClient implements Client, ClientCallback
     return false;
   }
 
+  @Override
+  public int getNextQuestionID() {
+    try {
+      return server.getNextQuestionID();
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return -1;
+  }
+
+  @Override
+  public void questionCreated(Question question) {
+    // server.questionCreated(question);
+    support.firePropertyChange("onQuestionCreated",null, question);
+  }
+
   @Override public Quiz getQuiz(int quizID, String email)
   {
     try

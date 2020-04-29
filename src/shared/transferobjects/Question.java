@@ -11,6 +11,7 @@ public class Question implements Serializable
   private String question;
   private List<Answer> answers;
   private int time, pointValue;
+  private Integer noAnswers;
 
 
   public Question(String question, List<Answer> answersList, int time, int pointValue) {
@@ -28,6 +29,11 @@ public class Question implements Serializable
 
   public List<Answer> getAnswers() {
     return answers;
+  }
+
+  public Integer getNoAnswers() {
+    noAnswers = answers.size();
+    return noAnswers;
   }
 
   public int getTime() {

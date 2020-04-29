@@ -3,6 +3,8 @@ package client.views.crudquiz;
 import client.model.QuizConverter;
 import javafx.beans.property.*;
 
+import java.beans.PropertyChangeListener;
+
 public class CrudQuizVM {
     private QuizConverter quizConverter;
     private StringProperty nameField, subjectField;
@@ -17,7 +19,7 @@ public class CrudQuizVM {
 
     public void createQuiz()
     {
-       // quizConverter.createQuiz(nameField.get(), subjectField.get(), difficulty.get);
+       // quizConverter.createQuiz(nameField.get(), subjectField.get(), difficulty.get());
     }
 
     public StringProperty nameFieldProperty()
@@ -32,5 +34,10 @@ public class CrudQuizVM {
 
     public Property difficultyProperty() {
         return difficulty;
+    }
+
+    public void addListener(String propertyChange, PropertyChangeListener propertyChange1)
+    {
+        quizConverter.addListener(propertyChange, propertyChange1);
     }
 }

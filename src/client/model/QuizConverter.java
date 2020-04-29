@@ -35,4 +35,8 @@ public interface QuizConverter extends Subject
   boolean verifyPin(String pin);
   void addParticipant(String pin, Participant participant);
   void startQuiz();
+
+    int getNextQuestionID();
+
+    void questionCreated(Question question);
 }

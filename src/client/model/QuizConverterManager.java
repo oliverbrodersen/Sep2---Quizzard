@@ -126,6 +126,16 @@ public class QuizConverterManager implements QuizConverter
     client.startQuiz(client.getPin(), client.getLobby(client.getPin()).getQuiz().getQuizId(), user.getEmail());
   }
 
+  @Override
+  public int getNextQuestionID() {
+    return client.getNextQuestionID();
+  }
+
+  @Override
+  public void questionCreated(Question question) {
+    client.questionCreated(question);
+  }
+
   @Override public void addListener(String eventName, PropertyChangeListener listener) {
       client.addListener(eventName,listener);
   }

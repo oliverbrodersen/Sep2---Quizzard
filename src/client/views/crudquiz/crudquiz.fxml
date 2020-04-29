@@ -11,8 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.crudquiz.CrudQuizVC">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="600.0">
@@ -31,13 +29,6 @@
             </TextField>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty" />
             <ChoiceBox fx:id="difficultyChoice" prefWidth="150.0">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Easy" />
-                     <String fx:value="Medium" />
-                     <String fx:value="Hard" />
-                  </FXCollections>
-               </items>
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
@@ -56,7 +47,7 @@
               <columns>
                 <TableColumn fx:id="questionColumn" prefWidth="385.0" text="Question" />
                 <TableColumn fx:id="noAnswersColumn" minWidth="0.0" prefWidth="62.0" text="# Answers" />
-                  <TableColumn prefWidth="33.0" text="Time" />
+                  <TableColumn fx:id="timeColumn" prefWidth="33.0" text="Time" />
               </columns>
             </TableView>
             <VBox alignment="TOP_CENTER" prefHeight="316.0" prefWidth="120.0">

@@ -58,6 +58,9 @@ public class ViewHandler {
       case "scoreboardview":
         root = loadFXML("../views/scoreboardview/scoreboardview.fxml");
         break;
+      case "crudquestion":
+        root = loadFXML("../views/crudquiz/crudquestion/crudquestion.fxml");
+        break;
     }
     currentScene = new Scene(root);
 

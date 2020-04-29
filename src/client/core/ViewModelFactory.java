@@ -1,6 +1,7 @@
 package client.core;
 
 import client.views.createaccount.CreateAccountVM;
+import client.views.crudquiz.crudquestion.CrudQuestionVM;
 import client.views.finalscreen.FinalScreenVM;
 import client.views.hostmain.HostMainVM;
 import client.views.crudquiz.CrudQuizVM;
@@ -21,6 +22,7 @@ public class ViewModelFactory {
   private LobbyVM lobbyVM;
   private QuestionVM questionVM;
   private ScoreboardVM scoreboardVM;
+  private CrudQuestionVM crudQuestionVM;
 
   public ViewModelFactory(ModelFactory mf) {
     this.mf = mf;
@@ -81,4 +83,11 @@ public class ViewModelFactory {
     }
     return scoreboardVM;
   }
+
+    public CrudQuestionVM getCrudQuestionVM() {
+      if (crudQuestionVM == null) {
+        crudQuestionVM = new CrudQuestionVM(mf.getQuizConverter());
+      }
+      return crudQuestionVM;
+    }
 }
