@@ -3,7 +3,7 @@ package client.core;
 import client.views.createaccount.CreateAccountVM;
 import client.views.finalscreen.FinalScreenVM;
 import client.views.hostmain.HostMainVM;
-import client.views.hostmain.createquiz.CreateQuizVM;
+import client.views.crudquiz.CrudQuizVM;
 import client.views.lobbyview.LobbyVM;
 import client.views.mainview.MainVM;
 import client.views.questionview.QuestionVM;
@@ -17,7 +17,7 @@ public class ViewModelFactory {
   private HostMainVM hostMainVM;
   private CreateAccountVM createAccountVM;
   private FinalScreenVM finalScreenVM;
-  private CreateQuizVM createQuizVM;
+  private CrudQuizVM crudQuizVM;
   private LobbyVM lobbyVM;
   private QuestionVM questionVM;
   private ScoreboardVM scoreboardVM;
@@ -54,11 +54,11 @@ public class ViewModelFactory {
     return finalScreenVM;
   }
 
-  public CreateQuizVM getCreateQuizVM() {
-    if (createQuizVM == null) {
-      createQuizVM = new CreateQuizVM(mf.getQuizConverter());
+  public CrudQuizVM getCrudQuizVM() {
+    if (crudQuizVM == null) {
+      crudQuizVM = new CrudQuizVM(mf.getQuizConverter());
     }
-    return createQuizVM;
+    return crudQuizVM;
   }
 
   public LobbyVM getLobbyVM() {

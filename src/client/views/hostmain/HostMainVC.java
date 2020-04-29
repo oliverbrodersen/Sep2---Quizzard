@@ -50,9 +50,11 @@ public class HostMainVC implements ViewController {
     }
 
     public void onCreatePressed(ActionEvent actionEvent) {
+        vh.openView("crudquiz");
     }
 
     public void onEditPressed(ActionEvent actionEvent) {
+
     }
 
     public void onDeletePressed(ActionEvent actionEvent) {

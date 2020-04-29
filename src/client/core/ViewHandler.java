@@ -46,8 +46,8 @@ public class ViewHandler {
       case "finalscreen":
         root = loadFXML("../views/finalscreen/finalscreen.fxml");
         break;
-      case "createquiz":
-        root = loadFXML("../views/hostmain/createquiz/createquiz.fxml");
+      case "crudquiz":
+        root = loadFXML("../views/crudquiz/crudquiz.fxml");
         break;
       case "lobbyview":
         root = loadFXML("../views/lobbyview/lobbyview.fxml");
