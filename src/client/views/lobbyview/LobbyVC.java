@@ -37,8 +37,10 @@ public class LobbyVC implements ViewController {
         userTypeLabel.textProperty().bindBidirectional(vm.userTypeLabelProperty());
         pinLabel.textProperty().bindBidirectional(vm.pinLabelProperty());
         playersCountLabel.textProperty().bindBidirectional(vm.playersCountLabelProperty());
+
         participantsTableView.setItems(vm.getParticipants());
         participantsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
         vm.setup(startButton, kickButton);
     }
 

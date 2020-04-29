@@ -13,11 +13,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import shared.transferobjects.Participant;
 import shared.transferobjects.Question;
 
 import java.beans.PropertyChangeEvent;
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class CrudQuizVC implements ViewController {
     private CrudQuizVM vm;
@@ -31,34 +32,25 @@ public class CrudQuizVC implements ViewController {
     @FXML private TableColumn<String, Question> questionColumn;
     @FXML private TableColumn<Integer, Question> noAnswersColumn;
     @FXML private TableColumn<Integer, Question> timeColumn;
-
-    private ObservableList<Question> observableQuestions = FXCollections.observableArrayList();
+    private ObservableList<Question> observableQuestions;
 
     @Override
     public void init(ViewHandler vh, ViewModelFactory vmf) {
         this.vh = vh;
         this.vm = vmf.getCrudQuizVM();
-
+        vm.addListener("onQuestionCreated", this::updateQuestionsList);
         nameField.textProperty().bindBidirectional(vm.nameFieldProperty());
         subjectField.textProperty().bindBidirectional(vm.subjectFieldProperty());
         difficultyChoice.valueProperty().bindBidirectional(vm.difficultyProperty());
-
-        questionsTable.setItems(observableQuestions);
+        questionsTable.setItems(vm.getQuestions());
 
         questionColumn.setCellValueFactory(new PropertyValueFactory<>("question"));
-        //noAnswersColumn.setCellValueFactory(new PropertyValueFactory<>("noAnswers"));
-        //timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-
-        vm.addListener("onQuestionCreated", this::updateQuestionsList);
+        noAnswersColumn.setCellValueFactory(new PropertyValueFactory<>("noAnswers"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
     }
 
     private void updateQuestionsList(PropertyChangeEvent evt) {
-        Question question = (Question)evt.getNewValue();
-        observableQuestions.add(question);
-
-        questionsTable.setItems(observableQuestions);
-        System.out.println(questionsTable.getItems());
-
+        questionsTable.setItems(vm.setQuestions((Question) evt.getNewValue()));
     }
 
     @Override
