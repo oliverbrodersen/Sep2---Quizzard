@@ -27,6 +27,7 @@ public interface RMIServer extends Remote
   void newClientCallBack(int pin, ClientCallback clientCallback)throws RemoteException;
   void addLobby(Lobby lobby, ClientCallback client) throws RemoteException;
   Lobby getLobby(int pin) throws RemoteException;
+  void endQuestion(int pin) throws RemoteException;
 
   void submitAnswer(int pin, int answer) throws RemoteException;
 

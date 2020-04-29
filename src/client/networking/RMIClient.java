@@ -73,31 +73,11 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public void getNextQuestion(int pin)
-  {
-    try
-    {
-      server.getNextQuestion(pin);
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException("Could not get question");
-    }
-  }
 
-  @Override public void returnNextQuestion(int pin, int num)
+  @Override public void returnNextQuestion()
   {
-    if (num != -1) {
-      System.out.println(quiz.getQuestion(num));
-
-      System.out.println("Please enter answer: ");
-      Scanner scanner = new Scanner(System.in);
-      int answer = scanner.nextInt();
-      scanner.nextLine();
-      sendAnswer(pin, answer);
-    }
-    else
-      System.out.println("End of quiz, you lost");
+    quiz.nextQuestion();
+    support.firePropertyChange("onNextQuestion", null, null);
   }
 
   @Override public void updatePin(int pin)
@@ -105,11 +85,23 @@ public class RMIClient implements Client, ClientCallback
     pinFromServer = pin;
   }
 
+
   @Override public int getPin()
   {
     return pinFromServer;
   }
 
+  @Override public void getNextQuestion()
+  {
+    try
+    {
+      server.getNextQuestion(pinFromServer);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not get question");
+    }
+  }
 
   @Override public UserID getUserClass() {
     return null;
@@ -143,10 +135,10 @@ public class RMIClient implements Client, ClientCallback
     return null;
   }
 
-  @Override public void sendAnswer(int pin, int answer)
+  @Override public void sendAnswer(int answer)
   {
     try {
-      server.submitAnswer(pin, answer);
+      server.submitAnswer(pinFromServer, answer);
     } catch (RemoteException e) {
       e.printStackTrace();
     }
@@ -164,6 +156,22 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
+  @Override public void endQuestion()
+  {
+    try
+    {
+      server.endQuestion(pinFromServer);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public void endQuestionCall()
+  {
+    support.firePropertyChange("endQuestion", null, null);
+  }
   @Override public void addListener(String eventName,
       PropertyChangeListener listener)
   {
@@ -260,7 +268,6 @@ public class RMIClient implements Client, ClientCallback
   {
     this.quiz = quiz;
     support.firePropertyChange("onQuizStarted", null, quiz);
-    System.out.println("Quiz recieved");
     return quiz;
   }
 }

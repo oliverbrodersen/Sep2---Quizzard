@@ -4,6 +4,7 @@ import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
 import client.views.hostmain.HostMainVM;
+import javafx.fxml.FXML;
 
 public class ScoreboardVC implements ViewController {
   private ScoreboardVM vm;
@@ -13,6 +14,11 @@ public class ScoreboardVC implements ViewController {
   public void init(ViewHandler vh, ViewModelFactory vmf) {
     this.vh = vh;
     this.vm = vmf.getScoreboardVM();
+  }
+
+  @FXML public void nextQuestion(){
+    vm.nextQuestion();
+    vh.openView("questionview");
   }
 
   @Override

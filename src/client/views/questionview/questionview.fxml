@@ -1,32 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.questionview.QuestionVC">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.questionview.QuestionVC">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quiz started">
+      <HBox prefHeight="19.0" prefWidth="600.0">
+         <children>
+            <Text fx:id="quizNameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Quiz name" wrappingWidth="251.29811477661133">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Text>
+            <VBox prefHeight="32.0" prefWidth="39.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time left" textAlignment="CENTER" wrappingWidth="39.80340766906738">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="timeLeftText" strokeType="OUTSIDE" strokeWidth="0.0" text="60" textAlignment="CENTER" wrappingWidth="39.47009468078613">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <Text fx:id="numberOfQuestionsText" nodeOrientation="RIGHT_TO_LEFT" strokeType="OUTSIDE" strokeWidth="0.0" text="(2/6)" wrappingWidth="253.44930524627398" />
+         </children>
          <VBox.margin>
-            <Insets left="30.0" top="20.0" />
+            <Insets top="20.0" />
          </VBox.margin>
-      </Text>
-      <Text fx:id="quizNameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Quiz name">
+      </HBox>
+      <Text fx:id="questionText" strokeType="OUTSIDE" strokeWidth="0.0" text="Who did 9/11?" textAlignment="CENTER" wrappingWidth="580.5618438720703">
          <VBox.margin>
-            <Insets left="30.0" top="15.0" />
+            <Insets />
          </VBox.margin>
          <font>
-            <Font size="25.0" />
+            <Font size="26.0" />
          </font>
       </Text>
-      <Text fx:id="numberOfQuestionsText" strokeType="OUTSIDE" strokeWidth="0.0" text="Questions: 0">
-         <VBox.margin>
-            <Insets left="30.0" />
-         </VBox.margin>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
+      <VBox prefHeight="260.0" prefWidth="600.0">
+         <children>
+            <HBox prefHeight="136.0" prefWidth="600.0">
+               <children>
+                  <VBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="300.0">
+                     <children>
+                        <Button fx:id="answer1Button" alignment="CENTER" maxHeight="102.0" maxWidth="207.0" minHeight="102.0" minWidth="207.0" mnemonicParsing="false" onAction="#answer1Pressed" prefHeight="102.0" prefWidth="207.0" style="-fx-background-color: #e64c4c;">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Consolas" size="58.0" />
+                           </font>
+                           <graphic>
+                              <Text fx:id="answer1Text" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: in;" text="1" textAlignment="CENTER" wrappingWidth="199.18226093053818">
+                                 <font>
+                                    <Font name="Consolas Bold" size="52.0" />
+                                 </font>
+                              </Text>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="300.0">
+                     <children>
+                        <Button fx:id="answer2Button" alignment="CENTER" maxHeight="102.0" maxWidth="207.0" minHeight="102.0" minWidth="207.0" mnemonicParsing="false" onAction="#answer2Pressed" prefHeight="102.0" prefWidth="207.0" style="-fx-background-color: #99e64c;">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Consolas" size="58.0" />
+                           </font>
+                           <graphic>
+                              <Text fx:id="answer2Text" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="205.25651800632477">
+                                 <font>
+                                    <Font name="Consolas Bold" size="52.0" />
+                                 </font>
+                              </Text>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="124.0" prefWidth="600.0">
+               <children>
+                  <VBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="300.0">
+                     <children>
+                        <Button fx:id="answer3Button" alignment="CENTER" maxHeight="102.0" maxWidth="207.0" minHeight="102.0" minWidth="207.0" mnemonicParsing="false" onAction="#answer3Pressed" prefHeight="102.0" prefWidth="207.0" style="-fx-background-color: #ffe347;">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Consolas" size="58.0" />
+                           </font>
+                           <graphic>
+                              <Text fx:id="answer3Text" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" wrappingWidth="204.58981561660767">
+                                 <font>
+                                    <Font name="Consolas Bold" size="52.0" />
+                                 </font>
+                              </Text>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="300.0">
+                     <children>
+                        <Button fx:id="answer4Button" alignment="CENTER" maxHeight="102.0" maxWidth="207.0" minHeight="102.0" minWidth="207.0" mnemonicParsing="false" onAction="#answer4Pressed" prefHeight="102.0" prefWidth="207.0" style="-fx-background-color: #4c84e6;">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Consolas" size="58.0" />
+                           </font>
+                           <graphic>
+                              <Text fx:id="answer4Text" strokeType="OUTSIDE" strokeWidth="0.0" text="4" textAlignment="CENTER" wrappingWidth="205.923246383667">
+                                 <font>
+                                    <Font name="Consolas Bold" size="52.0" />
+                                 </font>
+                              </Text>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button fx:id="endQuestionPressed" mnemonicParsing="false" onAction="#endQuestionPressed" text="End Question" />
    </children>
 </VBox>

@@ -9,4 +9,9 @@ public class ScoreboardVM {
   public ScoreboardVM(QuizConverter quizConverter) {
     this.quizConverter = quizConverter;
   }
+
+  public void nextQuestion()
+  {
+    quizConverter.nextQuestion();
+  }
 }

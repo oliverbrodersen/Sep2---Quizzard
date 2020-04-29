@@ -98,12 +98,17 @@ public class QuizConverterManager implements QuizConverter
     return client.getQuiz(quizID, email);
   }
 
-  @Override public void sendAnswer() {
-
+  @Override public void sendAnswer(int i) {
+    client.sendAnswer(i);
   }
 
   @Override public void exit() {
 
+  }
+
+  @Override public void nextQuestion()
+  {
+    client.getNextQuestion();
   }
 
   @Override
@@ -124,6 +129,11 @@ public class QuizConverterManager implements QuizConverter
   @Override public void startQuiz()
   {
     client.startQuiz(client.getPin(), client.getLobby(client.getPin()).getQuiz().getQuizId(), user.getEmail());
+  }
+
+  @Override public void endQuestion()
+  {
+    client.endQuestion();
   }
 
   @Override public void addListener(String eventName, PropertyChangeListener listener) {

@@ -17,7 +17,7 @@ public interface ClientCallback extends Remote
   void addLobby(Lobby lobby, ClientCallback client)throws RemoteException;
   Lobby getLobby()throws RemoteException;
   Quiz getQuiz(Quiz quiz) throws RemoteException;
-  void getNextQuestion(int pin) throws RemoteException;
-  void returnNextQuestion(int pin, int num) throws RemoteException;
+  void returnNextQuestion() throws RemoteException;
   void updatePin(int pin) throws RemoteException;
+  void endQuestionCall() throws RemoteException;
 }

@@ -69,6 +69,9 @@ public class Lobby implements Serializable
   public List<Integer> getAnswersForQuestion(int i){
     return answers.get(i);
   }
+  public void setAnswers(int i, ArrayList<Integer> a){
+    answers.set(i, a);
+  }
 
   public List<ClientCallback> getClientList()
   {

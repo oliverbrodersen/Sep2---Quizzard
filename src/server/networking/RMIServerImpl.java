@@ -100,6 +100,15 @@ public class RMIServerImpl implements RMIServer
     return getLobbyByPin(pin);
   }
 
+  @Override public void endQuestion(int pin) throws RemoteException
+  {
+    ArrayList<ClientCallback> clients = (ArrayList<ClientCallback>) getLobbyByPin(pin).getClientList();
+    for (int i = 0; i < clients.size(); i++)
+    {
+      clients.get(i).endQuestionCall();
+    }
+  }
+
   @Override public void submitAnswer(int pin, int answer) throws RemoteException
   {
     int questionNumber = getLobbyByPin(pin).getQuiz().getQuestionNumber();
@@ -108,10 +117,8 @@ public class RMIServerImpl implements RMIServer
 
     int number = answers.get(answer);
     number++;
-
-    //Vi har fjernet den der satte værdien fordi den gerne skulle opdatere automatisk
-    //answers.get(quiz.getQuestionNumber()).set(answer, number);
-
+    answers.set(answer, answers.get(answer) + 1);
+    getLobbyByPin(pin).setAnswers(questionNumber, answers);
     System.out.println(answers);
   }
 
@@ -198,8 +205,11 @@ public class RMIServerImpl implements RMIServer
     ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(
         pin).getClientList();
     System.out.println("Connected clients: " + clientList.size());
-    getLobbyByPin(pin).getHostCallBack().getParticipants(pin);
-    Quiz quiz = getQuiz(quizID, email);
+    ClientCallback host = getLobbyByPin(pin).getHostCallBack();
+    host.getParticipants(pin);
+    getLobbyByPin(pin).getQuiz().nextQuestion();
+    Quiz quiz = getLobbyByPin(pin).getQuiz();
+    host.getQuiz(quiz);
     for (int i = 0; i < clientList.size(); i++)
     {
       clientList.get(i).getQuiz(quiz);
@@ -212,9 +222,10 @@ public class RMIServerImpl implements RMIServer
         pin).getClientList();
     int num = getLobbyByPin(pin).getQuiz().nextQuestion();
     System.out.println("Question number:" + num);
+    getLobbyByPin(pin).getHostCallBack().returnNextQuestion();
     for (int i = 0; i < clientList.size(); i++)
     {
-      clientList.get(i).returnNextQuestion(pin, num);
+      clientList.get(i).returnNextQuestion();
     }
   }
 
