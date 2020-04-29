@@ -38,4 +38,14 @@ public class QuestionHandler implements QuestionData{
         rs.close();
         return questions;
     }
+
+    @Override
+    public int getNextQuestionID() throws SQLException {
+        int questionID = -1;
+        ResultSet rs = DBConn.retrieveData("SELECT MAX(QuestionID) FROM \"Quizzard_Database\".Question");
+        while (rs.next()) {
+            questionID = Integer.parseInt(rs.getString("max"));
+        }
+        return questionID;
+    }
 }

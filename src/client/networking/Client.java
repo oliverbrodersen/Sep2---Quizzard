@@ -32,4 +32,8 @@ public interface Client extends Subject
 
   boolean verifyLogin(String username);
   boolean verifyPin(String pin);
+
+    int getNextQuestionID();
+
+    void questionCreated(Question question);
 }

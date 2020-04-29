@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.crudquiz.CrudQuizVC">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="600.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+            <TextField fx:id="nameField">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Subject" />
+            <TextField fx:id="subjectField">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty" />
+            <ChoiceBox fx:id="difficultyChoice" prefWidth="150.0">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ChoiceBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="302.0" prefWidth="600.0">
+         <children>
+            <TableView fx:id="questionsTable" prefHeight="291.0" prefWidth="481.0">
+              <columns>
+                <TableColumn fx:id="questionColumn" prefWidth="385.0" text="Question" />
+                <TableColumn fx:id="noAnswersColumn" minWidth="0.0" prefWidth="62.0" text="# Answers" />
+                  <TableColumn fx:id="timeColumn" prefWidth="33.0" text="Time" />
+              </columns>
+            </TableView>
+            <VBox alignment="TOP_CENTER" prefHeight="316.0" prefWidth="120.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onAddQuestionPressed" text="Add Question">
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onEditQuestionPressed" text="Edit Question">
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onDeleteQuestionPressed" text="Delete Question" />
+               </children>
+               <HBox.margin>
+                  <Insets top="25.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="590.0">
+         <children>
+            <Label fx:id="warningLabel" text="Warning in select">
+               <HBox.margin>
+                  <Insets right="200.0" />
+               </HBox.margin>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#onBackPressed" text="Back">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#onSubmitPressed" text="Submit" />
+         </children>
+         <VBox.margin>
+            <Insets right="10.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

@@ -8,4 +8,6 @@ import java.util.ArrayList;
 public interface QuestionData {
     void storeQuestion(Question question);
     ArrayList<Question> retrieveQuestion(int quizID) throws SQLException;
+
+    int getNextQuestionID() throws SQLException;
 }

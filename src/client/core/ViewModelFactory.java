@@ -1,9 +1,10 @@
 package client.core;
 
 import client.views.createaccount.CreateAccountVM;
+import client.views.crudquiz.crudquestion.CrudQuestionVM;
 import client.views.finalscreen.FinalScreenVM;
 import client.views.hostmain.HostMainVM;
-import client.views.hostmain.createquiz.CreateQuizVM;
+import client.views.crudquiz.CrudQuizVM;
 import client.views.lobbyview.LobbyVM;
 import client.views.mainview.MainVM;
 import client.views.questionview.QuestionVM;
@@ -17,10 +18,11 @@ public class ViewModelFactory {
   private HostMainVM hostMainVM;
   private CreateAccountVM createAccountVM;
   private FinalScreenVM finalScreenVM;
-  private CreateQuizVM createQuizVM;
+  private CrudQuizVM crudQuizVM;
   private LobbyVM lobbyVM;
   private QuestionVM questionVM;
   private ScoreboardVM scoreboardVM;
+  private CrudQuestionVM crudQuestionVM;
 
   public ViewModelFactory(ModelFactory mf) {
     this.mf = mf;
@@ -54,11 +56,11 @@ public class ViewModelFactory {
     return finalScreenVM;
   }
 
-  public CreateQuizVM getCreateQuizVM() {
-    if (createQuizVM == null) {
-      createQuizVM = new CreateQuizVM(mf.getQuizConverter());
+  public CrudQuizVM getCrudQuizVM() {
+    if (crudQuizVM == null) {
+      crudQuizVM = new CrudQuizVM(mf.getQuizConverter());
     }
-    return createQuizVM;
+    return crudQuizVM;
   }
 
   public LobbyVM getLobbyVM() {
@@ -81,4 +83,11 @@ public class ViewModelFactory {
     }
     return scoreboardVM;
   }
+
+    public CrudQuestionVM getCrudQuestionVM() {
+      if (crudQuestionVM == null) {
+        crudQuestionVM = new CrudQuestionVM(mf.getQuizConverter());
+      }
+      return crudQuestionVM;
+    }
 }

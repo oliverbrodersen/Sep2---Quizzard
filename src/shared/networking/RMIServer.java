@@ -33,4 +33,8 @@ public interface RMIServer extends Remote
 
   boolean verifyLogin(String username) throws RemoteException;
   boolean verifyPin(String pin) throws RemoteException;
+
+    int getNextQuestionID() throws RemoteException;
+
+    // void questionCreated(Question );
 }

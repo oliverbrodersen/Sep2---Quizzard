@@ -44,8 +44,8 @@ public class Answer implements Serializable
 
   public String toString(){
     if (correct)
-      return "\u001B[32m" + "[" + answer + "]" + "\u001B[0m";
+      return "\u001B[32m" + "[" + answer + "]" + "\u001B[0m" + "[" + answerID + "]";
     else
-      return "[" + answer + "]";
+      return "[" + answer + "]" + "[" + answerID + "]";
   }
 }

@@ -36,4 +36,8 @@ public interface QuizConverter extends Subject
   void addParticipant(String pin, Participant participant);
   void startQuiz();
   void endQuestion();
+
+    int getNextQuestionID();
+
+    void questionCreated(Question question);
 }
