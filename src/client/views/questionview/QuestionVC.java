@@ -20,6 +20,7 @@ public class QuestionVC implements ViewController {
     this.vh = vh;
     this.vm = vmf.getQuestionVM();
     vm.addListener("endQuestion", this::removeAnswers);
+    vm.addListener("endQuiz", this::endQuiz);
     vm.addListener("onNextQuestion", this::onNextQuestion);
     numberOfQuestionsText.textProperty().bindBidirectional(vm.numberOfQuestionsProperty());
     quizNameText.textProperty().bindBidirectional(vm.quizNameProperty());
@@ -31,6 +32,12 @@ public class QuestionVC implements ViewController {
     //answer4Text.textProperty().bindBidirectional(vm.answer4TextProperty());
     vm.setup(answer1Button, answer2Button, answer3Button, answer4Button, endQuestionPressed, answer1Text, answer2Text, answer3Text, answer4Text);
   }
+
+  private void endQuiz(PropertyChangeEvent evt)
+  {
+    vm.endQuiz();
+  }
+
   public void removeAnswers(PropertyChangeEvent evt){
     vm.removeAnswers(true);
   }

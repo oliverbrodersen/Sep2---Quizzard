@@ -241,14 +241,22 @@ public class RMIServerImpl implements RMIServer
 
   @Override public void getNextQuestion(int pin) throws RemoteException
   {
-    ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(
-        pin).getClientList();
+    ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(pin).getClientList();
     int num = getLobbyByPin(pin).getQuiz().nextQuestion();
     System.out.println("Question number:" + num);
-    getLobbyByPin(pin).getHostCallBack().returnNextQuestion();
-    for (int i = 0; i < clientList.size(); i++)
-    {
-      clientList.get(i).returnNextQuestion();
+    if (num != -1){
+      getLobbyByPin(pin).getHostCallBack().returnNextQuestion();
+      for (int i = 0; i < clientList.size(); i++)
+      {
+        clientList.get(i).returnNextQuestion();
+      }
+    }
+    else{
+      getLobbyByPin(pin).getHostCallBack().endQuiz();
+      for (int i = 0; i < clientList.size(); i++)
+      {
+        clientList.get(i).endQuiz();
+      }
     }
   }
 

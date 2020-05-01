@@ -22,30 +22,38 @@ public class RMIClient implements Client, ClientCallback
   private RMIServer server;
   private PropertyChangeSupport support;
   private Quiz quiz;
+  private Participant participant;
   private int pinFromServer = -1;
   private List<Quiz> quizzes = new ArrayList<>();
 
-  public RMIClient() {
+  public RMIClient()
+  {
     support = new PropertyChangeSupport(this);
   }
 
   @Override public void startClient()
   {
-    try {
+    try
+    {
       UnicastRemoteObject.exportObject(this, 0);
       Registry registry = LocateRegistry.getRegistry("localhost", 1099);
       server = (RMIServer) registry.lookup("QuizServer");
-    } catch (RemoteException | NotBoundException e) {
+    }
+    catch (RemoteException | NotBoundException e)
+    {
       System.out.println("Could not connect to server");
       e.printStackTrace();
     }
   }
 
-  @Override
-  public boolean verifyLogin(String username) {
-    try {
+  @Override public boolean verifyLogin(String username)
+  {
+    try
+    {
       return server.verifyLogin(username);
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return false;
@@ -53,28 +61,34 @@ public class RMIClient implements Client, ClientCallback
 
   @Override public boolean verifyPin(String pin)
   {
-    try {
+    try
+    {
       return server.verifyPin(pin);
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return false;
   }
 
-  @Override
-  public int getNextQuestionID() {
-    try {
+  @Override public int getNextQuestionID()
+  {
+    try
+    {
       return server.getNextQuestionID();
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return -1;
   }
 
-  @Override
-  public void questionCreated(Question question) {
+  @Override public void questionCreated(Question question)
+  {
     // server.questionCreated(question);
-    support.firePropertyChange("onQuestionCreated",null, question);
+    support.firePropertyChange("onQuestionCreated", null, question);
   }
 
   @Override public Quiz getQuiz(int quizID, String email)
@@ -89,7 +103,6 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-
   @Override public void returnNextQuestion()
   {
     quiz.nextQuestion();
@@ -100,7 +113,6 @@ public class RMIClient implements Client, ClientCallback
   {
     pinFromServer = pin;
   }
-
 
   @Override public int getPin()
   {
@@ -119,43 +131,60 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public UserID getUserClass() {
+  @Override public Participant getParticipant()
+  {
+    return participant;
+  }
+
+  @Override public UserID getUserClass()
+  {
     return null;
   }
 
-  @Override
-  public List<Quiz> getQuizzes(String email) {
-    try {
+  @Override public List<Quiz> getQuizzes(String email)
+  {
+    try
+    {
       return server.getQuizzes(email);
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return quizzes;
   }
 
-  @Override
-  public UserClass getUser(String email) {
-    try {
+  @Override public UserClass getUser(String email)
+  {
+    try
+    {
       return server.getUser(email);
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
     return null;
   }
 
-  @Override public int getUserID() {
+  @Override public int getUserID()
+  {
     return 0;
   }
 
-  @Override public String getPassword() {
+  @Override public String getPassword()
+  {
     return null;
   }
 
   @Override public void sendAnswer(int answer)
   {
-    try {
+    try
+    {
       server.submitAnswer(pinFromServer, answer);
-    } catch (RemoteException e) {
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
   }
@@ -188,6 +217,13 @@ public class RMIClient implements Client, ClientCallback
   {
     support.firePropertyChange("endQuestion", null, null);
   }
+
+  @Override public void endQuiz() throws RemoteException
+  {
+    System.out.println("quiz over from client");
+    support.firePropertyChange("endQuiz", null, null);
+  }
+
   @Override public void addListener(String eventName,
       PropertyChangeListener listener)
   {
@@ -205,7 +241,6 @@ public class RMIClient implements Client, ClientCallback
 
   }
 
-
   @Override public ArrayList<Participant> getParticipants(int pin)
   {
     try
@@ -221,7 +256,8 @@ public class RMIClient implements Client, ClientCallback
     return null;
   }
 
-  @Override public String getUsername() {
+  @Override public String getUsername()
+  {
     return null;
   }
 
@@ -234,6 +270,7 @@ public class RMIClient implements Client, ClientCallback
   {
     try
     {
+      this.participant = participant;
       server.newParticipant(pin, participant);
       server.registerClient(pin, this, UserID.PARTICIPANT);
     }
@@ -277,9 +314,12 @@ public class RMIClient implements Client, ClientCallback
     }
     return null;
   }
-  @Override public Quiz getQuiz(){
+
+  @Override public Quiz getQuiz()
+  {
     return quiz;
   }
+
   @Override public Quiz getQuiz(Quiz quiz)
   {
     this.quiz = quiz;

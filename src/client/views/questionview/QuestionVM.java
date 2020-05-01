@@ -5,10 +5,7 @@ import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import shared.transferobjects.Answer;
-import shared.transferobjects.Question;
-import shared.transferobjects.Quiz;
-import shared.transferobjects.UserID;
+import shared.transferobjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.util.List;
@@ -55,6 +52,7 @@ public class QuestionVM
 
     Quiz quiz = quizConverter.getQuiz();
     Question quizQuestion = quiz.getQuestion(quiz.getQuestionNumber());
+    System.out.println(quiz.getQuestionNumber());
     List<Answer> answersList = quizQuestion.getAnswers();
     int answers = answersList.size();
 
@@ -81,20 +79,12 @@ public class QuestionVM
       {
         case 4:
           answer4Text.setText(answersList.get(3).getAnswer());
-          answer4Text.setStyle(
-              "-fx-font-weight: bold;-fx-font-size:15;");
         case 3:
           answer3Text.setText(answersList.get(2).getAnswer());
-          answer3Text.setStyle(
-              "-fx-font-weight: bold;-fx-font-size:15;");
         case 2:
           answer2Text.setText(answersList.get(1).getAnswer());
-          answer2Text.setStyle(
-              "-fx-font-weight: bold;-fx-font-size:15;");
         case 1:
           answer1Text.setText(answersList.get(0).getAnswer());
-          answer1Text.setStyle(
-              "-fx-font-weight: bold;-fx-font-size:15;");
       }
     }
     else
@@ -117,8 +107,20 @@ public class QuestionVM
   public void submitAnswer(int i)
   {
     if (quizConverter.getUser() == null){
+      //Submit answer
       quizConverter.sendAnswer(i);
       removeAnswers(false);
+      //Calc score
+      Quiz quiz = quizConverter.getQuiz();
+      Question quizQuestion = quiz.getQuestion(quiz.getQuestionNumber());
+      List<Answer> answersList = quizQuestion.getAnswers();
+      if (answersList.get(i).getCorrect()){
+        int score = quizConverter.getPartisipant().getScore();
+        //Adds time left * 100 to current score
+        score += interval * 100;
+        quizConverter.getPartisipant().setScore(score);
+        System.out.println(score);
+      }
     }
   }
 
@@ -161,5 +163,11 @@ public class QuestionVM
   public void addListener(String propertyChange, PropertyChangeListener propertyChange1)
   {
     quizConverter.addListener(propertyChange, propertyChange1);
+  }
+
+  public void endQuiz()
+  {
+    if (quizConverter.getUser() == null)
+      question.set("Score: " + quizConverter.getPartisipant().getScore());
   }
 }

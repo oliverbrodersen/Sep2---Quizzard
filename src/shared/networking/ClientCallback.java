@@ -20,4 +20,5 @@ public interface ClientCallback extends Remote
   void returnNextQuestion() throws RemoteException;
   void updatePin(int pin) throws RemoteException;
   void endQuestionCall() throws RemoteException;
+  void endQuiz() throws RemoteException;
 }

@@ -12,7 +12,6 @@ public interface QuizConverter extends Subject
 
   List<Quiz> getQuizzes();
   List<Participant> getParticipants();
-  Question getNextQuestion();
 
   String getUsername();
   int getUserID();
@@ -20,9 +19,8 @@ public interface QuizConverter extends Subject
   UserClass getUser();
   int getPin();
   Quiz getQuiz();
+  Participant getPartisipant();
 
-  void setUsername(String username);
-  void setPassword(String password);
   void setUser(String email);
   void setPin(int pin);
 

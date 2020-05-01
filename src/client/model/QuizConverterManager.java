@@ -15,47 +15,46 @@ public class QuizConverterManager implements QuizConverter
   private Client client;
   private UserClass user;
 
-  public QuizConverterManager(Client client) {
+  public QuizConverterManager(Client client)
+  {
     this.client = client;
     support = new PropertyChangeSupport(this);
     // client.startClient();
     // client.addListener("OnJoin", this::onJoin);
   }
 
-
-  private void onJoin(PropertyChangeEvent evt) {
+  private void onJoin(PropertyChangeEvent evt)
+  {
     support.firePropertyChange(evt);
   }
 
-
-
-  @Override public Lobby getLobby(int pin) {
+  @Override public Lobby getLobby(int pin)
+  {
     return client.getLobby(pin);
   }
 
-  @Override
-  public List<Quiz> getQuizzes() {
+  @Override public List<Quiz> getQuizzes()
+  {
     return client.getQuizzes(user.getEmail());
   }
 
-
-  @Override public List<Participant> getParticipants() {
+  @Override public List<Participant> getParticipants()
+  {
     return client.getParticipants();
   }
 
-  @Override public Question getNextQuestion() {
-    return null;
-  }
-
-  @Override public String getUsername() {
+  @Override public String getUsername()
+  {
     return client.getUsername();
   }
 
-  @Override public int getUserID() {
+  @Override public int getUserID()
+  {
     return client.getUserID();
   }
 
-  @Override public String getPassword() {
+  @Override public String getPassword()
+  {
     return client.getPassword();
   }
 
@@ -74,13 +73,11 @@ public class QuizConverterManager implements QuizConverter
     return client.getQuiz();
   }
 
-  @Override public void setUsername(String username) {
-
+  @Override public Participant getPartisipant()
+  {
+    return client.getParticipant();
   }
 
-  @Override public void setPassword(String password) {
-
-  }
 
   @Override public void setUser(String email)
   {
@@ -98,11 +95,13 @@ public class QuizConverterManager implements QuizConverter
     return client.getQuiz(quizID, email);
   }
 
-  @Override public void sendAnswer(int i) {
+  @Override public void sendAnswer(int i)
+  {
     client.sendAnswer(i);
   }
 
-  @Override public void exit() {
+  @Override public void exit()
+  {
 
   }
 
@@ -111,8 +110,8 @@ public class QuizConverterManager implements QuizConverter
     client.getNextQuestion();
   }
 
-  @Override
-  public boolean verifyLogin(String username) {
+  @Override public boolean verifyLogin(String username)
+  {
     return client.verifyLogin(username);
   }
 
@@ -128,16 +127,18 @@ public class QuizConverterManager implements QuizConverter
 
   @Override public void startQuiz()
   {
-    client.startQuiz(client.getPin(), client.getLobby(client.getPin()).getQuiz().getQuizId(), user.getEmail());
+    client.startQuiz(client.getPin(),
+        client.getLobby(client.getPin()).getQuiz().getQuizId(),
+        user.getEmail());
   }
 
-  @Override
-  public int getNextQuestionID() {
+  @Override public int getNextQuestionID()
+  {
     return client.getNextQuestionID();
   }
 
-  @Override
-  public void questionCreated(Question question) {
+  @Override public void questionCreated(Question question)
+  {
     client.questionCreated(question);
   }
 
@@ -146,12 +147,15 @@ public class QuizConverterManager implements QuizConverter
     client.endQuestion();
   }
 
-  @Override public void addListener(String eventName, PropertyChangeListener listener) {
-      client.addListener(eventName,listener);
+  @Override public void addListener(String eventName,
+      PropertyChangeListener listener)
+  {
+    client.addListener(eventName, listener);
   }
 
   @Override public void removeListener(String eventName,
-      PropertyChangeListener listener) {
+      PropertyChangeListener listener)
+  {
 
   }
 }

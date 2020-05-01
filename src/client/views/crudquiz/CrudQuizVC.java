@@ -32,7 +32,6 @@ public class CrudQuizVC implements ViewController {
     @FXML private TableColumn<String, Question> questionColumn;
     @FXML private TableColumn<Integer, Question> noAnswersColumn;
     @FXML private TableColumn<Integer, Question> timeColumn;
-    private ObservableList<Question> observableQuestions;
 
     @Override
     public void init(ViewHandler vh, ViewModelFactory vmf) {
