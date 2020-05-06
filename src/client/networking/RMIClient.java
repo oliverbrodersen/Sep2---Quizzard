@@ -1,13 +1,12 @@
 package client.networking;
 
-import javafx.application.Platform;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 import shared.transferobjects.*;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -15,7 +14,6 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class RMIClient implements Client, ClientCallback
 {
@@ -89,6 +87,18 @@ public class RMIClient implements Client, ClientCallback
   {
     // server.questionCreated(question);
     support.firePropertyChange("onQuestionCreated", null, question);
+  }
+
+  @Override public void kickPlayer(Participant participant)
+  {
+    try
+    {
+      server.kickPlayer(participant, pinFromServer);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -254,6 +264,11 @@ public class RMIClient implements Client, ClientCallback
     support.firePropertyChange("endQuiz", null, null);
   }
 
+  @Override public void kickPlayer()
+  {
+    support.firePropertyChange("onKick", null,null);
+  }
+
   @Override public void addListener(String eventName, PropertyChangeListener listener)
   {
     support.addPropertyChangeListener(eventName, listener);
@@ -269,6 +284,7 @@ public class RMIClient implements Client, ClientCallback
   {
 
   }
+
 
   @Override public ArrayList<Participant> getParticipants(int pin)
   {
@@ -300,6 +316,7 @@ public class RMIClient implements Client, ClientCallback
     try
     {
       this.participant = participant;
+      participant.setClientCallback(this);
       server.newParticipant(pin, participant);
       server.registerClient(pin, this, UserID.PARTICIPANT);
     }
@@ -307,6 +324,11 @@ public class RMIClient implements Client, ClientCallback
     {
       e.printStackTrace();
     }
+  }
+
+  @Override public void removeParticipant(int pin, Participant participant)
+  {
+
   }
 
   @Override public void addLobby(Lobby lobby, ClientCallback client){

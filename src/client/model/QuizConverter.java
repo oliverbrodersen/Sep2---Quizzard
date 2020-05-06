@@ -20,7 +20,6 @@ public interface QuizConverter extends Subject
   UserClass getUser();
   int getPin();
   Quiz getQuiz();
-  Participant getPartisipant();
   ArrayList<Integer> getAnswers(int question);
   Participant getParticipant();
 
@@ -45,4 +44,5 @@ public interface QuizConverter extends Subject
     void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions);
 
     void deleteQuiz(Quiz quiz);
+  void kickPlayer(Participant participant);
 }

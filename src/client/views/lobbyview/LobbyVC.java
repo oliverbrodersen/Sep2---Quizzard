@@ -2,6 +2,7 @@ package client.views.lobbyview;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
+import client.networking.RMIClient;
 import client.views.ViewController;
 import client.views.mainview.MainVM;
 import javafx.application.Platform;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import server.networking.RMIServerImpl;
 import shared.transferobjects.Participant;
 import shared.transferobjects.Quiz;
 import shared.transferobjects.UserID;
@@ -22,6 +24,8 @@ import java.util.List;
 public class LobbyVC implements ViewController {
     private LobbyVM vm;
     private ViewHandler vh;
+    private RMIClient client;
+
     @FXML private Label pinLabel, userTypeLabel, playersCountLabel;
     @FXML private Button startButton, kickButton;
 
@@ -34,6 +38,7 @@ public class LobbyVC implements ViewController {
         this.vm = vmf.getLobbyVM();
         vm.addListener("onNewConnected", this::updateParticipantList);
         vm.addListener("onQuizStarted", this::startQuizListener);
+        vm.addListener("onKick", this::playerKicked);
         userTypeLabel.textProperty().bindBidirectional(vm.userTypeLabelProperty());
         pinLabel.textProperty().bindBidirectional(vm.pinLabelProperty());
         playersCountLabel.textProperty().bindBidirectional(vm.playersCountLabelProperty());
@@ -42,6 +47,16 @@ public class LobbyVC implements ViewController {
         participantsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         vm.setup(startButton, kickButton);
+    }
+
+    private void playerKicked(PropertyChangeEvent propertyChangeEvent)
+    {
+        Platform.runLater(new Runnable(){
+            @Override public void run()
+            {
+                vh.openView("login");
+            }
+        });
     }
 
     private void startQuizListener(PropertyChangeEvent evt)
@@ -69,6 +84,6 @@ public class LobbyVC implements ViewController {
     }
 
     public void onKickButtonPressed(ActionEvent actionEvent){
-        System.out.println("Kick player: " + participantsTableView.getSelectionModel().getSelectedItem().getName());
+        vm.kickPlayer(participantsTableView.getSelectionModel().getSelectedItem());
     }
 }

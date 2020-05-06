@@ -102,9 +102,17 @@ public class LobbyVM {
     {
         quizConverter.addListener(propertyChange, propertyChange1);
     }
+    public void removeListener(String propertyChange, PropertyChangeListener propertyChange1){
+        quizConverter.removeListener(propertyChange, propertyChange1);
+    }
 
     public StringProperty playersCountLabelProperty()
     {
         return playersCountLabel;
+    }
+
+    public void kickPlayer(Participant participant)
+    {
+        quizConverter.kickPlayer(participant);
     }
 }
