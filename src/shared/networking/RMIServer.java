@@ -38,4 +38,7 @@ public interface RMIServer extends Remote
   ArrayList<Integer> getAnswers(int pin, int question) throws RemoteException;
 
   // void questionCreated(Question );
+    void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions, String email) throws RemoteException;
+
+    // void questionCreated(Question );
 }

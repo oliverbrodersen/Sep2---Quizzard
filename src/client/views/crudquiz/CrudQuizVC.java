@@ -42,7 +42,6 @@ public class CrudQuizVC implements ViewController {
         subjectField.textProperty().bindBidirectional(vm.subjectFieldProperty());
         difficultyChoice.valueProperty().bindBidirectional(vm.difficultyProperty());
         questionsTable.setItems(vm.getQuestions());
-
         questionColumn.setCellValueFactory(new PropertyValueFactory<>("question"));
         noAnswersColumn.setCellValueFactory(new PropertyValueFactory<>("noAnswers"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));

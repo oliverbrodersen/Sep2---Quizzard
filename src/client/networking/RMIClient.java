@@ -91,6 +91,15 @@ public class RMIClient implements Client, ClientCallback
     support.firePropertyChange("onQuestionCreated", null, question);
   }
 
+  @Override
+  public void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions, String email) {
+    try {
+      server.createQuiz(name, subject, difficulty, questions, email);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+  }
+
   @Override public Quiz getQuiz(int quizID, String email)
   {
     try

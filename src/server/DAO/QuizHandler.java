@@ -18,8 +18,49 @@ public class QuizHandler implements QuizData{
     }
 
     @Override
-    public void storeQuiz(Quiz quiz) {
+    public void storeQuiz(Quiz quiz, String difficulty, String email) {
 
+        DBConn.addData("INSERT into \"Quizzard_Database\".Quiz(QuizID, QuizName, Subject, Level, Email) VALUES ('" + quiz.getQuizId()
+        + "', '" + quiz.getTitle() + "', '" + quiz.getSubject() + "', '" + difficulty.toUpperCase()
+        + "', '" + email + "');");
+
+        ArrayList<Question> questions = (ArrayList<Question>) quiz.getQuestions();
+
+        for (int i = 0; i < questions.size(); i++) {
+            String sql = "";
+            String questionID = questions.get(i).getAnswer(0).getAnswerID().substring(1);
+            for (int j = 0; j < 4; j++) {
+                char place;
+                if (questions.get(i).getAnswers().size() > j) {
+                    if (questions.get(i).getAnswer(j) != null) {
+                        place = questions.get(i).getAnswer(j).getAnswerID().charAt(0);
+                        sql = sql + " '" + place + "',";
+                    }
+                } else {
+                    sql = sql + " " + null + ",";
+                }
+            }
+
+            DBConn.addData("INSERT into \"Quizzard_Database\".Question(QuestionID, QuizID, Question, Answer1, Answer2, Answer3, Answer4, Time) " +
+                    "values ('" + questionID + "', '" + quiz.getQuizId() + "', '"
+                    + questions.get(i).getQuestion() + "',"
+                    + sql + " '" + quiz.getQuestion(i).getTime() + "');");
+
+            for (int j = 0; j < questions.get(i).getAnswers().size(); j++) {
+                String answerNo = String.valueOf(questions.get(i).getAnswer(j).getAnswerID().charAt(0));
+                String answer = questions.get(i).getAnswer(j).getAnswer();
+                boolean correctAnswer = questions.get(i).getAnswer(j).getCorrect();
+                String correctAnswerString = "";
+                if (correctAnswer)
+                    correctAnswerString = "1";
+                else
+                    correctAnswerString = "0";
+
+                DBConn.addData("INSERT into \"Quizzard_Database\".Answer(AnswerNo, QuestionID, Answer, CorrectAnswer) VALUES "
+                        + "('" + answerNo + "', '" + questionID + "', '" + answer + "', '"
+                        + correctAnswerString + "');");
+            }
+        }
     }
 
     @Override
@@ -53,5 +94,15 @@ public class QuizHandler implements QuizData{
             quizzes.add(quiz);
         }
         return quizzes;
+    }
+
+    @Override
+    public int getNextQuizID() throws SQLException {
+        int quizID = -1;
+        ResultSet rs = DBConn.retrieveData("SELECT MAX(QuizID) FROM \"Quizzard_Database\".Quiz");
+        while (rs.next()) {
+            quizID = Integer.parseInt(rs.getString("max"));
+        }
+        return quizID;
     }
 }

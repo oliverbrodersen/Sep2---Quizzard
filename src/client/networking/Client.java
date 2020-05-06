@@ -39,4 +39,6 @@ public interface Client extends Subject
     int getNextQuestionID();
 
     void questionCreated(Question question);
+
+    void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions, String email);
 }
