@@ -15,6 +15,7 @@ public class CrudQuestionVM {
     private StringProperty questionArea, answerArea;
     private BooleanProperty correctCheckBox;
     private StringProperty timeField;
+    private int correctQuestionID;
     private int answerNumber;
 
     public CrudQuestionVM(QuizConverter quizConverter) {
@@ -24,6 +25,7 @@ public class CrudQuestionVM {
         correctCheckBox = new SimpleBooleanProperty();
         timeField = new SimpleStringProperty();
         answerNumber = 1;
+        correctQuestionID = quizConverter.getNextQuestionID() + 1;
     }
 
     public Property<String> questionAreaProperty() {
@@ -45,8 +47,6 @@ public class CrudQuestionVM {
     public Answer submitAnswer() {
         if (answerNumber <= 4) {
             String answerID = "";
-            int correctQuestionID = -1;
-            correctQuestionID = quizConverter.getNextQuestionID() + 1;
             answerID = answerNumber + Integer.toString(correctQuestionID);
 
             Answer answerToSubmit = new Answer(answerArea.get(), correctCheckBox.get(), answerID);
@@ -65,6 +65,8 @@ public class CrudQuestionVM {
 
     public void submitQuestion(ObservableList<Answer> answers) {
         List<Answer> questionAnswers = new ArrayList<>(answers);
+        while(correctQuestionID <= quizConverter.getNextQuestionID() + 1)
+            correctQuestionID++;
         int time = -1;
         if (timeField.get() != null && timeField.get().matches("^[0-9]*$"))
             time = Integer.parseInt(timeField.get());

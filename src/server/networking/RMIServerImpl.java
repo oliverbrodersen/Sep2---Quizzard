@@ -163,6 +163,20 @@ public class RMIServerImpl implements RMIServer
     return questionID;
   }
 
+  @Override
+  public void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions, String email) {
+    if (quizData == null)
+    {
+      quizData = new QuizHandler(DBConn);
+    }
+    try {
+      Quiz quiz = new Quiz(name, subject, questions, quizData.getNextQuizID() + 1);
+      quizData.storeQuiz(quiz, difficulty, "Host@Host.com");
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
+  }
+
 //  @Override
 //  public void questionCreated(Question question) {
 //    questionsCreated.add(question);
@@ -205,7 +219,7 @@ public class RMIServerImpl implements RMIServer
     return quizzes;
   }
 
-  @Override public UserClass getUser(String email) throws RemoteException
+  @Override public UserClass getUser(String email)
   {
     if (userData == null)
     {

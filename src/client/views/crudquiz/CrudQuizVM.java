@@ -28,7 +28,12 @@ public class CrudQuizVM {
 
     public void createQuiz()
     {
-       // quizConverter.createQuiz(nameField.get(), subjectField.get(), difficulty.get());
+        if (nameField.get().isEmpty() || subjectField.get().isEmpty() || difficulty.get().isEmpty() || questionArrayList.isEmpty())
+            System.out.println("Empty error");
+
+       quizConverter.createQuiz(nameField.get(), subjectField.get(), difficulty.get(), questionArrayList);
+        System.out.println(nameField.get() + subjectField.get() + difficulty.get());
+        System.out.println(questionArrayList.toString());
     }
 
     public StringProperty nameFieldProperty()

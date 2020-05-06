@@ -4,6 +4,7 @@ import shared.transferobjects.*;
 import shared.util.Subject;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Client extends Subject
@@ -37,4 +38,6 @@ public interface Client extends Subject
     int getNextQuestionID();
 
     void questionCreated(Question question);
+
+    void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions, String email);
 }

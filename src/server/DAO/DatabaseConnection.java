@@ -43,7 +43,7 @@ public class DatabaseConnection {
     {
         try {
             stmt = c.createStatement();
-            stmt.executeQuery(sql);
+            stmt.executeUpdate(sql);
             closeStatement();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

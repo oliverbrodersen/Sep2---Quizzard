@@ -6,6 +6,7 @@ import shared.transferobjects.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuizConverterManager implements QuizConverter
@@ -73,7 +74,7 @@ public class QuizConverterManager implements QuizConverter
     return client.getQuiz();
   }
 
-  @Override public Participant getPartisipant()
+  @Override public Participant getParticipant()
   {
     return client.getParticipant();
   }
@@ -140,6 +141,11 @@ public class QuizConverterManager implements QuizConverter
   @Override public void questionCreated(Question question)
   {
     client.questionCreated(question);
+  }
+
+  @Override
+  public void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions) {
+    client.createQuiz(name, subject, difficulty, questions, getUser().getEmail());
   }
 
   @Override public void endQuestion()
