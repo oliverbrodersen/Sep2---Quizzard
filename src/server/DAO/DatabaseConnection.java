@@ -39,7 +39,7 @@ public class DatabaseConnection {
         }
     }
 
-    public void addData(String sql)
+    public void updateData(String sql)
     {
         try {
             stmt = c.createStatement();

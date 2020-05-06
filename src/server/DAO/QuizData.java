@@ -11,4 +11,5 @@ public interface QuizData {
     List<Quiz> readQuizzes(String email) throws SQLException;
     int getNextQuizID() throws SQLException;
 
+    void deleteQuiz(Quiz quiz) throws SQLException;
 }

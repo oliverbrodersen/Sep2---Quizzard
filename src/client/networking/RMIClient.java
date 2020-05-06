@@ -100,6 +100,15 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
+  @Override
+  public void deleteQuiz(Quiz quiz) {
+    try {
+      server.deleteQuiz(quiz);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+  }
+
   @Override public Quiz getQuiz(int quizID, String email)
   {
     try

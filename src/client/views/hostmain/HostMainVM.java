@@ -72,5 +72,9 @@ public class HostMainVM {
     {
         return userClassText;
     }
+
+    public void deleteQuiz(Quiz quiz) {
+        quizConverter.deleteQuiz(quiz);
+    }
 }
 

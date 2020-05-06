@@ -40,5 +40,7 @@ public interface RMIServer extends Remote
   // void questionCreated(Question );
     void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions, String email) throws RemoteException;
 
+    void deleteQuiz(Quiz quiz) throws RemoteException;
+
     // void questionCreated(Question );
 }

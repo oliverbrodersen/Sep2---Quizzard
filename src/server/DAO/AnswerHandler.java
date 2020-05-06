@@ -21,7 +21,7 @@ public class AnswerHandler implements AnswerData{
         char correctAnswer = 0;
         if (answer.getCorrect())
             correctAnswer = 1;
-        DBConn.addData("INSERT INTO Answer VALUES ('" + answerNo + "', '"
+        DBConn.updateData("INSERT INTO Answer VALUES ('" + answerNo + "', '"
                 + questionID + "', '" + answerString + "', '" + correctAnswer + "');");
 
     }

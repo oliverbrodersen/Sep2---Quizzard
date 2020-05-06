@@ -20,7 +20,7 @@ public class QuizHandler implements QuizData{
     @Override
     public void storeQuiz(Quiz quiz, String difficulty, String email) {
 
-        DBConn.addData("INSERT into \"Quizzard_Database\".Quiz(QuizID, QuizName, Subject, Level, Email) VALUES ('" + quiz.getQuizId()
+        DBConn.updateData("INSERT into \"Quizzard_Database\".Quiz(QuizID, QuizName, Subject, Level, Email) VALUES ('" + quiz.getQuizId()
         + "', '" + quiz.getTitle() + "', '" + quiz.getSubject() + "', '" + difficulty.toUpperCase()
         + "', '" + email + "');");
 
@@ -41,7 +41,7 @@ public class QuizHandler implements QuizData{
                 }
             }
 
-            DBConn.addData("INSERT into \"Quizzard_Database\".Question(QuestionID, QuizID, Question, Answer1, Answer2, Answer3, Answer4, Time) " +
+            DBConn.updateData("INSERT into \"Quizzard_Database\".Question(QuestionID, QuizID, Question, Answer1, Answer2, Answer3, Answer4, Time) " +
                     "values ('" + questionID + "', '" + quiz.getQuizId() + "', '"
                     + questions.get(i).getQuestion() + "',"
                     + sql + " '" + quiz.getQuestion(i).getTime() + "');");
@@ -56,7 +56,7 @@ public class QuizHandler implements QuizData{
                 else
                     correctAnswerString = "0";
 
-                DBConn.addData("INSERT into \"Quizzard_Database\".Answer(AnswerNo, QuestionID, Answer, CorrectAnswer) VALUES "
+                DBConn.updateData("INSERT into \"Quizzard_Database\".Answer(AnswerNo, QuestionID, Answer, CorrectAnswer) VALUES "
                         + "('" + answerNo + "', '" + questionID + "', '" + answer + "', '"
                         + correctAnswerString + "');");
             }
@@ -105,4 +105,17 @@ public class QuizHandler implements QuizData{
         }
         return quizID;
     }
+
+    @Override
+    public void deleteQuiz(Quiz quiz) throws SQLException {
+
+        for (int i = 0; i < quiz.getQuestions().size(); i++) {
+            String questionID = quiz.getQuestion(i).getAnswer(0).getAnswerID().substring(1);
+            DBConn.updateData("DELETE FROM \"Quizzard_Database\".Answer WHERE QuestionID='" + questionID + "';");
+        }
+        DBConn.updateData("DELETE FROM \"Quizzard_Database\".Question WHERE QuizID='" + quiz.getQuizId() + "';");
+        DBConn.updateData("DELETE FROM \"Quizzard_Database\".Quiz WHERE QuizID='" + quiz.getQuizId() + "';");
+    }
+
+
 }

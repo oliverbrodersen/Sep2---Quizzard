@@ -170,9 +170,31 @@ public class RMIServerImpl implements RMIServer
 
   @Override public void createQuiz(String name, String subject,
       String difficulty, ArrayList<Question> questions, String email)
-      throws RemoteException
   {
+    if (quizData == null)
+    {
+      quizData = new QuizHandler(DBConn);
+    }
+    Quiz quiz = null;
+    try {
+      quiz = new Quiz(name, subject, questions, quizData.getNextQuizID() + 1);
+      quizData.storeQuiz(quiz, difficulty, "Host@Host.com");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
 
+  @Override
+  public void deleteQuiz(Quiz quiz) {
+    if(quizData == null)
+    {
+      quizData = new QuizHandler(DBConn);
+    }
+    try {
+      quizData.deleteQuiz(quiz);
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
   }
 
   //  @Override

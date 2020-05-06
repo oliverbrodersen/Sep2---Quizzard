@@ -58,6 +58,10 @@ public class HostMainVC implements ViewController {
     }
 
     public void onDeletePressed(ActionEvent actionEvent) {
+        Quiz quizSelected = hostQuizTable.getSelectionModel().getSelectedItem();
+        vm.deleteQuiz(quizSelected);
+        vm.getQuizzes().remove(quizSelected);
+        hostQuizTable.setItems(vm.getQuizzes());
     }
 
     public void onHostPressed(ActionEvent actionEvent) throws RemoteException
