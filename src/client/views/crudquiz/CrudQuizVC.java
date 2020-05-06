@@ -45,6 +45,7 @@ public class CrudQuizVC implements ViewController {
         questionColumn.setCellValueFactory(new PropertyValueFactory<>("question"));
         noAnswersColumn.setCellValueFactory(new PropertyValueFactory<>("noAnswers"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+        difficultyChoice.getSelectionModel().select(0);
     }
 
     private void updateQuestionsList(PropertyChangeEvent evt) {
@@ -53,14 +54,20 @@ public class CrudQuizVC implements ViewController {
 
     @Override
     public void reset() {
-
+        nameField.setText(null);
+        subjectField.setText(null);
+        questionsTable.setItems(null);
     }
 
     public void onSubmitPressed(ActionEvent actionEvent) {
         vm.createQuiz();
+        reset();
+        vm.back();
     }
 
     public void onDeleteQuestionPressed(ActionEvent actionEvent) {
+        Question questionSelected = questionsTable.getSelectionModel().getSelectedItem();
+        vm.delete(questionSelected);
     }
 
     public void onEditQuestionPressed(ActionEvent actionEvent) {
@@ -71,8 +78,8 @@ public class CrudQuizVC implements ViewController {
     }
 
     public void onBackPressed(ActionEvent actionEvent) {
-        nameField.setText(null);
-        subjectField.setText(null);
+        reset();
+        vm.back();
         vh.openView("hostmain");
     }
 }
