@@ -168,6 +168,13 @@ public class RMIServerImpl implements RMIServer
     return (ArrayList<Integer>)getLobbyByPin(pin).getAnswersForQuestion(question);
   }
 
+  @Override public void createQuiz(String name, String subject,
+      String difficulty, ArrayList<Question> questions, String email)
+      throws RemoteException
+  {
+
+  }
+
   //  @Override
 //  public void questionCreated(Question question) {
 //    questionsCreated.add(question);
