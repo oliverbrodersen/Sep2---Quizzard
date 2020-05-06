@@ -1,7 +1,6 @@
 package client.views.questionview;
 
 import client.model.QuizConverter;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -114,10 +113,10 @@ public class QuestionVM
       Question quizQuestion = quiz.getQuestion(quiz.getQuestionNumber());
       List<Answer> answersList = quizQuestion.getAnswers();
       if (answersList.get(i).getCorrect()){
-        int score = quizConverter.getPartisipant().getScore();
+        int score = quizConverter.getParticipant().getScore();
         //Adds time left * 100 to current score
         score += interval * 100;
-        quizConverter.getPartisipant().setScore(score);
+        quizConverter.getParticipant().setScore(score);
         System.out.println(score);
       }
     }
@@ -167,6 +166,6 @@ public class QuestionVM
   public void endQuiz()
   {
     if (quizConverter.getUser() == null)
-      question.set("Score: " + quizConverter.getPartisipant().getScore());
+      question.set("Score: " + quizConverter.getParticipant().getScore());
   }
 }

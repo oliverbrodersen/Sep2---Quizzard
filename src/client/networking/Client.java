@@ -5,6 +5,7 @@ import shared.util.Subject;
 
 import java.beans.PropertyChangeEvent;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Client extends Subject
@@ -25,6 +26,7 @@ public interface Client extends Subject
   int getPin();
   void getNextQuestion();
   Participant getParticipant();
+  ArrayList<Integer> getAnswers(int question);
 
   void setPin(int pin);
   void newParticipant(int pin, Participant participant);
@@ -40,4 +42,6 @@ public interface Client extends Subject
 
     void questionCreated(Question question);
   void kickPlayer(Participant participant);
+
+    void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions, String email);
 }

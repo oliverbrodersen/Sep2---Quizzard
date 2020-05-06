@@ -191,6 +191,23 @@ public class RMIServerImpl implements RMIServer
   //    questionsCreated.add(question);
   //
   //  }
+  @Override public ArrayList<Integer> getAnswers(int pin, int question) throws RemoteException
+  {
+    return (ArrayList<Integer>)getLobbyByPin(pin).getAnswersForQuestion(question);
+  }
+
+  @Override public void createQuiz(String name, String subject,
+      String difficulty, ArrayList<Question> questions, String email)
+      throws RemoteException
+  {
+
+  }
+
+  //  @Override
+//  public void questionCreated(Question question) {
+//    questionsCreated.add(question);
+//
+//  }
 
   @Override public Quiz getQuiz(int quizID, String email)
   {

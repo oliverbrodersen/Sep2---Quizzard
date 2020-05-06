@@ -17,6 +17,7 @@ public interface RMIServer extends Remote
   UserID getUserID() throws RemoteException;
 
   void registerClient(int pin, ClientCallback client, UserID userID) throws RemoteException;
+  void removeClient(ClientCallback client) throws RemoteException;
 
   List<Quiz> getQuizzes(String email)  throws RemoteException;
   UserClass getUser(String email)  throws RemoteException;;
@@ -36,6 +37,11 @@ public interface RMIServer extends Remote
 
     int getNextQuestionID() throws RemoteException;
   void kickPlayer(Participant participant, int pinFromServer) throws RemoteException;
+  int getNextQuestionID() throws RemoteException;
+  ArrayList<Integer> getAnswers(int pin, int question) throws RemoteException;
+
+  // void questionCreated(Question );
+    void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions, String email) throws RemoteException;
 
   // void questionCreated(Question );
 }
