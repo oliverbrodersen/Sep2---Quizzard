@@ -52,7 +52,6 @@ public class QuestionVM
 
     Quiz quiz = quizConverter.getQuiz();
     Question quizQuestion = quiz.getQuestion(quiz.getQuestionNumber());
-    System.out.println(quiz.getQuestionNumber());
     List<Answer> answersList = quizQuestion.getAnswers();
     int answers = answersList.size();
 

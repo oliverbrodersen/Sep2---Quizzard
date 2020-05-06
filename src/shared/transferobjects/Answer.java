@@ -18,8 +18,6 @@ public class Answer implements Serializable
     this.answerID = answerID;
   }
 
-
-
   // Getters
   public String getAnswer() {
     return answer;

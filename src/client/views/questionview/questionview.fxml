@@ -59,7 +59,7 @@
                               <Font name="Consolas" size="58.0" />
                            </font>
                            <graphic>
-                              <Text fx:id="answer1Text" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: in;" textAlignment="CENTER" wrappingWidth="199.18226093053818">
+                              <Text fx:id="answer1Text" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="199.18226093053818">
                                  <font>
                                     <Font size="16.0" />
                                  </font>

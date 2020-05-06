@@ -224,8 +224,7 @@ public class RMIClient implements Client, ClientCallback
     support.firePropertyChange("endQuiz", null, null);
   }
 
-  @Override public void addListener(String eventName,
-      PropertyChangeListener listener)
+  @Override public void addListener(String eventName, PropertyChangeListener listener)
   {
     support.addPropertyChangeListener(eventName, listener);
   }
@@ -280,8 +279,7 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public void addLobby(Lobby lobby, ClientCallback client)
-  {
+  @Override public void addLobby(Lobby lobby, ClientCallback client){
     try
     {
       server.addLobby(lobby, client);
@@ -297,13 +295,11 @@ public class RMIClient implements Client, ClientCallback
     return null;
   }
 
-  @Override public List<Participant> getParticipants()
-  {
+  @Override public List<Participant> getParticipants(){
     return getParticipants(pinFromServer);
   }
 
-  @Override public Lobby getLobby(int pin)
-  {
+  @Override public Lobby getLobby(int pin){
     try
     {
       return server.getLobby(pin);
