@@ -147,6 +147,12 @@ public class QuizConverterManager implements QuizConverter
     client.questionCreated(question);
   }
 
+  @Override public void createQuiz(String name, String subject,
+      String difficulty, ArrayList<Question> questions)
+  {
+
+  }
+
   @Override public void kickPlayer(Participant participant)
   {
     client.kickPlayer(participant);
