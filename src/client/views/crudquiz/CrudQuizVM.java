@@ -30,10 +30,7 @@ public class CrudQuizVM {
     {
         if (nameField.get().isEmpty() || subjectField.get().isEmpty() || difficulty.get().isEmpty() || questionArrayList.isEmpty())
             System.out.println("Empty error");
-
        quizConverter.createQuiz(nameField.get(), subjectField.get(), difficulty.get(), questionArrayList);
-        System.out.println(nameField.get() + subjectField.get() + difficulty.get());
-        System.out.println(questionArrayList.toString());
     }
 
     public StringProperty nameFieldProperty()
@@ -66,5 +63,15 @@ public class CrudQuizVM {
         if (!questionArrayList.contains(newValue))
             questionArrayList.add(newValue);
         return getQuestions();
+    }
+
+    public void delete(Question questionSelected) {
+        questionObservableList.remove(questionSelected);
+        questionArrayList.remove(questionSelected);
+    }
+
+    public void back() {
+        questionArrayList = new ArrayList<>();
+        questionObservableList = null;
     }
 }

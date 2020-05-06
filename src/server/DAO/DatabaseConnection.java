@@ -44,6 +44,7 @@ public class DatabaseConnection {
         try {
             stmt = c.createStatement();
             stmt.executeUpdate(sql);
+            c.commit();
             closeStatement();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

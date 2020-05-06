@@ -45,7 +45,10 @@ public class CrudQuestionVC implements ViewController {
 
     @Override
     public void reset() {
-
+        questionArea.setText(null);
+        answerArea.setText(null);
+        correctCheckBox.setSelected(false);
+        timeField.setText(null);
     }
 
     public void onSubmitAnswerPressed(ActionEvent actionEvent) {
@@ -58,24 +61,19 @@ public class CrudQuestionVC implements ViewController {
 
     public void onBackPressed(ActionEvent actionEvent) {
         vm.backPressed();
-        questionArea.setText(null);
-        answerArea.setText(null);
-        correctCheckBox.setSelected(false);
-
+        reset();
         vh.openView("crudquiz");
 
     }
 
     public void OnDeleteAnswerPressed(ActionEvent actionEvent) {
+        Answer selectedAnswer = answersTable.getSelectionModel().getSelectedItem();
+        observableAnswers.remove(selectedAnswer);
     }
 
     public void onSubmitQuestionPressed(ActionEvent actionEvent) {
         vm.submitQuestion(observableAnswers);
-
-        questionArea.setText(null);
-        answerArea.setText(null);
-        correctCheckBox.setSelected(false);
-
+        reset();
         vh.openView("crudquiz");
     }
 }
