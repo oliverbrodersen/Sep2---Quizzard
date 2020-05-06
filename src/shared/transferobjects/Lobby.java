@@ -116,11 +116,22 @@ public class Lobby implements Serializable
   // Logic
   public void removeParticipant(Participant participant)
   {
-    participants.remove(participant);
+    for (int i = 0; i < participants.size() ; i++)
+    {
+      if(participants.get(i).getName().equals(participant.getName())){
+        participants.remove(i);
+        break;
+      }
+    }
   }
 
   public void submitAnswer(int answer){
     int currentQ = quiz.getQuestionNumber();
     answers.get(currentQ).set(answer, answers.get(currentQ).get(answer) + 1);
+  }
+
+  public void removeClient(ClientCallback rmiClient)
+  {
+    clientList.remove(rmiClient);
   }
 }

@@ -1,5 +1,9 @@
 package shared.transferobjects;
 
+import client.networking.Client;
+import client.networking.RMIClient;
+import shared.networking.ClientCallback;
+
 import java.io.Serializable;
 
 public class Participant implements Serializable
@@ -9,6 +13,7 @@ public class Participant implements Serializable
   private String name;
   private int score, userID;
   private UserID userClass;
+  private ClientCallback clientCallback;
 
   public Participant(String name) {
     this.name = name;
@@ -35,6 +40,11 @@ public class Participant implements Serializable
     return userClass;
   }
 
+  public ClientCallback getClientCallback()
+  {
+    return clientCallback;
+  }
+
   // Setters
   public void setName(String name) {
     this.name = name;
@@ -52,5 +62,10 @@ public class Participant implements Serializable
   {
     return "Participant{" + "name='" + name + '\'' + ", score=" + score
         + ", userID=" + userID + ", userClass=" + userClass + '}';
+  }
+
+  public void setClientCallback(ClientCallback clientCallback)
+  {
+    this.clientCallback = clientCallback;
   }
 }

@@ -38,4 +38,5 @@ public interface QuizConverter extends Subject
     int getNextQuestionID();
 
     void questionCreated(Question question);
+  void kickPlayer(Participant participant);
 }

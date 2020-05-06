@@ -26,7 +26,7 @@ public class RMIServerImpl implements RMIServer
   private QuestionData questionData;
   private DatabaseConnection DBConn;
   private List<Quiz> quizzes;
-//  private List<Question> questionsCreated = new ArrayList<>();
+  //  private List<Question> questionsCreated = new ArrayList<>();
 
   public RMIServerImpl(QuizManager quizManager)
   {
@@ -104,7 +104,8 @@ public class RMIServerImpl implements RMIServer
 
   @Override public void endQuestion(int pin) throws RemoteException
   {
-    ArrayList<ClientCallback> clients = (ArrayList<ClientCallback>) getLobbyByPin(pin).getClientList();
+    ArrayList<ClientCallback> clients = (ArrayList<ClientCallback>) getLobbyByPin(
+        pin).getClientList();
     for (int i = 0; i < clients.size(); i++)
     {
       clients.get(i).endQuestionCall();
@@ -148,26 +149,48 @@ public class RMIServerImpl implements RMIServer
     return !(getLobbyByPin(Integer.parseInt(pin)) == null);
   }
 
-  @Override
-  public int getNextQuestionID() {
+  @Override public int getNextQuestionID()
+  {
     int questionID = -1;
     if (questionData == null)
     {
       questionData = new QuestionHandler(DBConn);
     }
-    try {
+    try
+    {
       questionID = questionData.getNextQuestionID();
-    } catch (SQLException throwables) {
+    }
+    catch (SQLException throwables)
+    {
       throwables.printStackTrace();
     }
     return questionID;
   }
 
-//  @Override
-//  public void questionCreated(Question question) {
-//    questionsCreated.add(question);
-//
-//  }
+  @Override public void kickPlayer(Participant participant, int pinFromServer) throws RemoteException
+  {
+    getLobbyByPin(pinFromServer).removeParticipant(participant);
+
+    participant.getClientCallback().kickPlayer();
+
+    getLobbyByPin(pinFromServer).removeClient(participant.getClientCallback());
+    ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(
+        pinFromServer).getClientList();
+
+    getLobbyByPin(pinFromServer).getHostCallBack()
+        .getParticipants(pinFromServer);
+
+    for (int i = 0; i < clientList.size(); i++)
+    {
+      clientList.get(i).getParticipants(pinFromServer);
+    }
+  }
+
+  //  @Override
+  //  public void questionCreated(Question question) {
+  //    questionsCreated.add(question);
+  //
+  //  }
 
   @Override public Quiz getQuiz(int quizID, String email)
   {
@@ -241,17 +264,20 @@ public class RMIServerImpl implements RMIServer
 
   @Override public void getNextQuestion(int pin) throws RemoteException
   {
-    ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(pin).getClientList();
+    ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(
+        pin).getClientList();
     int num = getLobbyByPin(pin).getQuiz().nextQuestion();
     System.out.println("Question number:" + num);
-    if (num != -1){
+    if (num != -1)
+    {
       getLobbyByPin(pin).getHostCallBack().returnNextQuestion();
       for (int i = 0; i < clientList.size(); i++)
       {
         clientList.get(i).returnNextQuestion();
       }
     }
-    else{
+    else
+    {
       getLobbyByPin(pin).getHostCallBack().endQuiz();
       for (int i = 0; i < clientList.size(); i++)
       {
@@ -265,11 +291,12 @@ public class RMIServerImpl implements RMIServer
     return null;
   }
 
+  PropertyChangeListener listener = null;
+  PropertyChangeListener finalListener = listener;
+
   @Override public void registerClient(int pin, ClientCallback client,
       UserID userID) throws RemoteException
   {
-    PropertyChangeListener listener = null;
-    PropertyChangeListener finalListener = listener;
 
     listener = evt -> {
       try
@@ -283,7 +310,8 @@ public class RMIServerImpl implements RMIServer
       }
     };
     quizManager.addListener("Lobby", listener);
-    if (userID == UserID.PARTICIPANT){
+    if (userID == UserID.PARTICIPANT)
+    {
       ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(
           pin).getClientList();
       getLobbyByPin(pin).getHostCallBack().getParticipants(pin);
@@ -296,10 +324,6 @@ public class RMIServerImpl implements RMIServer
     else if (userID == UserID.HOST)
       getLobbyByPin(pin).setHostCallBack(client);
     System.out.println("Client successfully connected.");
-  }
-
-  @Override public void removeClient(ClientCallback client)
-  {
   }
 
 }

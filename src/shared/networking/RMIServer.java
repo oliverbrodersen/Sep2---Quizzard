@@ -1,5 +1,6 @@
 package shared.networking;
 
+import client.networking.RMIClient;
 import shared.transferobjects.*;
 
 import java.rmi.AlreadyBoundException;
@@ -16,7 +17,6 @@ public interface RMIServer extends Remote
   UserID getUserID() throws RemoteException;
 
   void registerClient(int pin, ClientCallback client, UserID userID) throws RemoteException;
-  void removeClient(ClientCallback client) throws RemoteException;
 
   List<Quiz> getQuizzes(String email)  throws RemoteException;
   UserClass getUser(String email)  throws RemoteException;;
@@ -35,6 +35,7 @@ public interface RMIServer extends Remote
   boolean verifyPin(String pin) throws RemoteException;
 
     int getNextQuestionID() throws RemoteException;
+  void kickPlayer(Participant participant, int pinFromServer) throws RemoteException;
 
-    // void questionCreated(Question );
+  // void questionCreated(Question );
 }
