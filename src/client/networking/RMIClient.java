@@ -136,6 +136,18 @@ public class RMIClient implements Client, ClientCallback
     return participant;
   }
 
+  @Override public ArrayList<Integer> getAnswers(int question)
+  {
+    try
+    {
+      return server.getAnswers(pinFromServer, question);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not get answers for question: " + question);
+    }
+  }
+
   @Override public UserID getUserClass()
   {
     return null;

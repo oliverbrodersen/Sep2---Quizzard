@@ -3,6 +3,7 @@ package client.model;
 import shared.transferobjects.*;
 import shared.util.Subject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface QuizConverter extends Subject
@@ -20,6 +21,7 @@ public interface QuizConverter extends Subject
   int getPin();
   Quiz getQuiz();
   Participant getPartisipant();
+  ArrayList<Integer> getAnswers(int question);
 
   void setUser(String email);
   void setPin(int pin);

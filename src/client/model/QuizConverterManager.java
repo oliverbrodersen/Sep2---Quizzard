@@ -6,6 +6,7 @@ import shared.transferobjects.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuizConverterManager implements QuizConverter
@@ -78,6 +79,10 @@ public class QuizConverterManager implements QuizConverter
     return client.getParticipant();
   }
 
+  @Override public ArrayList<Integer> getAnswers(int question)
+  {
+    return client.getAnswers(question);
+  }
 
   @Override public void setUser(String email)
   {

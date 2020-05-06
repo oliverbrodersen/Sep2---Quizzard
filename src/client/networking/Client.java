@@ -4,6 +4,7 @@ import shared.transferobjects.*;
 import shared.util.Subject;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Client extends Subject
@@ -24,6 +25,7 @@ public interface Client extends Subject
   int getPin();
   void getNextQuestion();
   Participant getParticipant();
+  ArrayList<Integer> getAnswers(int question);
 
   void setPin(int pin);
   void newParticipant(int pin, Participant participant);
