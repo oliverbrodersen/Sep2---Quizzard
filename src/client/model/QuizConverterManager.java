@@ -74,11 +74,6 @@ public class QuizConverterManager implements QuizConverter
     return client.getQuiz();
   }
 
-  @Override
-  public Participant getPartisipant() {
-    return null;
-  }
-
   @Override public Participant getParticipant()
   {
     return client.getParticipant();
