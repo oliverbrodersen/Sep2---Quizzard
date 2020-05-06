@@ -20,6 +20,8 @@ public interface QuizConverter extends Subject
   UserClass getUser();
   int getPin();
   Quiz getQuiz();
+  Participant getPartisipant();
+  ArrayList<Integer> getAnswers(int question);
   Participant getParticipant();
 
   void setUser(String email);

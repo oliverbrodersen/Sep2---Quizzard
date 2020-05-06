@@ -79,6 +79,10 @@ public class QuizConverterManager implements QuizConverter
     return client.getParticipant();
   }
 
+  @Override public ArrayList<Integer> getAnswers(int question)
+  {
+    return client.getAnswers(question);
+  }
 
   @Override public void setUser(String email)
   {

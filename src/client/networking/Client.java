@@ -25,6 +25,7 @@ public interface Client extends Subject
   int getPin();
   void getNextQuestion();
   Participant getParticipant();
+  ArrayList<Integer> getAnswers(int question);
 
   void setPin(int pin);
   void newParticipant(int pin, Participant participant);
