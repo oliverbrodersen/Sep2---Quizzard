@@ -20,6 +20,7 @@ public class CrudQuestionVC implements ViewController {
     @FXML private TextArea questionArea, answerArea;
     @FXML private TextField timeField;
     @FXML private CheckBox correctCheckBox;
+    @FXML private Label errorLabel;
 
     @FXML
     private TableView<Answer> answersTable;
@@ -32,6 +33,8 @@ public class CrudQuestionVC implements ViewController {
     public void init(ViewHandler vh, ViewModelFactory vmf) {
         this.vh = vh;
         this.vm = vmf.getCrudQuestionVM();
+        errorLabel.setVisible(false);
+
 
         questionArea.textProperty().bindBidirectional(vm.questionAreaProperty());
         answerArea.textProperty().bindBidirectional(vm.answerAreaProperty());
@@ -56,6 +59,11 @@ public class CrudQuestionVC implements ViewController {
         if (answer != null)
         {
             observableAnswers.add(answer);
+            errorLabel.setVisible(false);
+        }
+        else {
+            errorLabel.setVisible(true);
+            errorLabel.setText("Cannot submit empty answer.");
         }
     }
 
@@ -72,8 +80,16 @@ public class CrudQuestionVC implements ViewController {
     }
 
     public void onSubmitQuestionPressed(ActionEvent actionEvent) {
-        vm.submitQuestion(observableAnswers);
-        reset();
-        vh.openView("crudquiz");
+        if (questionArea.getText() != null && !answersTable.getItems().isEmpty() && timeField.getText() != null)
+        {
+            errorLabel.setVisible(false);
+            vm.submitQuestion(observableAnswers);
+            reset();
+            vh.openView("crudquiz");
+        }
+        else {
+            errorLabel.setVisible(true);
+            errorLabel.setText("Cannot submit empty question.");
+        }
     }
 }

@@ -206,7 +206,7 @@ public class RMIServerImpl implements RMIServer
     Quiz quiz = null;
     try {
       quiz = new Quiz(name, subject, questions, quizData.getNextQuizID() + 1);
-      quizData.storeQuiz(quiz, difficulty, "Host@Host.com");
+      quizData.storeQuiz(quiz, difficulty, email.toLowerCase());
     } catch (SQLException e) {
       e.printStackTrace();
     }

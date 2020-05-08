@@ -4,7 +4,6 @@ import client.model.QuizConverter;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Button;
 import shared.networking.ClientCallback;
 import shared.transferobjects.Lobby;
 import shared.transferobjects.Quiz;
@@ -30,7 +29,6 @@ public class HostMainVM {
         createButton = new SimpleBooleanProperty();
         editButton = new SimpleBooleanProperty();
         hostButton = new SimpleBooleanProperty();
-        System.out.println(quizConverter.getUser().getUserID());
         if (quizConverter.getUser().getUserID() == UserID.MODERATOR)
             isModerator = true;
         else if (quizConverter.getUser().getUserID() == UserID.HOST)
