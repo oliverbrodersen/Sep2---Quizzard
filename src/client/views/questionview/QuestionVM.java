@@ -17,6 +17,7 @@ public class QuestionVM
   private SimpleStringProperty numberOfQuestions, quizName, timeLeft, question;
   private Button answer1, answer2, answer3, answer4;
   private Timer timer;
+  private boolean quizOver = false;
   private int interval;
 
   public QuestionVM(QuizConverter quizConverter)
@@ -41,13 +42,10 @@ public class QuestionVM
   public void setup(Button answer1Button, Button answer2Button, Button answer3Button, Button answer4Button, Button endQuestionPressed, Text answer1Text,
       Text answer2Text, Text answer3Text, Text answer4Text)
   {
-    if (answer1 == null)
-    {
-      answer1 = answer1Button;
-      answer2 = answer2Button;
-      answer3 = answer3Button;
-      answer4 = answer4Button;
-    }
+    answer1 = answer1Button;
+    answer2 = answer2Button;
+    answer3 = answer3Button;
+    answer4 = answer4Button;
 
     Quiz quiz = quizConverter.getQuiz();
     Question quizQuestion = quiz.getQuestion(quiz.getQuestionNumber());
@@ -124,6 +122,7 @@ public class QuestionVM
 
   public void removeAnswers(boolean t)
   {
+    System.out.println("Removed answers");
     answer1.setVisible(false);
     answer2.setVisible(false);
     answer3.setVisible(false);
@@ -163,9 +162,29 @@ public class QuestionVM
     quizConverter.addListener(propertyChange, propertyChange1);
   }
 
+  public boolean isQuizOver()
+  {
+    return quizOver;
+  }
+
+  public void setQuizOver(boolean quizOver)
+  {
+    this.quizOver = quizOver;
+  }
+
   public void endQuiz()
   {
+    quizOver = true;
     if (quizConverter.getUser() == null)
       question.set("Score: " + quizConverter.getParticipant().getScore());
+  }
+  public UserClass getUser(){
+    return quizConverter.getUser();
+  }
+
+  public void removeListener(String eventName,
+      PropertyChangeListener listener)
+  {
+    quizConverter.removeListener(eventName, listener);
   }
 }

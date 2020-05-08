@@ -271,6 +271,7 @@ public class RMIClient implements Client, ClientCallback
 
   @Override public void addListener(String eventName, PropertyChangeListener listener)
   {
+
     support.addPropertyChangeListener(eventName, listener);
   }
 

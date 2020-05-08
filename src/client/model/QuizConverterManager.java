@@ -177,6 +177,6 @@ public class QuizConverterManager implements QuizConverter
   @Override public void removeListener(String eventName,
       PropertyChangeListener listener)
   {
-
+    client.removeListener(eventName,listener);
   }
 }

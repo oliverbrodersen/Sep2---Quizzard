@@ -30,24 +30,23 @@ public class MainVC implements ViewController
   {
     this.vh = vh;
     this.vm = vmf.getMainVM();
-    //try{
-    //  this.vm = vmf.getMainVM();
-    //} catch (RemoteException | NotBoundException e) {
-    //  System.out.println("Caught from view");
-    //}
 
     usernameField.textProperty().bindBidirectional(vm.usernameProperty());
     passwordField.textProperty().bindBidirectional(vm.passwordProperty());
     quizIDField.textProperty().bindBidirectional(vm.quizIDProperty());
     nickField.textProperty().bindBidirectional(vm.nickProperty());
-
     errorJoinLabel.textProperty().bindBidirectional(vm.joinErrorProperty());
     errorLoginLabel.textProperty().bindBidirectional(vm.loginErrorProperty());
 
+    reset();
   }
 
   @Override public void reset()
   {
+    quizIDField.setText("");
+    usernameField.setText("");
+    nickField.setText("");
+    passwordField.setText("");
   }
 
   @FXML public void onJoinPressed()

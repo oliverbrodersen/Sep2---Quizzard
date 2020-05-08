@@ -54,6 +54,7 @@ public class LobbyVC implements ViewController {
         Platform.runLater(new Runnable(){
             @Override public void run()
             {
+                removeListeners();
                 vh.openView("login");
             }
         });
@@ -72,6 +73,14 @@ public class LobbyVC implements ViewController {
     @Override
     public void reset() {
 
+    }
+
+    private void removeListeners(){
+        System.out.println("Removing listeners");
+
+        vm.removeListener("onNewConnected", this::updateParticipantList);
+        vm.removeListener("onQuizStarted", this::startQuizListener);
+        vm.removeListener("onKick", this::playerKicked);
     }
 
     public void updateParticipantList(PropertyChangeEvent evt)
