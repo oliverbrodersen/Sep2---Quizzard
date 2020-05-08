@@ -1,11 +1,10 @@
 package client.views.hostmain;
 
 import client.model.QuizConverter;
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import shared.networking.ClientCallback;
 import shared.transferobjects.Lobby;
 import shared.transferobjects.Quiz;
@@ -20,12 +19,29 @@ public class HostMainVM {
     private ObservableList<Quiz> quizzes;
     private QuizConverter quizConverter;
     private StringProperty nameText, emailText, userClassText;
+    private BooleanProperty createButton, editButton, hostButton;
+    private boolean isModerator;
 
     public HostMainVM(QuizConverter quizConverter) {
         this.quizConverter = quizConverter;
         nameText = new SimpleStringProperty();
         emailText = new SimpleStringProperty();
         userClassText = new SimpleStringProperty();
+        createButton = new SimpleBooleanProperty();
+        editButton = new SimpleBooleanProperty();
+        hostButton = new SimpleBooleanProperty();
+        System.out.println(quizConverter.getUser().getUserID());
+        if (quizConverter.getUser().getUserID() == UserID.MODERATOR)
+            isModerator = true;
+        else if (quizConverter.getUser().getUserID() == UserID.HOST)
+            isModerator = false;
+
+        if (!isModerator)
+        {
+            createButton.setValue(true);
+            editButton.setValue(true);
+            hostButton.setValue(true);
+        }
     }
 
     public void exit() {
@@ -73,8 +89,21 @@ public class HostMainVM {
         return userClassText;
     }
 
+
     public void deleteQuiz(Quiz quiz) {
         quizConverter.deleteQuiz(quiz);
+    }
+
+    public Property<Boolean> createButtonProperty() {
+        return createButton;
+    }
+
+    public Property<Boolean> editButtonProperty() {
+        return editButton;
+    }
+
+    public Property<Boolean> hostButtonProperty() {
+        return hostButton;
     }
 }
 
