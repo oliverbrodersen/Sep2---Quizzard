@@ -43,12 +43,12 @@
             </TableView>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onCreatePressed" text="Create">
+                  <Button fx:id="createButton" mnemonicParsing="false" onAction="#onCreatePressed" text="Create">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#onEditPressed" prefHeight="25.0" prefWidth="51.0" text="Edit">
+                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditPressed" prefHeight="25.0" prefWidth="51.0" text="Edit">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
@@ -58,7 +58,7 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#onHostPressed" prefHeight="25.0" prefWidth="51.0" text="Host">
+                  <Button fx:id="hostButton" mnemonicParsing="false" onAction="#onHostPressed" prefHeight="25.0" prefWidth="51.0" text="Host">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>

@@ -6,6 +6,7 @@ import client.views.ViewController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,6 +22,7 @@ public class HostMainVC implements ViewController {
     @FXML private Text emailText;
     @FXML private Text nameText;
     @FXML private Text userTypeText;
+    @FXML private Button createButton, editButton, hostButton;
 
     @FXML private TableView<Quiz> hostQuizTable;
     @FXML private TableColumn<String, Quiz> quizTitleColumn;
@@ -33,6 +35,9 @@ public class HostMainVC implements ViewController {
         this.vh = vh;
         this.vm = vmf.getHostMainVM();
 
+        createButton.visibleProperty().bindBidirectional(vm.createButtonProperty());
+        editButton.visibleProperty().bindBidirectional(vm.editButtonProperty());
+        hostButton.visibleProperty().bindBidirectional(vm.hostButtonProperty());
         emailText.textProperty().bindBidirectional(vm.emailTextProperty());
         nameText.textProperty().bindBidirectional(vm.nameTextProperty());
         userTypeText.textProperty().bindBidirectional(vm.userClassTextProperty());

@@ -12,7 +12,7 @@ public class Moderator implements UserClass
   private UserID userID;
   private ClientCallback client;
 
-  public Moderator(String name, String password, String email) {
+  public Moderator(String email, String name, String password) {
     this.name = name;
     this.password = password;
     this.email = email;

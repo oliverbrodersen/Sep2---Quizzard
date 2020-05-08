@@ -3,6 +3,7 @@ package server.DAO;
 import shared.transferobjects.Question;
 import shared.transferobjects.Quiz;
 
+import java.io.Reader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -84,14 +85,39 @@ public class QuizHandler implements QuizData{
         List<Quiz> quizzes = new ArrayList<>();
         List<Question> questions = new ArrayList<>();
         Quiz quiz = null;
-        ResultSet rs = DBConn.retrieveData("SELECT * FROM \"Quizzard_Database\".Quiz WHERE LOWER(Email) = LOWER('" + email + "');");
+        //Check to see what userClass the email belongs to
+        ResultSet rsCheck = DBConn.retrieveData("SELECT UserClass FROM \"Quizzard_Database\".Users WHERE LOWER(Email) = LOWER('"
+                + email + "');");
+        while (rsCheck.next())
+        {
+            // output if userClass is Moderator:
+            if (rsCheck.getString("UserClass").equalsIgnoreCase("M"))
+            {
+                ResultSet rs = DBConn.retrieveData("SELECT * FROM \"Quizzard_Database\".Quiz");
 
-        while ( rs.next() ) {
-            String quizName = rs.getString("QuizName");
-            String quizSubject = rs.getString("Subject");
-            int quizID = Integer.parseInt(rs.getString("QuizID"));
-            quiz = new Quiz(quizName, quizSubject, questionData.retrieveQuestion(quizID), quizID);
-            quizzes.add(quiz);
+                while ( rs.next() ) {
+                    String quizName = rs.getString("QuizName");
+                    String quizSubject = rs.getString("Subject");
+                    int quizID = Integer.parseInt(rs.getString("QuizID"));
+                    quiz = new Quiz(quizName, quizSubject, questionData.retrieveQuestion(quizID), quizID);
+                    quizzes.add(quiz);
+                }
+            }
+
+            // output if userClass is Host:
+            else if (rsCheck.getString("UserClass").equalsIgnoreCase("H"))
+            {
+                ResultSet rs = DBConn.retrieveData("SELECT * FROM \"Quizzard_Database\".Quiz WHERE LOWER(Email) = LOWER('" + email + "');");
+
+                while ( rs.next() ) {
+                    String quizName = rs.getString("QuizName");
+                    String quizSubject = rs.getString("Subject");
+                    int quizID = Integer.parseInt(rs.getString("QuizID"));
+                    quiz = new Quiz(quizName, quizSubject, questionData.retrieveQuestion(quizID), quizID);
+                    quizzes.add(quiz);
+                }
+            }
+
         }
         return quizzes;
     }
