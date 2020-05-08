@@ -306,7 +306,6 @@ public class RMIServerImpl implements RMIServer
     ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(
         pin).getClientList();
     int num = getLobbyByPin(pin).getQuiz().nextQuestion();
-    System.out.println("Question number:" + num);
     if (num != -1)
     {
       getLobbyByPin(pin).getHostCallBack().returnNextQuestion();
@@ -314,14 +313,21 @@ public class RMIServerImpl implements RMIServer
       {
         clientList.get(i).returnNextQuestion();
       }
+
+      if (getLobbyByPin(pin).isOver()){
+        System.out.println("Quiz: " + getLobbyByPin(pin).getQuiz().getTitle() + " has now ended.");
+        lobbyList.remove(getLobbyByPin(pin));
+      }
     }
     else
     {
+      getLobbyByPin(pin).setOver(true);
       getLobbyByPin(pin).getHostCallBack().endQuiz();
       for (int i = 0; i < clientList.size(); i++)
       {
         clientList.get(i).endQuiz();
       }
+
     }
   }
 

@@ -18,6 +18,7 @@ public class Lobby implements Serializable
   private ArrayList<ArrayList<Integer>> answers;
   private List<ClientCallback> clientList;
   private ClientCallback hostCallBack;
+  private boolean isOver = false;
 
   public Lobby(Quiz quiz, UserClass host) {
     this.quiz = quiz;
@@ -38,6 +39,12 @@ public class Lobby implements Serializable
 
 
   // getters
+
+  public boolean isOver()
+  {
+    return isOver;
+  }
+
   public int getPin() {
     return pin;
   }
@@ -84,6 +91,12 @@ public class Lobby implements Serializable
   }
 
   // Setters
+
+  public void setOver(boolean over)
+  {
+    isOver = over;
+  }
+
   public void setPin(int pin) {
     this.pin = pin;
   }

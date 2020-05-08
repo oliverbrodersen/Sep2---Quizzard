@@ -3,6 +3,7 @@ package client.views.questionview;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -26,10 +27,6 @@ public class QuestionVC implements ViewController {
     quizNameText.textProperty().bindBidirectional(vm.quizNameProperty());
     questionText.textProperty().bindBidirectional(vm.questionProperty());
     timeLeftText.textProperty().bindBidirectional(vm.timeLeftProperty());
-    //answer1Text.textProperty().bindBidirectional(vm.answer1TextProperty());
-    //answer2Text.textProperty().bindBidirectional(vm.answer2TextProperty());
-    //answer3Text.textProperty().bindBidirectional(vm.answer3TextProperty());
-    //answer4Text.textProperty().bindBidirectional(vm.answer4TextProperty());
     vm.setup(answer1Button, answer2Button, answer3Button, answer4Button, endQuestionPressed, answer1Text, answer2Text, answer3Text, answer4Text);
   }
 
@@ -43,8 +40,27 @@ public class QuestionVC implements ViewController {
   }
 
   public void onNextQuestion(PropertyChangeEvent evt){
-    reset();
-    vm.setup(answer1Button, answer2Button, answer3Button, answer4Button, endQuestionPressed, answer1Text, answer2Text, answer3Text, answer4Text);
+    if (!vm.isQuizOver())
+    {
+      reset();
+      vm.setup(answer1Button, answer2Button, answer3Button, answer4Button,
+          endQuestionPressed, answer1Text, answer2Text, answer3Text, answer4Text);
+    }
+    else{
+      vm.removeListener("endQuestion", this::removeAnswers);
+      vm.removeListener("endQuiz", this::endQuiz);
+      vm.removeListener("onNextQuestion", this::onNextQuestion);
+
+      Platform.runLater(new Runnable(){
+        @Override public void run()
+        {
+          if (vm.getUser() == null)
+            vh.openView("login");
+          else
+            vh.openView("hostmain");
+        }
+      });
+    }
   }
   @Override
   public void reset() {

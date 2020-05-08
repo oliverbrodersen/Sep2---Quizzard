@@ -26,14 +26,7 @@ public class MainVM {
     nick = new SimpleStringProperty();
     loginError = new SimpleStringProperty();
     joinError = new SimpleStringProperty();
-    quizConverter.addListener("OnJoin", this::onJoin);
   }
-
-  private void onJoin(PropertyChangeEvent evt) {
-    participants.add((Participant) evt.getNewValue());
-  }
-
-
 
   public String getUsername() {
     return username.get();

@@ -115,4 +115,5 @@ public class LobbyVM {
     {
         quizConverter.kickPlayer(participant);
     }
+
 }
