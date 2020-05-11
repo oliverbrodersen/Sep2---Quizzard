@@ -49,9 +49,11 @@ public class CrudQuestionVM {
             String answerID = "";
             answerID = answerNumber + Integer.toString(correctQuestionID);
 
-            Answer answerToSubmit = new Answer(answerArea.get(), correctCheckBox.get(), answerID);
-            answerNumber++;
-            return answerToSubmit;
+            if (answerArea.get() != null) {
+                Answer answerToSubmit = new Answer(answerArea.get(), correctCheckBox.get(), answerID);
+                answerNumber++;
+                return answerToSubmit;
+            }
         }
         else {
             System.out.println("too many answers");

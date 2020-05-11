@@ -29,7 +29,7 @@ public class MainVM {
   }
 
   public String getUsername() {
-    return username.get();
+    return username.get().toLowerCase();
   }
   public String getNick() {
     return nick.get();
@@ -76,11 +76,11 @@ public class MainVM {
   StringProperty nickProperty() { return nick; }
 
   public void setUser(){
-    quizConverter.setUser(username.get());
+    quizConverter.setUser(getUsername());
   }
 
   public boolean CheckLogin() {
-    return quizConverter.verifyLogin(username.get());
+    return quizConverter.verifyLogin(getUsername());
   }
 
   public boolean checkPin()

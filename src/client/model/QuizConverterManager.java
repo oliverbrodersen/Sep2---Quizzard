@@ -155,7 +155,7 @@ public class QuizConverterManager implements QuizConverter
   @Override public void createQuiz(String name, String subject,
       String difficulty, ArrayList<Question> questions)
   {
-
+    client.createQuiz(name, subject, difficulty, questions, user.getEmail());
   }
 
   @Override public void kickPlayer(Participant participant)
