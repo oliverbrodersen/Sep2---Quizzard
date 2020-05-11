@@ -18,7 +18,8 @@ public interface RMIServer extends Remote
 
   void registerClient(int pin, ClientCallback client, UserID userID) throws RemoteException;
   List<Quiz> getQuizzes(String email)  throws RemoteException;
-  UserClass getUser(String email)  throws RemoteException;;
+  UserClass getUser(String email)  throws RemoteException;
+  Participant getWinner(int pinFromServer) throws RemoteException;
 
   void startServer() throws RemoteException, AlreadyBoundException;
   ArrayList<Participant> getParticipants(int pin)throws RemoteException;
@@ -41,4 +42,5 @@ public interface RMIServer extends Remote
     void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions, String email) throws RemoteException;
 
     void deleteQuiz(Quiz quiz) throws RemoteException;
+  void updateScore(int pin, Participant participant) throws RemoteException;
 }

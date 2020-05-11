@@ -119,6 +119,17 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
+  @Override public void updateScore(int score)
+  {
+    participant.setScore(score);
+
+    try {
+      server.updateScore(pinFromServer, participant);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+  }
+
   @Override public Quiz getQuiz(int quizID, String email)
   {
     try
@@ -174,6 +185,19 @@ public class RMIClient implements Client, ClientCallback
     {
       throw new RuntimeException("Could not get answers for question: " + question);
     }
+  }
+
+  @Override public Participant getWinner()
+  {
+    try
+    {
+      return server.getWinner(pinFromServer);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   @Override public UserID getUserClass()

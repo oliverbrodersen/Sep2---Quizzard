@@ -225,6 +225,11 @@ public class RMIServerImpl implements RMIServer
     }
   }
 
+  @Override public void updateScore(int pin, Participant participant) throws RemoteException
+  {
+    getLobbyByPin(pin).getParticipant(participant.getName()).setScore(participant.getScore());
+  }
+
   //  @Override
 //  public void questionCreated(Question question) {
 //    questionsCreated.add(question);
@@ -282,6 +287,19 @@ public class RMIServerImpl implements RMIServer
       throwables.printStackTrace();
     }
     return null;
+  }
+
+  @Override public Participant getWinner(int pinFromServer)
+      throws RemoteException
+  {
+    ArrayList<Participant> participants = (ArrayList<Participant>) getLobbyByPin(pinFromServer).getParticipants();
+    Participant winner = participants.get(0);
+    for (int i = 0; i < participants.size(); i++)
+    {
+      if (participants.get(i).getScore() > winner.getScore())
+        winner = participants.get(i);
+    }
+    return winner;
   }
 
   @Override public void startQuiz(int pin, int quizID, String email)

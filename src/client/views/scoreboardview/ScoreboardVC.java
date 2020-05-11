@@ -41,6 +41,9 @@ public class ScoreboardVC implements ViewController {
     {
       vh.openView("questionview");
     }
+    else{
+      questionText.setText(vm.getWinner());
+    }
   }
 
   @Override
