@@ -79,6 +79,11 @@ public class QuizConverterManager implements QuizConverter
     return client.getParticipant();
   }
 
+  @Override public Participant getWinner()
+  {
+    return client.getWinner();
+  }
+
   @Override public ArrayList<Integer> getAnswers(int question)
   {
     return client.getAnswers(question);
@@ -156,6 +161,11 @@ public class QuizConverterManager implements QuizConverter
   @Override public void kickPlayer(Participant participant)
   {
     client.kickPlayer(participant);
+  }
+
+  @Override public void updateScore(int score)
+  {
+    client.updateScore(score);
   }
 
   @Override

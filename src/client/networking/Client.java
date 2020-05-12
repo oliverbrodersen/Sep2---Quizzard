@@ -27,6 +27,7 @@ public interface Client extends Subject
   void getNextQuestion();
   Participant getParticipant();
   ArrayList<Integer> getAnswers(int question);
+  Participant getWinner();
 
   void setPin(int pin);
   void newParticipant(int pin, Participant participant);
@@ -46,4 +47,5 @@ public interface Client extends Subject
     void createQuiz(String name, String subject, String difficulty, ArrayList<Question> questions, String email);
 
     void deleteQuiz(Quiz quiz);
+  void updateScore(int score);
 }

@@ -69,6 +69,15 @@ public class Lobby implements Serializable
     return participants.get(i);
   }
 
+  public Participant getParticipant(String name){
+    for (int i = 0; i < participants.size(); i++)
+    {
+      if (participants.get(i).getName().equals(name))
+        return participants.get(i);
+    }
+    return null;
+  }
+
   public Question getNextQuestion(int i) {
     return quiz.getQuestion(i);
   }

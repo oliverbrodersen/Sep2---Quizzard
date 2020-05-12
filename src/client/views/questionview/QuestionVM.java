@@ -114,8 +114,7 @@ public class QuestionVM
         int score = quizConverter.getParticipant().getScore();
         //Adds time left * 100 to current score
         score += interval * 100;
-        quizConverter.getParticipant().setScore(score);
-        System.out.println(score);
+        quizConverter.updateScore(score);
       }
     }
   }

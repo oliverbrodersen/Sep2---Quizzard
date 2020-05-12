@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import shared.transferobjects.Answer;
+import shared.transferobjects.Participant;
 import shared.transferobjects.Quiz;
 
 import java.util.ArrayList;
@@ -98,5 +99,11 @@ public class ScoreboardVM {
   public SimpleStringProperty questionProperty()
   {
     return question;
+  }
+
+  public String getWinner()
+  {
+    Participant participant = quizConverter.getWinner();
+    return "Winner: " + participant.getName() + " Points: " + participant.getScore();
   }
 }
