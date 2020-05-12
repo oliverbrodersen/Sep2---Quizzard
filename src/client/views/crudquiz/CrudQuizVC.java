@@ -8,10 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.transferobjects.Participant;
 import shared.transferobjects.Question;
@@ -27,6 +24,7 @@ public class CrudQuizVC implements ViewController {
     @FXML private TextField nameField;
     @FXML private TextField subjectField;
     @FXML private ChoiceBox difficultyChoice;
+    @FXML private Label errorLabel;
 
     @FXML private TableView<Question> questionsTable;
     @FXML private TableColumn<String, Question> questionColumn;
@@ -35,6 +33,7 @@ public class CrudQuizVC implements ViewController {
 
     @Override
     public void init(ViewHandler vh, ViewModelFactory vmf) {
+        errorLabel.setVisible(false);
         this.vh = vh;
         this.vm = vmf.getCrudQuizVM();
         vm.addListener("onQuestionCreated", this::updateQuestionsList);
@@ -60,9 +59,18 @@ public class CrudQuizVC implements ViewController {
     }
 
     public void onSubmitPressed(ActionEvent actionEvent) {
-        vm.createQuiz();
-        reset();
-        vm.back();
+        if (nameField.getText() != null && subjectField.getText() != null && difficultyChoice.getSelectionModel().getSelectedItem() != null && questionsTable.getItems() != null)
+        {
+            errorLabel.setVisible(false);
+            vm.createQuiz();
+            reset();
+            vm.back();
+        }
+        else
+        {
+            errorLabel.setVisible(true);
+            errorLabel.setText("Cannot submit quiz with empty stuff");
+        }
     }
 
     public void onDeleteQuestionPressed(ActionEvent actionEvent) {

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -11,8 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.crudquiz.CrudQuizVC">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="600.0">
@@ -81,7 +81,7 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="590.0">
          <children>
-            <Label fx:id="warningLabel" text="Warning in select">
+            <Label fx:id="errorLabel" text="Warning in select">
                <HBox.margin>
                   <Insets right="200.0" />
                </HBox.margin>

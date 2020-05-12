@@ -28,8 +28,6 @@ public class CrudQuizVM {
 
     public void createQuiz()
     {
-        if (nameField.get().isEmpty() || subjectField.get().isEmpty() || difficulty.get().isEmpty() || questionArrayList.isEmpty())
-            System.out.println("Empty error");
        quizConverter.createQuiz(nameField.get(), subjectField.get(), difficulty.get(), questionArrayList);
     }
 
