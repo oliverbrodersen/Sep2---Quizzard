@@ -10,19 +10,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import jdk.dynalink.beans.StaticClass;
 
 import java.io.IOException;
 
 public class ViewHandler {
 
+  private static ViewHandler viewHandler;
   private Stage stage;
   private Scene currentScene;
 
-  private ViewModelFactory vmf;
 
 
-  public ViewHandler(ViewModelFactory vmf) {
-    this.vmf = vmf;
+  public ViewHandler() {
   }
 
   public void start() {
@@ -86,7 +86,14 @@ public class ViewHandler {
     }
 
     ViewController ctrl = loader.getController();
-    ctrl.init(this, vmf);
+    ctrl.init(this, ViewModelFactory.getInstance());
     return root;
+  }
+
+  public static ViewHandler getInstance() {
+    if (viewHandler == null) {
+      viewHandler = new ViewHandler();
+    }
+    return viewHandler;
   }
 }
