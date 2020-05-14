@@ -1,6 +1,7 @@
 package client.views.hostmain;
 
 import client.model.QuizConverter;
+import client.views.ViewModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +14,7 @@ import shared.transferobjects.UserID;
 import java.rmi.RemoteException;
 import java.util.List;
 
-public class HostMainVM {
+public class HostMainVM implements ViewModel {
 
     private ObservableList<Quiz> quizzes;
     private QuizConverter quizConverter;

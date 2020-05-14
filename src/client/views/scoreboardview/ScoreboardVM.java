@@ -1,6 +1,7 @@
 package client.views.scoreboardview;
 
 import client.model.QuizConverter;
+import client.views.ViewModel;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.layout.VBox;
@@ -12,7 +13,7 @@ import shared.transferobjects.Quiz;
 
 import java.util.ArrayList;
 
-public class ScoreboardVM {
+public class ScoreboardVM implements ViewModel {
 
   private QuizConverter quizConverter;
   private SimpleStringProperty a1Text, a2Text, a3Text, a4Text, question;

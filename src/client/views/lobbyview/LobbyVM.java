@@ -1,6 +1,7 @@
 package client.views.lobbyview;
 
 import client.model.QuizConverter;
+import client.views.ViewModel;
 import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,7 +16,7 @@ import shared.transferobjects.UserID;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
-public class LobbyVM {
+public class LobbyVM implements ViewModel {
     private ObservableList<Participant> participants;
     private QuizConverter quizConverter;
     private StringProperty userTypeLabel, pinLabel, playersCountLabel;

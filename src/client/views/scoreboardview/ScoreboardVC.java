@@ -21,7 +21,7 @@ public class ScoreboardVC implements ViewController {
   @Override
   public void init(ViewHandler vh, ViewModelFactory vmf) {
     this.vh = vh;
-    this.vm = vmf.getScoreboardVM();
+    this.vm = (ScoreboardVM) vmf.getVM("scoreboard");
     a1Text.textProperty().bindBidirectional(vm.a1Property());
     a2Text.textProperty().bindBidirectional(vm.a2Property());
     a3Text.textProperty().bindBidirectional(vm.a3Property());

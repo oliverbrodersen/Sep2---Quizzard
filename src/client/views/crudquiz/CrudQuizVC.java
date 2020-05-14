@@ -35,7 +35,7 @@ public class CrudQuizVC implements ViewController {
     public void init(ViewHandler vh, ViewModelFactory vmf) {
         errorLabel.setVisible(false);
         this.vh = vh;
-        this.vm = vmf.getCrudQuizVM();
+        this.vm = (CrudQuizVM) vmf.getVM("crudquiz");
         vm.addListener("onQuestionCreated", this::updateQuestionsList);
         nameField.textProperty().bindBidirectional(vm.nameFieldProperty());
         subjectField.textProperty().bindBidirectional(vm.subjectFieldProperty());

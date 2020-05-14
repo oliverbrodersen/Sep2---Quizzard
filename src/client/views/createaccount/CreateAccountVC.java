@@ -13,7 +13,7 @@ public class CreateAccountVC implements ViewController {
     @Override
     public void init(ViewHandler vh, ViewModelFactory vmf) {
         this.vh = vh;
-        this.vm = vmf.getCreateAccountVM();
+        this.vm = (CreateAccountVM) vmf.getVM("createaccount");
     }
 
     @Override

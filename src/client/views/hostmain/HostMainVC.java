@@ -33,7 +33,7 @@ public class HostMainVC implements ViewController {
     @Override
     public void init(ViewHandler vh, ViewModelFactory vmf) {
         this.vh = vh;
-        this.vm = vmf.getHostMainVM();
+        this.vm = (HostMainVM) vmf.getVM("hostmain");
 
         createButton.visibleProperty().bindBidirectional(vm.createButtonProperty());
         editButton.visibleProperty().bindBidirectional(vm.editButtonProperty());

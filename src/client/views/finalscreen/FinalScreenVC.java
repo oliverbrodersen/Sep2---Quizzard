@@ -12,7 +12,7 @@ public class FinalScreenVC implements ViewController {
     @Override
     public void init(ViewHandler vh, ViewModelFactory vmf) {
         this.vh = vh;
-        this.vm = vmf.getFinalScreenVM();
+        this.vm = (FinalScreenVM) vmf.getVM("finalscreen");
     }
 
     @Override

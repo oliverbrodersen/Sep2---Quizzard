@@ -19,7 +19,7 @@ public class QuestionVC implements ViewController {
   @Override
   public void init(ViewHandler vh, ViewModelFactory vmf) {
     this.vh = vh;
-    this.vm = vmf.getQuestionVM();
+    this.vm = (QuestionVM) vmf.getVM("question");
     vm.addListener("endQuestion", this::removeAnswers);
     vm.addListener("endQuiz", this::endQuiz);
     vm.addListener("onNextQuestion", this::onNextQuestion);

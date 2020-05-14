@@ -35,7 +35,7 @@ public class LobbyVC implements ViewController {
     @Override
     public void init(ViewHandler vh, ViewModelFactory vmf) {
         this.vh = vh;
-        this.vm = vmf.getLobbyVM();
+        this.vm = (LobbyVM) vmf.getVM("lobby");
         vm.addListener("onNewConnected", this::updateParticipantList);
         vm.addListener("onQuizStarted", this::startQuizListener);
         vm.addListener("onKick", this::playerKicked);

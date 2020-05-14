@@ -29,7 +29,7 @@ public class MainVC implements ViewController
   @Override public void init(ViewHandler vh, ViewModelFactory vmf)
   {
     this.vh = vh;
-    this.vm = vmf.getMainVM();
+    this.vm = (MainVM) vmf.getVM("main");
 
     usernameField.textProperty().bindBidirectional(vm.usernameProperty());
     passwordField.textProperty().bindBidirectional(vm.passwordProperty());

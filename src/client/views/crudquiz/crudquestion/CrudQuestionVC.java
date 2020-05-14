@@ -32,7 +32,7 @@ public class CrudQuestionVC implements ViewController {
     @Override
     public void init(ViewHandler vh, ViewModelFactory vmf) {
         this.vh = vh;
-        this.vm = vmf.getCrudQuestionVM();
+        this.vm = (CrudQuestionVM) vmf.getVM("crudquestion");
         errorLabel.setVisible(false);
 
 

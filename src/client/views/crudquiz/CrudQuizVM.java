@@ -1,6 +1,7 @@
 package client.views.crudquiz;
 
 import client.model.QuizConverter;
+import client.views.ViewModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +12,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrudQuizVM {
+public class CrudQuizVM implements ViewModel {
     private QuizConverter quizConverter;
     private StringProperty nameField, subjectField;
     private ObjectProperty<String> difficulty;
