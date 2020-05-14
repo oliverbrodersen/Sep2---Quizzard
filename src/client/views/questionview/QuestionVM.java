@@ -1,6 +1,7 @@
 package client.views.questionview;
 
 import client.model.QuizConverter;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
@@ -14,7 +15,7 @@ import java.util.TimerTask;
 public class QuestionVM
 {
   private QuizConverter quizConverter;
-  private SimpleStringProperty numberOfQuestions, quizName, timeLeft, question;
+  private SimpleStringProperty numberOfQuestions, quizName, timeLeft, question, scoreText;
   private Button answer1, answer2, answer3, answer4;
   private Timer timer;
   private boolean quizOver = false;
@@ -26,6 +27,7 @@ public class QuestionVM
     numberOfQuestions = new SimpleStringProperty();
     quizName = new SimpleStringProperty();
     timeLeft = new SimpleStringProperty();
+    scoreText = new SimpleStringProperty();
     question = new SimpleStringProperty();
   }
 
@@ -55,6 +57,7 @@ public class QuestionVM
     numberOfQuestions.set(
         "(" + (quiz.getQuestionNumber() + 1) + "/" + quiz.getLength() + ")");
     quizName.set(quiz.getTitle());
+    scoreText.set("Score: 0");
     interval = quizQuestion.getTime();
     timeLeft.set(interval + "");
     question.set(quizQuestion.getQuestion());
@@ -82,9 +85,11 @@ public class QuestionVM
         case 1:
           answer1Text.setText(answersList.get(0).getAnswer());
       }
+      scoreText.set("");
     }
     else
     {
+      scoreText.set("Score: " + quizConverter.getParticipant().getScore());
       endQuestionPressed.setVisible(false);
     }
     if (timer != null)
@@ -185,5 +190,10 @@ public class QuestionVM
       PropertyChangeListener listener)
   {
     quizConverter.removeListener(eventName, listener);
+  }
+
+  public SimpleStringProperty scoreProperty()
+  {
+    return scoreText;
   }
 }

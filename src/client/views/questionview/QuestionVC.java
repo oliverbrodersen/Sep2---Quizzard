@@ -13,7 +13,7 @@ import java.beans.PropertyChangeEvent;
 public class QuestionVC implements ViewController {
   private QuestionVM vm;
   private ViewHandler vh;
-  @FXML Text numberOfQuestionsText, quizNameText, timeLeftText, questionText, answer1Text, answer2Text, answer3Text, answer4Text;
+  @FXML Text numberOfQuestionsText, quizNameText, timeLeftText, questionText, answer1Text, answer2Text, answer3Text, answer4Text, scoreText;
   @FXML Button answer1Button, answer2Button, answer3Button, answer4Button, endQuestionPressed;
 
   @Override
@@ -27,6 +27,7 @@ public class QuestionVC implements ViewController {
     quizNameText.textProperty().bindBidirectional(vm.quizNameProperty());
     questionText.textProperty().bindBidirectional(vm.questionProperty());
     timeLeftText.textProperty().bindBidirectional(vm.timeLeftProperty());
+    scoreText.textProperty().bindBidirectional(vm.scoreProperty());
     vm.setup(answer1Button, answer2Button, answer3Button, answer4Button, endQuestionPressed, answer1Text, answer2Text, answer3Text, answer4Text);
   }
 

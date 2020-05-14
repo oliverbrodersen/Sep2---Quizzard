@@ -12,11 +12,20 @@
    <children>
       <HBox prefHeight="19.0" prefWidth="600.0">
          <children>
-            <Text fx:id="quizNameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Quiz name" wrappingWidth="251.29811477661133">
-               <HBox.margin>
-                  <Insets left="30.0" />
-               </HBox.margin>
-            </Text>
+            <VBox prefHeight="32.0" prefWidth="229.0">
+               <children>
+                  <Text fx:id="quizNameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Quiz name" wrappingWidth="244.63148880004883">
+                     <VBox.margin>
+                        <Insets left="30.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text fx:id="scoreText" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 0">
+                     <VBox.margin>
+                        <Insets left="30.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
             <VBox prefHeight="32.0" prefWidth="39.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time left" textAlignment="CENTER" wrappingWidth="39.80340766906738">
