@@ -15,7 +15,6 @@ import shared.transferobjects.Answer;
 
 public class CrudQuestionVC implements ViewController {
     private CrudQuestionVM vm;
-    private ViewHandler vh;
 
     @FXML private TextArea questionArea, answerArea;
     @FXML private TextField timeField;
@@ -30,9 +29,8 @@ public class CrudQuestionVC implements ViewController {
     private ObservableList<Answer> observableAnswers = FXCollections.observableArrayList();
 
     @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) {
-        this.vh = vh;
-        this.vm = (CrudQuestionVM) vmf.getVM("crudquestion");
+    public void init() {
+        this.vm = (CrudQuestionVM) ViewModelFactory.getInstance().getVM("crudquestion");
         errorLabel.setVisible(false);
 
 
@@ -70,7 +68,7 @@ public class CrudQuestionVC implements ViewController {
     public void onBackPressed(ActionEvent actionEvent) {
         vm.backPressed();
         reset();
-        vh.openView("crudquiz");
+        ViewHandler.getInstance().openView("crudquiz");
 
     }
 
@@ -85,7 +83,7 @@ public class CrudQuestionVC implements ViewController {
             errorLabel.setVisible(false);
             vm.submitQuestion(observableAnswers);
             reset();
-            vh.openView("crudquiz");
+            ViewHandler.getInstance().openView("crudquiz");
         }
         else {
             errorLabel.setVisible(true);

@@ -7,12 +7,10 @@ import client.views.mainview.MainVM;
 
 public class FinalScreenVC implements ViewController {
     private FinalScreenVM vm;
-    private ViewHandler vh;
 
     @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) {
-        this.vh = vh;
-        this.vm = (FinalScreenVM) vmf.getVM("finalscreen");
+    public void init() {
+        this.vm = (FinalScreenVM) ViewModelFactory.getInstance().getVM("finalscreen");
     }
 
     @Override

@@ -22,7 +22,7 @@ public class ViewHandler {
 
 
 
-  public ViewHandler() {
+  private ViewHandler() {
   }
 
   public void start() {
@@ -86,7 +86,7 @@ public class ViewHandler {
     }
 
     ViewController ctrl = loader.getController();
-    ctrl.init(this, ViewModelFactory.getInstance());
+    ctrl.init();
     return root;
   }
 

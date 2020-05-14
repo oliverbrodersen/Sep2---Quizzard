@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 
 public interface ViewController {
 
-  void init(ViewHandler vh, ViewModelFactory vmf);
+  void init();
 
   void reset();
 

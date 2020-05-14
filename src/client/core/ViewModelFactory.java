@@ -24,7 +24,7 @@ public class ViewModelFactory {
   private ScoreboardVM scoreboardVM;
   private CrudQuestionVM crudQuestionVM;
 
-  public ViewModelFactory() {
+  private ViewModelFactory() {
   }
 
   public ViewModel getVM(String id) {
