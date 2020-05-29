@@ -1,16 +1,18 @@
 package client.views.crudquiz.crudquestion;
 
 import client.model.QuizConverter;
+import client.views.ViewModel;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import shared.transferobjects.Answer;
 import shared.transferobjects.Question;
 
+import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CrudQuestionVM {
+public class CrudQuestionVM implements ViewModel {
     private QuizConverter quizConverter;
     private StringProperty questionArea, answerArea;
     private BooleanProperty correctCheckBox;

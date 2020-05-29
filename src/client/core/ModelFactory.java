@@ -6,18 +6,26 @@ import client.model.QuizConverterManager;
 public class ModelFactory
 {
 
-  private final ClientFactory cf;
   private QuizConverter quizConverter;
+  private static ModelFactory modelFactory;
 
-  public ModelFactory(ClientFactory cf) {
-    this.cf = cf;
+  private ModelFactory() {
   }
 
   public QuizConverter getQuizConverter() {
     if(quizConverter == null) {
-      quizConverter = new QuizConverterManager(cf.getClient());
+      quizConverter = new QuizConverterManager(ClientFactory.getInstance().getClient());
     }
     return quizConverter;
   }
+
+  public static ModelFactory getInstance() {
+    if (modelFactory == null) {
+      modelFactory = new ModelFactory();
+    }
+    return modelFactory;
+  }
+
+
 
 }

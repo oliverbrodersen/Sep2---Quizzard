@@ -23,7 +23,6 @@ import java.util.List;
 
 public class LobbyVC implements ViewController {
     private LobbyVM vm;
-    private ViewHandler vh;
     private RMIClient client;
 
     @FXML private Label pinLabel, userTypeLabel, playersCountLabel;
@@ -33,9 +32,8 @@ public class LobbyVC implements ViewController {
     @FXML private TableColumn<String, Quiz> participantsColumn;
 
     @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) {
-        this.vh = vh;
-        this.vm = vmf.getLobbyVM();
+    public void init() {
+        this.vm = (LobbyVM) ViewModelFactory.getInstance().getVM("lobby");
         vm.addListener("onNewConnected", this::updateParticipantList);
         vm.addListener("onQuizStarted", this::startQuizListener);
         vm.addListener("onKick", this::playerKicked);
@@ -55,7 +53,7 @@ public class LobbyVC implements ViewController {
             @Override public void run()
             {
                 removeListeners();
-                vh.openView("login");
+                ViewHandler.getInstance().openView("login");
             }
         });
     }
@@ -65,7 +63,7 @@ public class LobbyVC implements ViewController {
         Platform.runLater(new Runnable(){
             @Override public void run()
             {
-                vh.openView("questionview");
+                ViewHandler.getInstance().openView("questionview");
             }
         });
     }

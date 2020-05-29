@@ -8,12 +8,10 @@ import client.views.mainview.MainVM;
 public class CreateAccountVC implements ViewController {
 
     private CreateAccountVM vm;
-    private ViewHandler vh;
 
     @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) {
-        this.vh = vh;
-        this.vm = vmf.getCreateAccountVM();
+    public void init() {
+        this.vm = (CreateAccountVM) ViewModelFactory.getInstance().getVM("createaccount");
     }
 
     @Override

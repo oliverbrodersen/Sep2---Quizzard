@@ -12,14 +12,12 @@ import java.beans.PropertyChangeEvent;
 
 public class QuestionVC implements ViewController {
   private QuestionVM vm;
-  private ViewHandler vh;
   @FXML Text numberOfQuestionsText, quizNameText, timeLeftText, questionText, answer1Text, answer2Text, answer3Text, answer4Text, scoreText;
   @FXML Button answer1Button, answer2Button, answer3Button, answer4Button, endQuestionPressed;
 
   @Override
-  public void init(ViewHandler vh, ViewModelFactory vmf) {
-    this.vh = vh;
-    this.vm = vmf.getQuestionVM();
+  public void init() {
+    this.vm = (QuestionVM) ViewModelFactory.getInstance().getVM("question");
     vm.addListener("endQuestion", this::removeAnswers);
     vm.addListener("endQuiz", this::endQuiz);
     vm.addListener("onNextQuestion", this::onNextQuestion);
@@ -56,9 +54,9 @@ public class QuestionVC implements ViewController {
         @Override public void run()
         {
           if (vm.getUser() == null)
-            vh.openView("login");
+            ViewHandler.getInstance().openView("login");
           else
-            vh.openView("hostmain");
+            ViewHandler.getInstance().openView("hostmain");
         }
       });
     }
@@ -84,7 +82,7 @@ public class QuestionVC implements ViewController {
   }
   @FXML public void endQuestionPressed(){
     vm.endQuestion();
-    vh.openView("scoreboardview");
+    ViewHandler.getInstance().openView("scoreboardview");
   }
 }
 

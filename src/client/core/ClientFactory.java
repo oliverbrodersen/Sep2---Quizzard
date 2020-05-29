@@ -6,6 +6,7 @@ import shared.transferobjects.UserID;
 
 public class ClientFactory {
 
+  private static ClientFactory clientFactory;
   private Client client;
 
   public Client getClient() {
@@ -14,5 +15,12 @@ public class ClientFactory {
       client.startClient();
     }
     return client;
+  }
+
+  public static ClientFactory getInstance() {
+    if (clientFactory == null) {
+      clientFactory = new ClientFactory();
+    }
+    return clientFactory;
   }
 }

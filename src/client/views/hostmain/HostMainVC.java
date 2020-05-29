@@ -18,7 +18,6 @@ import java.rmi.RemoteException;
 public class HostMainVC implements ViewController {
 
     private HostMainVM vm;
-    private ViewHandler vh;
     @FXML private Text emailText;
     @FXML private Text nameText;
     @FXML private Text userTypeText;
@@ -31,9 +30,8 @@ public class HostMainVC implements ViewController {
 
 
     @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) {
-        this.vh = vh;
-        this.vm = vmf.getHostMainVM();
+    public void init() {
+        this.vm = (HostMainVM) ViewModelFactory.getInstance().getVM("hostmain");
 
         createButton.visibleProperty().bindBidirectional(vm.createButtonProperty());
         editButton.visibleProperty().bindBidirectional(vm.editButtonProperty());
@@ -55,7 +53,7 @@ public class HostMainVC implements ViewController {
     }
 
     public void onCreatePressed(ActionEvent actionEvent) {
-        vh.openView("crudquiz");
+        ViewHandler.getInstance().openView("crudquiz");
     }
 
     public void onEditPressed(ActionEvent actionEvent) {
@@ -72,7 +70,7 @@ public class HostMainVC implements ViewController {
     public void onHostPressed(ActionEvent actionEvent) throws RemoteException
     {
         vm.host(hostQuizTable.getSelectionModel().getSelectedItem());
-        vh.openView("lobbyview");
+        ViewHandler.getInstance().openView("lobbyview");
     }
 
     public void onExitPressed(ActionEvent actionEvent) {

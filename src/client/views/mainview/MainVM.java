@@ -1,6 +1,7 @@
 package client.views.mainview;
 
 import client.model.QuizConverter;
+import client.views.ViewModel;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
@@ -10,7 +11,7 @@ import shared.transferobjects.UserID;
 
 import java.beans.PropertyChangeEvent;
 
-public class MainVM {
+public class MainVM implements ViewModel {
   private ObservableList<Participant> participants;
   private QuizConverter quizConverter;
   private StringProperty username, password, quizID, loginError, joinError, nick;

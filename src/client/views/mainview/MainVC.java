@@ -20,16 +20,14 @@ public class MainVC implements ViewController
   @FXML private Label errorJoinLabel, errorLoginLabel;
 
   private MainVM vm;
-  private ViewHandler vh;
 
   public MainVC()
   {
   }
 
-  @Override public void init(ViewHandler vh, ViewModelFactory vmf)
+  @Override public void init()
   {
-    this.vh = vh;
-    this.vm = vmf.getMainVM();
+    this.vm = (MainVM) ViewModelFactory.getInstance().getVM("main");
 
     usernameField.textProperty().bindBidirectional(vm.usernameProperty());
     passwordField.textProperty().bindBidirectional(vm.passwordProperty());
@@ -55,7 +53,7 @@ public class MainVC implements ViewController
     if (vm.checkPin())
     {
       vm.addParticipant();
-      vh.openView("lobbyview");
+      ViewHandler.getInstance().openView("lobbyview");
     }
     else
       errorJoinLabel.setText("Could not connect to pin");
@@ -66,7 +64,7 @@ public class MainVC implements ViewController
     if (vm.CheckLogin())
     {
       vm.setUser();
-      vh.openView("hostmain");
+      ViewHandler.getInstance().openView("hostmain");
     }
     else
       errorLoginLabel.setText("Not a valid user");

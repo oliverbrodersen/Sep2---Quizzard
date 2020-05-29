@@ -12,16 +12,14 @@ import javafx.scene.text.Text;
 
 public class ScoreboardVC implements ViewController {
   private ScoreboardVM vm;
-  private ViewHandler vh;
   @FXML private Button NextQuestionButton;
   @FXML private Rectangle a1Rec, a2Rec, a3Rec, a4Rec;
   @FXML private Text a1Text, a2Text, a3Text, a4Text, questionText, a1True, a2True, a3True, a4True;
   @FXML private VBox vBox1, vBox2, vBox3, vBox4;
 
   @Override
-  public void init(ViewHandler vh, ViewModelFactory vmf) {
-    this.vh = vh;
-    this.vm = vmf.getScoreboardVM();
+  public void init() {
+    this.vm = (ScoreboardVM) ViewModelFactory.getInstance().getVM("scoreboard");
     a1Text.textProperty().bindBidirectional(vm.a1Property());
     a2Text.textProperty().bindBidirectional(vm.a2Property());
     a3Text.textProperty().bindBidirectional(vm.a3Property());
@@ -39,7 +37,7 @@ public class ScoreboardVC implements ViewController {
     vm.nextQuestion();
     if (!NextQuestionButton.getText().equals("End quiz"))
     {
-      vh.openView("questionview");
+      ViewHandler.getInstance().openView("questionview");
     }
     else{
       questionText.setText(vm.getWinner());

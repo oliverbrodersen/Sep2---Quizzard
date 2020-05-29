@@ -1,5 +1,6 @@
 package client.core;
 
+import client.views.ViewModel;
 import client.views.createaccount.CreateAccountVM;
 import client.views.crudquiz.crudquestion.CrudQuestionVM;
 import client.views.finalscreen.FinalScreenVM;
@@ -12,8 +13,7 @@ import client.views.scoreboardview.ScoreboardVM;
 
 public class ViewModelFactory {
 
-  private final ModelFactory mf;
-
+  private static ViewModelFactory viewModelFactory;
   private MainVM mainVM;
   private HostMainVM hostMainVM;
   private CreateAccountVM createAccountVM;
@@ -24,70 +24,66 @@ public class ViewModelFactory {
   private ScoreboardVM scoreboardVM;
   private CrudQuestionVM crudQuestionVM;
 
-  public ViewModelFactory(ModelFactory mf) {
-    this.mf = mf;
+  private ViewModelFactory() {
   }
 
-  public MainVM getMainVM() {
-    if(mainVM == null) {
-      mainVM = new MainVM(mf.getQuizConverter());
+  public ViewModel getVM(String id) {
+
+    switch (id) {
+      case "main":
+        if(mainVM == null) {
+          mainVM = new MainVM(ModelFactory.getInstance().getQuizConverter());
+        }
+        return mainVM;
+      case "hostmain":
+        if (hostMainVM == null) {
+          hostMainVM = new HostMainVM(ModelFactory.getInstance().getQuizConverter());
+        }
+        return hostMainVM;
+      case "createaccount":
+        if (createAccountVM == null) {
+          createAccountVM = new CreateAccountVM(ModelFactory.getInstance().getQuizConverter());
+        }
+        return createAccountVM;
+      case "finalscreen":
+        if (finalScreenVM == null) {
+          finalScreenVM = new FinalScreenVM(ModelFactory.getInstance().getQuizConverter());
+        }
+        return finalScreenVM;
+      case "crudquiz":
+        if (crudQuizVM == null) {
+          crudQuizVM = new CrudQuizVM(ModelFactory.getInstance().getQuizConverter());
+        }
+        return crudQuizVM;
+      case "lobby":
+        if (lobbyVM == null) {
+          lobbyVM = new LobbyVM(ModelFactory.getInstance().getQuizConverter());
+        }
+        return lobbyVM;
+      case "question":
+        if (questionVM == null) {
+          questionVM = new QuestionVM(ModelFactory.getInstance().getQuizConverter());
+        }
+        return questionVM;
+      case "scoreboard":
+        if (scoreboardVM == null) {
+          scoreboardVM = new ScoreboardVM(ModelFactory.getInstance().getQuizConverter());
+        }
+        return scoreboardVM;
+      case "crudquestion":
+        if (crudQuestionVM == null) {
+          crudQuestionVM = new CrudQuestionVM(ModelFactory.getInstance().getQuizConverter());
+        }
+        return crudQuestionVM;
     }
-    return mainVM;
+    return null;
   }
 
-  public HostMainVM getHostMainVM() {
-    if (hostMainVM == null) {
-      hostMainVM = new HostMainVM(mf.getQuizConverter());
+  public static ViewModelFactory getInstance() {
+    if (viewModelFactory == null) {
+      viewModelFactory = new ViewModelFactory();
     }
-    return hostMainVM;
+    return viewModelFactory;
   }
 
-  public CreateAccountVM getCreateAccountVM() {
-    if (createAccountVM == null) {
-      createAccountVM = new CreateAccountVM(mf.getQuizConverter());
-    }
-    return createAccountVM;
-  }
-
-  public FinalScreenVM getFinalScreenVM() {
-    if (finalScreenVM == null) {
-      finalScreenVM = new FinalScreenVM(mf.getQuizConverter());
-    }
-    return finalScreenVM;
-  }
-
-  public CrudQuizVM getCrudQuizVM() {
-    if (crudQuizVM == null) {
-      crudQuizVM = new CrudQuizVM(mf.getQuizConverter());
-    }
-    return crudQuizVM;
-  }
-
-  public LobbyVM getLobbyVM() {
-    if (lobbyVM == null) {
-      lobbyVM = new LobbyVM(mf.getQuizConverter());
-    }
-    return lobbyVM;
-  }
-
-  public QuestionVM getQuestionVM() {
-    if (questionVM == null) {
-      questionVM = new QuestionVM(mf.getQuizConverter());
-    }
-    return questionVM;
-  }
-
-  public ScoreboardVM getScoreboardVM() {
-    if (scoreboardVM == null) {
-      scoreboardVM = new ScoreboardVM(mf.getQuizConverter());
-    }
-    return scoreboardVM;
-  }
-
-    public CrudQuestionVM getCrudQuestionVM() {
-      if (crudQuestionVM == null) {
-        crudQuestionVM = new CrudQuestionVM(mf.getQuizConverter());
-      }
-      return crudQuestionVM;
-    }
 }

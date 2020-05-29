@@ -19,7 +19,6 @@ import java.util.List;
 
 public class CrudQuizVC implements ViewController {
     private CrudQuizVM vm;
-    private ViewHandler vh;
 
     @FXML private TextField nameField;
     @FXML private TextField subjectField;
@@ -32,10 +31,9 @@ public class CrudQuizVC implements ViewController {
     @FXML private TableColumn<Integer, Question> timeColumn;
 
     @Override
-    public void init(ViewHandler vh, ViewModelFactory vmf) {
+    public void init() {
         errorLabel.setVisible(false);
-        this.vh = vh;
-        this.vm = vmf.getCrudQuizVM();
+        this.vm = (CrudQuizVM) ViewModelFactory.getInstance().getVM("crudquiz");
         vm.addListener("onQuestionCreated", this::updateQuestionsList);
         nameField.textProperty().bindBidirectional(vm.nameFieldProperty());
         subjectField.textProperty().bindBidirectional(vm.subjectFieldProperty());
@@ -82,12 +80,12 @@ public class CrudQuizVC implements ViewController {
     }
 
     public void onAddQuestionPressed(ActionEvent actionEvent) {
-        vh.openView("crudquestion");
+        ViewHandler.getInstance().openView("crudquestion");
     }
 
     public void onBackPressed(ActionEvent actionEvent) {
         reset();
         vm.back();
-        vh.openView("hostmain");
+        ViewHandler.getInstance().openView("hostmain");
     }
 }

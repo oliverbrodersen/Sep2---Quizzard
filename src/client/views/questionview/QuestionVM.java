@@ -1,18 +1,20 @@
 package client.views.questionview;
 
 import client.model.QuizConverter;
+import client.views.ViewModel;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import shared.transferobjects.*;
 
+import javax.swing.text.View;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class QuestionVM
+public class QuestionVM implements ViewModel
 {
   private QuizConverter quizConverter;
   private SimpleStringProperty numberOfQuestions, quizName, timeLeft, question, scoreText;
