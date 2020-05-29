@@ -89,9 +89,9 @@ public class QuizConverterManager implements QuizConverter
     return client.getAnswers(question);
   }
 
-  @Override public void setUser(String email)
+  @Override public void setUser(String email, String password)
   {
-    this.user = client.getUser(email);
+    this.user = client.getUser(email, password);
     user.setClient(client);
   }
 
@@ -120,9 +120,9 @@ public class QuizConverterManager implements QuizConverter
     client.getNextQuestion();
   }
 
-  @Override public boolean verifyLogin(String username)
+  @Override public boolean verifyLogin(String username, String password)
   {
-    return client.verifyLogin(username);
+    return client.verifyLogin(username, password);
   }
 
   @Override public boolean verifyPin(String pin)
@@ -137,9 +137,7 @@ public class QuizConverterManager implements QuizConverter
 
   @Override public void startQuiz()
   {
-    client.startQuiz(client.getPin(),
-        client.getLobby(client.getPin()).getQuiz().getQuizId(),
-        user.getEmail());
+    client.startQuiz();
   }
 
   @Override public int getNextQuestionID()

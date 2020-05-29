@@ -6,5 +6,5 @@ import java.sql.SQLException;
 
 public interface UserData {
     void storeUser(UserClass user);
-    UserClass retrieveUser(String email) throws SQLException;
+    UserClass retrieveUser(String email, String password) throws SQLException;
 }

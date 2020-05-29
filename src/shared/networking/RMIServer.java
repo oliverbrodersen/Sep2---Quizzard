@@ -12,13 +12,13 @@ import java.util.List;
 public interface RMIServer extends Remote
 {
   Quiz getQuiz(int quizID, String email) throws RemoteException;
-  void startQuiz(int pin, int quizID, String email) throws RemoteException;
+  void startQuiz(int pin) throws RemoteException;
   void getNextQuestion(int pin) throws RemoteException;
   UserID getUserID() throws RemoteException;
 
   void registerClient(int pin, ClientCallback client, UserID userID) throws RemoteException;
   List<Quiz> getQuizzes(String email)  throws RemoteException;
-  UserClass getUser(String email)  throws RemoteException;
+  UserClass getUser(String email, String password)  throws RemoteException;
   Participant getWinner(int pinFromServer) throws RemoteException;
 
   void startServer() throws RemoteException, AlreadyBoundException;
@@ -31,7 +31,7 @@ public interface RMIServer extends Remote
 
   void submitAnswer(int pin, int answer) throws RemoteException;
 
-  boolean verifyLogin(String username) throws RemoteException;
+  boolean verifyLogin(String username, String password) throws RemoteException;
   boolean verifyPin(String pin) throws RemoteException;
 
     int getNextQuestionID() throws RemoteException;

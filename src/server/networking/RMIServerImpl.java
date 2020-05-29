@@ -125,7 +125,7 @@ public class RMIServerImpl implements RMIServer
     System.out.println(answers);
   }
 
-  @Override public boolean verifyLogin(String username)
+  @Override public boolean verifyLogin(String username, String password)
   {
     if (userData == null)
     {
@@ -133,7 +133,7 @@ public class RMIServerImpl implements RMIServer
     }
     try
     {
-      UserClass user = userData.retrieveUser(username);
+      UserClass user = userData.retrieveUser(username, password);
       if (user.equals(null))
         return false;
     }
@@ -272,7 +272,7 @@ public class RMIServerImpl implements RMIServer
     return quizzes;
   }
 
-  @Override public UserClass getUser(String email) throws RemoteException
+  @Override public UserClass getUser(String email, String password) throws RemoteException
   {
     if (userData == null)
     {
@@ -280,7 +280,7 @@ public class RMIServerImpl implements RMIServer
     }
     try
     {
-      return userData.retrieveUser(email);
+      return userData.retrieveUser(email, password);
     }
     catch (SQLException throwables)
     {
@@ -302,7 +302,7 @@ public class RMIServerImpl implements RMIServer
     return winner;
   }
 
-  @Override public void startQuiz(int pin, int quizID, String email)
+  @Override public void startQuiz(int pin)
       throws RemoteException
   {
     ArrayList<ClientCallback> clientList = (ArrayList<ClientCallback>) getLobbyByPin(
@@ -345,7 +345,6 @@ public class RMIServerImpl implements RMIServer
       {
         clientList.get(i).endQuiz();
       }
-
     }
   }
 

@@ -44,11 +44,11 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public boolean verifyLogin(String username)
+  @Override public boolean verifyLogin(String username, String password)
   {
     try
     {
-      return server.verifyLogin(username);
+      return server.verifyLogin(username, password);
     }
     catch (RemoteException e)
     {
@@ -218,11 +218,11 @@ public class RMIClient implements Client, ClientCallback
     return quizzes;
   }
 
-  @Override public UserClass getUser(String email)
+  @Override public UserClass getUser(String email, String password)
   {
     try
     {
-      return server.getUser(email);
+      return server.getUser(email, password);
     }
     catch (RemoteException e)
     {
@@ -253,11 +253,11 @@ public class RMIClient implements Client, ClientCallback
     }
   }
 
-  @Override public void startQuiz(int pin, int quizID, String email)
+  @Override public void startQuiz()
   {
     try
     {
-      server.startQuiz(pin, quizID, email);
+      server.startQuiz(pinFromServer);
     }
     catch (RemoteException e)
     {

@@ -76,11 +76,11 @@ public class MainVM {
   StringProperty nickProperty() { return nick; }
 
   public void setUser(){
-    quizConverter.setUser(getUsername());
+    quizConverter.setUser(getUsername(), getPassword());
   }
 
   public boolean CheckLogin() {
-    return quizConverter.verifyLogin(getUsername());
+    return quizConverter.verifyLogin(getUsername(), getPassword());
   }
 
   public boolean checkPin()

@@ -17,7 +17,7 @@ public interface Client extends Subject
   List<Participant> getParticipants(int pin);
   List<Quiz> getQuizzes(String email);
   Quiz getQuiz();
-  UserClass getUser(String email);
+  UserClass getUser(String email, String password);
   Lobby getLobby() ;
   List<Participant> getParticipants();
   String getUsername();
@@ -33,10 +33,10 @@ public interface Client extends Subject
   void newParticipant(int pin, Participant participant);
   void removeParticipant(int pin, Participant participant);
   void sendAnswer(int answer);
-  void startQuiz(int pin, int quizID, String email);
+  void startQuiz();
   void endQuestion();
 
-  boolean verifyLogin(String username);
+  boolean verifyLogin(String username, String password);
   boolean verifyPin(String pin);
 
     int getNextQuestionID();

@@ -22,15 +22,15 @@ public class UserHandler implements UserData{
     }
 
     @Override
-    public UserClass retrieveUser(String email) throws SQLException, NullPointerException{
+    public UserClass retrieveUser(String email, String password) throws SQLException, NullPointerException{
         List<Quiz> quizzes;
         ResultSet rs = DBConn.retrieveData("SELECT * FROM \"Quizzard_Database\".Users WHERE LOWER(Email) = LOWER('" + email + "');");
         while ( rs.next() ) {
             String email2 = rs.getString("Email");
-            if (!(email.equalsIgnoreCase(email2)))
+            String password2 = rs.getString("Password");
+            if (!(email.equalsIgnoreCase(email2)) || !(password.equalsIgnoreCase(password2)))
                 break;
             String name = rs.getString("Name");
-            String password = rs.getString("Password");
             char userClass = rs.getString("Userclass").charAt(0);
             switch (userClass)
             {
