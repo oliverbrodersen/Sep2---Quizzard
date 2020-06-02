@@ -105,6 +105,8 @@ public class ScoreboardVM implements ViewModel {
   public String getWinner()
   {
     Participant participant = quizConverter.getWinner();
+    if (participant == null)
+      return "";
     return "Winner: " + participant.getName() + " Points: " + participant.getScore();
   }
 }

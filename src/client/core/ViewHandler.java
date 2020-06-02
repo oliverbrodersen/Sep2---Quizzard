@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import jdk.dynalink.beans.StaticClass;
 
 import java.io.IOException;
 

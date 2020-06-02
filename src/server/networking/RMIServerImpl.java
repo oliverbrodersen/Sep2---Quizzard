@@ -206,7 +206,7 @@ public class RMIServerImpl implements RMIServer
     Quiz quiz = null;
     try {
       quiz = new Quiz(name, subject, questions, quizData.getNextQuizID() + 1);
-      quizData.storeQuiz(quiz, difficulty, email.toLowerCase());
+      quizData.storeQuiz(quiz, difficulty, email.toLowerCase(), questionData.getNextQuestionID() + 1);
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -292,6 +292,9 @@ public class RMIServerImpl implements RMIServer
   @Override public Participant getWinner(int pinFromServer)
       throws RemoteException
   {
+    if (getLobbyByPin(pinFromServer) == null)
+      return null;
+
     ArrayList<Participant> participants = (ArrayList<Participant>) getLobbyByPin(pinFromServer).getParticipants();
     Participant winner = participants.get(0);
     for (int i = 0; i < participants.size(); i++)

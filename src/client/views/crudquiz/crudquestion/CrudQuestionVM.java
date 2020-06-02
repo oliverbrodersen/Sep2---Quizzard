@@ -49,7 +49,7 @@ public class CrudQuestionVM implements ViewModel {
     public Answer submitAnswer() {
         if (answerNumber <= 4) {
             String answerID = "";
-            answerID = answerNumber + Integer.toString(correctQuestionID);
+            answerID = answerNumber + "";
 
             if (answerArea.get() != null) {
                 Answer answerToSubmit = new Answer(answerArea.get(), correctCheckBox.get(), answerID);

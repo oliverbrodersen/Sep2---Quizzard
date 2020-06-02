@@ -19,7 +19,7 @@ public class QuizHandler implements QuizData{
     }
 
     @Override
-    public void storeQuiz(Quiz quiz, String difficulty, String email) {
+    public void storeQuiz(Quiz quiz, String difficulty, String email, int questionID) {
 
         DBConn.updateData("INSERT into \"Quizzard_Database\".Quiz(QuizID, QuizName, Subject, Level, Email) VALUES ('" + quiz.getQuizId()
         + "', '" + quiz.getTitle() + "', '" + quiz.getSubject() + "', '" + difficulty.toUpperCase()
@@ -29,7 +29,7 @@ public class QuizHandler implements QuizData{
 
         for (int i = 0; i < questions.size(); i++) {
             String sql = "";
-            String questionID = questions.get(i).getAnswer(0).getAnswerID().substring(1);
+            String questionIDString = questionID + i + "";
             for (int j = 0; j < 4; j++) {
                 char place;
                 if (questions.get(i).getAnswers().size() > j) {
@@ -43,7 +43,7 @@ public class QuizHandler implements QuizData{
             }
 
             DBConn.updateData("INSERT into \"Quizzard_Database\".Question(QuestionID, QuizID, Question, Answer1, Answer2, Answer3, Answer4, Time) " +
-                    "values ('" + questionID + "', '" + quiz.getQuizId() + "', '"
+                    "values ('" + questionIDString + "', '" + quiz.getQuizId() + "', '"
                     + questions.get(i).getQuestion() + "',"
                     + sql + " '" + quiz.getQuestion(i).getTime() + "');");
 
@@ -58,7 +58,7 @@ public class QuizHandler implements QuizData{
                     correctAnswerString = "0";
 
                 DBConn.updateData("INSERT into \"Quizzard_Database\".Answer(AnswerNo, QuestionID, Answer, CorrectAnswer) VALUES "
-                        + "('" + answerNo + "', '" + questionID + "', '" + answer + "', '"
+                        + "('" + answerNo + "', '" + questionIDString + "', '" + answer + "', '"
                         + correctAnswerString + "');");
             }
         }
